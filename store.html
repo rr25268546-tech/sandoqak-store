@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>المتجر | صندوقك</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .store-page {
+      max-width: 1100px;
+      margin: auto;
+      padding: 30px 18px;
+    }
+
+    .store-title {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .store-title h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .store-title p {
+      color: #777;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .product {
+      background: white;
+      border-radius: 18px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,.08);
+    }
+
+    .product-icon {
+      font-size: 65px;
+      margin-bottom: 10px;
+    }
+
+    .product h2 {
+      margin: 10px 0;
+    }
+
+    .price {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 15px 0;
+    }
+
+    .add-btn {
+      width: 100%;
+      padding: 12px;
+      border: 0;
+      border-radius: 12px;
+      background: #111;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .add-btn:active {
+      transform: scale(.97);
+    }
+
+    .cart-bar {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      max-width: 500px;
+      margin: auto;
+      background: #111;
+      color: white;
+      padding: 15px 20px;
+      border-radius: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .cart-bar button {
+      background: white;
+      color: #111;
+      border: 0;
+      padding: 9px 15px;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="store-page">
+
+    <div class="store-title">
+      <h1>🛍️ متجر صندوقك</h1>
+      <p>اختار الصندوق اللي يناسبك وخليه جاهز ليك 🎁</p>
+    </div>
+
+    <div class="products">
+
+      <!-- المنتج 1 -->
+      <div class="product">
+        <div class="product-icon">🎁</div>
+
+        <h2>الصندوق الذهبي</h2>
+
+        <p>
+          مفاجآت مختارة بعناية داخل صندوق واحد.
+        </p>
+
+        <div class="price">
+          299 جنيه
+        </div>
+
+        <button
+          class="add-btn"
+          onclick="addToCart('الصندوق الذهبي', 299)">
+          أضف للسلة 🛒
+        </button>
+      </div>
+
+      <!-- المنتج 2 -->
+      <div class="product">
+        <div class="product-icon">🎮</div>
+
+        <h2>صندوق الجيمرز</h2>
+
+        <p>
+          مفاجآت لعشاق الألعاب والجيمينج.
+        </p>
+
+        <div class="price">
+          399 جنيه
+        </div>
+
+        <button
+          class="add-btn"
+          onclick="addToCart('صندوق الجيمرز', 399)">
+          أضف للسلة 🛒
+        </button>
+      </div>
+
+      <!-- المنتج 3 -->
+      <div class="product">
+        <div class="product-icon">💎</div>
+
+        <h2>الصندوق الفاخر</h2>
+
+        <p>
+          صندوق مميز للهدايا والمناسبات.
+        </p>
+
+        <div class="price">
+          599 جنيه
+        </div>
+
+        <button
+          class="add-btn"
+          onclick="addToCart('الصندوق الفاخر', 599)">
+          أضف للسلة 🛒
+        </button>
+      </div>
+
+      <!-- المنتج 4 -->
+      <div class="product">
+        <div class="product-icon">❓</div>
+
+        <h2>الصندوق الغامض</h2>
+
+        <p>
+          مش هتعرف جواه إيه غير لما تفتحه 👀
+        </p>
+
+        <div class="price">
+          199 جنيه
+        </div>
+
+        <button
+          class="add-btn"
+          onclick="addToCart('الصندوق الغامض', 199)">
+          أضف للسلة 🛒
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- شريط السلة -->
+  <div class="cart-bar">
+
+    <div>
+      🛒 السلة:
+      <span id="cartCount">0</span>
+      منتج
+    </div>
+
+    <button onclick="openCart()">
+      عرض السلة
+    </button>
+
+  </div>
+
+
+  <!-- نافذة السلة -->
+  <div
+    id="cartModal"
+    onclick="closeCart(event)"
+    style="
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.65);
+      z-index:1000;
+      padding:30px 15px;
+    "
+  >
+
+    <div
+      onclick="event.stopPropagation()"
+      style="
+        background:white;
+        max-width:500px;
+        margin:50px auto;
+        padding:25px;
+        border-radius:20px;
+      "
+    >
+
+      <h2>🛒 سلة المشتريات</h2>
+
+      <div id="cartItems"></div>
+
+      <hr>
+
+      <h3>
+        الإجمالي:
+        <span id="cartTotal">0</span>
+        جنيه
+      </h3>
+
+      <button
+        onclick="checkout()"
+        style="
+          width:100%;
+          padding:13px;
+          border:0;
+          border-radius:12px;
+          background:#111;
+          color:white;
+          font-size:16px;
+        "
+      >
+        إتمام الطلب 🚀
+      </button>
+
+      <button
+        onclick="document.getElementById('cartModal').classList.remove('show')"
+        style="
+          width:100%;
+          margin-top:10px;
+          padding:12px;
+          border:1px solid #ddd;
+          border-radius:12px;
+          background:white;
+        "
+      >
+        إغلاق
+      </button>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+        </html>
