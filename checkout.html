@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>إتمام الطلب | صندوقك</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #090909;
+            color: white;
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 25px 18px;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .title h1 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .title p {
+            color: #aaa;
+        }
+
+        .box {
+            background: #111;
+            border: 1px solid #252525;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .box h2 {
+            margin-bottom: 18px;
+        }
+
+        .product {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 13px 0;
+            border-bottom: 1px solid #252525;
+        }
+
+        .product:last-child {
+            border-bottom: none;
+        }
+
+        .total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 18px;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            color: #ddd;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 13px;
+            margin-bottom: 15px;
+            border: 1px solid #333;
+            border-radius: 10px;
+            background: #181818;
+            color: white;
+            font-size: 15px;
+            outline: none;
+        }
+
+        textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #00e5ff;
+        }
+
+        .confirm {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            background: #00e5ff;
+            color: #000;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            color: #aaa;
+            text-decoration: none;
+            margin-top: 18px;
+        }
+
+        .empty {
+            text-align: center;
+            color: #aaa;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="title">
+        <h1>📦 إتمام الطلب</h1>
+        <p>راجع طلبك واكتب بيانات التوصيل</p>
+    </div>
+
+    <div class="box">
+
+        <h2>🛒 طلبك</h2>
+
+        <div id="orderItems"></div>
+
+        <div class="total">
+            <span>الإجمالي</span>
+            <span>
+                <span id="orderTotal">0</span>
+                جنيه
+            </span>
+        </div>
+
+    </div>
+
+    <div class="box">
+
+        <h2>👤 بيانات العميل</h2>
+
+        <form id="orderForm">
+
+            <label>الاسم</label>
+            <input
+                type="text"
+                id="name"
+                placeholder="اكتب اسمك"
+                required
+            >
+
+            <label>رقم الهاتف</label>
+            <input
+                type="tel"
+                id="phone"
+                placeholder="01xxxxxxxxx"
+                required
+            >
+
+            <label>العنوان</label>
+            <textarea
+                id="address"
+                placeholder="اكتب عنوان التوصيل بالتفصيل"
+                required
+            ></textarea>
+
+            <button type="submit" class="confirm">
+                تأكيد الطلب 🚀
+            </button>
+
+        </form>
+
+    </div>
+
+    <a href="store.html" class="back">
+        ← العودة للمتجر
+    </a>
+
+</div>
+
+
+<script>
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+const orderItems = document.getElementById("orderItems");
+const orderTotal = document.getElementById("orderTotal");
+
+let total = 0;
+
+if (cart.length === 0) {
+
+    orderItems.innerHTML = `
+        <div class="empty">
+            السلة فاضية 🛒
+        </div>
+    `;
+
+} else {
+
+    cart.forEach(function(item) {
+
+        total += Number(item.price);
+
+        orderItems.innerHTML += `
+            <div class="product">
+
+                <span>
+                    ${item.name}
+                </span>
+
+                <strong>
+                    ${item.price} جنيه
+                </strong>
+
+            </div>
+        `;
+
+    });
+
+}
+
+orderTotal.innerText = total;
+
+
+document.getElementById("orderForm").addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    if (cart.length === 0) {
+        alert("السلة فاضية 🛒");
+        return;
+    }
+
+    const name = document.getElementById("name").value;
+    const phone = document.getElementById("phone").value;
+    const address = document.getElementById("address").value;
+
+    const order = {
+        name: name,
+        phone: phone,
+        address: address,
+        products: cart,
+        total: total,
+        date: new Date().toLocaleString("ar-EG")
+    };
+
+    localStorage.setItem("lastOrder", JSON.stringify(order));
+
+    localStorage.removeItem("cart");
+
+    alert("تم إرسال طلبك بنجاح 🎉");
+
+    window.location.href = "index.html";
+
+});
+
+</script>
+
+</body>
+</html>
