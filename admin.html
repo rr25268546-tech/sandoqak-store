@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>لوحة التحكم | SANDOQAK</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #090909;
+            color: white;
+            min-height: 100vh;
+        }
+
+        header {
+            padding: 20px;
+            border-bottom: 1px solid #222;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #00e5ff;
+        }
+
+        .back {
+            background: #00e5ff;
+            color: #000;
+            text-decoration: none;
+            padding: 9px 14px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 30px 18px;
+        }
+
+        .title {
+            margin-bottom: 25px;
+        }
+
+        .title h1 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .title p {
+            color: #aaa;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat {
+            background: #111;
+            border: 1px solid #252525;
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .stat span {
+            color: #aaa;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat strong {
+            font-size: 26px;
+        }
+
+        .orders {
+            background: #111;
+            border: 1px solid #252525;
+            border-radius: 18px;
+            padding: 20px;
+        }
+
+        .orders h2 {
+            margin-bottom: 20px;
+        }
+
+        .empty {
+            text-align: center;
+            color: #aaa;
+            padding: 40px 10px;
+        }
+
+        .order {
+            background: #181818;
+            border: 1px solid #292929;
+            border-radius: 14px;
+            padding: 18px;
+            margin-bottom: 15px;
+        }
+
+        .order-head {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .order-number {
+            color: #00e5ff;
+            font-weight: bold;
+        }
+
+        .customer {
+            line-height: 1.8;
+            color: #ddd;
+            margin-bottom: 15px;
+        }
+
+        .products {
+            border-top: 1px solid #292929;
+            border-bottom: 1px solid #292929;
+            padding: 12px 0;
+            margin-bottom: 15px;
+        }
+
+        .product {
+            display: flex;
+            justify-content: space-between;
+            padding: 7px 0;
+            color: #ddd;
+        }
+
+        .total {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .delete-btn {
+            background: #e53935;
+            color: white;
+            border: 0;
+            padding: 10px 15px;
+            border-radius: 9px;
+            cursor: pointer;
+        }
+
+        .refresh-btn {
+            background: #00e5ff;
+            color: #000;
+            border: 0;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 600px) {
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .order-head {
+                flex-direction: column;
+            }
+
+            .product {
+                font-size: 14px;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        SANDOQ<span>AK</span> 👑
+    </div>
+
+    <a href="index.html" class="back">
+        الرئيسية
+    </a>
+
+</header>
+
+
+<div class="container">
+
+
+    <div class="title">
+
+        <h1>
+            👑 لوحة التحكم
+        </h1>
+
+        <p>
+            إدارة ومتابعة الطلبات
+        </p>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <span>
+                📦 عدد الطلبات
+            </span>
+
+            <strong id="ordersCount">
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="stat">
+
+            <span>
+                💰 إجمالي المبيعات
+            </span>
+
+            <strong id="salesTotal">
+                0 جنيه
+            </strong>
+
+        </div>
+
+
+        <div class="stat">
+
+            <span>
+                🛒 إجمالي المنتجات
+            </span>
+
+            <strong id="productsCount">
+                0
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <button
+        class="refresh-btn"
+        onclick="loadOrders()">
+
+        🔄 تحديث الطلبات
+
+    </button>
+
+
+    <div class="orders">
+
+        <h2>
+            📋 الطلبات
+        </h2>
+
+        <div id="ordersList"></div>
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+function loadOrders() {
+
+    const ordersList =
+        document.getElementById("ordersList");
+
+    const orders =
+        JSON.parse(localStorage.getItem("orders")) || [];
+
+    let sales = 0;
+    let products = 0;
+
+
+    document.getElementById("ordersCount").innerText =
+        orders.length;
+
+
+    if (orders.length === 0) {
+
+        ordersList.innerHTML = `
+            <div class="empty">
+                لا توجد طلبات حتى الآن 📦
+            </div>
+        `;
+
+        document.getElementById("salesTotal").innerText =
+            "0 جنيه";
+
+        document.getElementById("productsCount").innerText =
+            "0";
+
+        return;
+
+    }
+
+
+    ordersList.innerHTML = "";
+
+
+    orders.forEach(function(order, index) {
+
+        sales += Number(order.total) || 0;
+
+        products += order.products
+            ? order.products.length
+            : 0;
+
+
+        let productsHTML = "";
+
+
+        if (order.products) {
+
+            order.products.forEach(function(product) {
+
+                productsHTML += `
+                    <div class="product">
+
+                        <span>
+                            ${product.name}
+                        </span>
+
+                        <strong>
+                            ${product.price} جنيه
+                        </strong>
+
+                    </div>
+                `;
+
+            });
+
+        }
+
+
+        ordersList.innerHTML += `
+
+            <div class="order">
+
+                <div class="order-head">
+
+                    <div class="order-number">
+                        طلب #${index + 1}
+                    </div>
+
+                    <div>
+                        ${order.date || ""}
+                    </div>
+
+                </div>
+
+
+                <div class="customer">
+
+                    👤 ${order.name || "غير معروف"}
+
+                    <br>
+
+                    📱 ${order.phone || "غير موجود"}
+
+                    <br>
+
+                    📍 ${order.address || "غير موجود"}
+
+                </div>
+
+
+                <div class="products">
+
+                    ${productsHTML}
+
+                </div>
+
+
+                <div class="total">
+
+                    💰 الإجمالي:
+                    ${order.total || 0}
+                    جنيه
+
+                </div>
+
+
+                <button
+                    class="delete-btn"
+                    onclick="deleteOrder(${index})">
+
+                    🗑️ حذف الطلب
+
+                </button>
+
+            </div>
+
+        `;
+
+    });
+
+
+    document.getElementById("salesTotal").innerText =
+        sales + " جنيه";
+
+
+    document.getElementById("productsCount").innerText =
+        products;
+
+}
+
+
+function deleteOrder(index) {
+
+    if (!confirm("هل تريد حذف هذا الطلب؟")) {
+
+        return;
+
+    }
+
+
+    const orders =
+        JSON.parse(localStorage.getItem("orders")) || [];
+
+
+    orders.splice(index, 1);
+
+
+    localStorage.setItem(
+        "orders",
+        JSON.stringify(orders)
+    );
+
+
+    loadOrders();
+
+}
+
+
+loadOrders();
+
+</script>
+
+
+</body>
+
+</html>
