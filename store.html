@@ -1,357 +1,445 @@
-let cart = [];
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 
-function addToCart(name, price) {
-    cart.push({
-        name: name,
-        price: price
-    });
+<head>
 
-    updateCart();
-    alert("تم إضافة " + name + " للسلة 🛒");
-}
+    <meta charset="UTF-8">
 
-function updateCart() {
-    const cartCount = document.getElementById("cartCount");
-    const cartItems = document.getElementById("cartItems");
-    const cartTotal = document.getElementById("cartTotal");
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    cartCount.innerText = cart.length;
+    <title>المتجر | صندوقك</title>
 
-    cartItems.innerHTML = "";
+    <style>
 
-    let total = 0;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
 
-    cart.forEach(function(item, index) {
+        body {
+            background: #090909;
+            color: white;
+            min-height: 100vh;
+            padding-bottom: 100px;
+        }
 
-        total += item.price;
+        header {
+            padding: 18px;
+            border-bottom: 1px solid #222;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-        cartItems.innerHTML += `
-            <div style="
-                padding:15px 0;
-                border-bottom:1px solid #ddd;
-                display:flex;
-                justify-content:space-between;
-                align-items:center;
-                gap:10px;
-            ">
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
 
-                <div>
-                    <strong>${item.name}</strong>
-                    <br>
-                    <span>${item.price} جنيه</span>
-                </div>
+        .logo span {
+            color: #00e5ff;
+        }
 
-                <button
-                    onclick="removeFromCart(${index})"
-                    style="
-                        background:#e53935;
-                        color:white;
-                        border:0;
-                        padding:7px 10px;
-                        border-radius:8px;
-                    "
-                >
-                    حذف
-                </button>
+        .home {
+            background: #00e5ff;
+            color: #000;
+            padding: 9px 14px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
-            </div>
-        `;
-    });
+        .store-page {
+            max-width: 1100px;
+            margin: auto;
+            padding: 30px 18px;
+        }
 
-    cartTotal.innerText = total;
-}
+        .store-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
 
-function removeFromCart(index) {
-    cart.splice(index, 1);
-    updateCart();
-}
+        .store-title h1 {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
 
-function openCart() {
-    document.getElementById("cartModal").style.display = "block";
-    updateCart();
-}
+        .store-title p {
+            color: #aaa;
+        }
 
-function closeCart(event) {
-    if (event.target.id === "cartModal") {
-        document.getElementById("cartModal").style.display = "none";
-    }
-}
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
 
-function closeCartButton() {
-    document.getElementById("cartModal").style.display = "none";
-}
+        .product {
+            background: #111;
+            border: 1px solid #252525;
+            border-radius: 18px;
+            padding: 20px;
+            text-align: center;
+        }
 
-function checkout() {
+        .product-icon {
+            font-size: 65px;
+            margin-bottom: 10px;
+        }
 
-    if (cart.length === 0) {
-        alert("السلة فاضية 🛒");
-        return;
-    }
+        .product h2 {
+            margin: 10px 0;
+        }
 
-    alert("تم تجهيز طلبك 🚀");
+        .product p {
+            color: #aaa;
+            line-height: 1.6;
+        }
 
-    cart = [];
+        .price {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 18px 0;
+            color: #00e5ff;
+        }
 
-    updateCart();
+        .add-btn {
+            width: 100%;
+            padding: 12px;
+            border: 0;
+            border-radius: 12px;
+            background: #00e5ff;
+            color: #000;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
-    closeCartButton();
-}
+        .cart-bar {
+            position: fixed;
+            bottom: 15px;
+            left: 15px;
+            right: 15px;
+            max-width: 500px;
+            margin: auto;
+            background: #111;
+            border: 1px solid #333;
+            color: white;
+            padding: 15px;
+            border-radius: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 999;
+        }
 
-updateCart();
-    .product {
-      background: white;
-      border-radius: 18px;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 5px 20px rgba(0,0,0,.08);
-    }
+        .cart-bar button {
+            background: #00e5ff;
+            color: #000;
+            border: 0;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
-    .product-icon {
-      font-size: 65px;
-      margin-bottom: 10px;
-    }
+        #cartModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .75);
+            z-index: 1000;
+            padding: 20px;
+        }
 
-    .product h2 {
-      margin: 10px 0;
-    }
+        .cart-box {
+            background: white;
+            color: #111;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 22px;
+            border-radius: 20px;
+        }
 
-    .price {
-      font-size: 22px;
-      font-weight: bold;
-      margin: 15px 0;
-    }
+        .cart-box h2 {
+            margin-bottom: 15px;
+        }
 
-    .add-btn {
-      width: 100%;
-      padding: 12px;
-      border: 0;
-      border-radius: 12px;
-      background: #111;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-    }
+        .cart-total {
+            margin-top: 18px;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+            font-size: 20px;
+            font-weight: bold;
+        }
 
-    .add-btn:active {
-      transform: scale(.97);
-    }
+        .checkout-btn {
+            width: 100%;
+            margin-top: 15px;
+            padding: 13px;
+            border: 0;
+            border-radius: 12px;
+            background: #111;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
 
-    .cart-bar {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      right: 20px;
-      max-width: 500px;
-      margin: auto;
-      background: #111;
-      color: white;
-      padding: 15px 20px;
-      border-radius: 18px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 999;
-    }
+        .close-btn {
+            width: 100%;
+            margin-top: 10px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            background: white;
+            cursor: pointer;
+        }
 
-    .cart-bar button {
-      background: white;
-      color: #111;
-      border: 0;
-      padding: 9px 15px;
-      border-radius: 10px;
-      font-weight: bold;
-    }
-  </style>
+        @media (max-width: 600px) {
+
+            .products {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+
+            .product {
+                padding: 12px;
+            }
+
+            .product-icon {
+                font-size: 45px;
+            }
+
+            .product h2 {
+                font-size: 16px;
+            }
+
+            .product p {
+                font-size: 13px;
+            }
+
+            .price {
+                font-size: 18px;
+            }
+
+            .add-btn {
+                font-size: 13px;
+            }
+
+        }
+
+    </style>
+
 </head>
 
 <body>
 
-  <div class="store-page">
+
+<header>
+
+    <div class="logo">
+        SANDOQ<span>AK</span> 🎁
+    </div>
+
+    <a href="index.html" class="home">
+        الرئيسية
+    </a>
+
+</header>
+
+
+<div class="store-page">
 
     <div class="store-title">
-      <h1>🛍️ متجر صندوقك</h1>
-      <p>اختار الصندوق اللي يناسبك وخليه جاهز ليك 🎁</p>
+
+        <h1>
+            🛍️ متجر صندوقك
+        </h1>
+
+        <p>
+            اختار الصندوق اللي يناسبك 🎁
+        </p>
+
     </div>
+
 
     <div class="products">
 
-      <!-- المنتج 1 -->
-      <div class="product">
-        <div class="product-icon">🎁</div>
 
-        <h2>الصندوق الذهبي</h2>
+        <div class="product">
 
-        <p>
-          مفاجآت مختارة بعناية داخل صندوق واحد.
-        </p>
+            <div class="product-icon">
+                🎁
+            </div>
 
-        <div class="price">
-          299 جنيه
+            <h2>
+                الصندوق الذهبي
+            </h2>
+
+            <p>
+                مفاجآت مختارة بعناية داخل صندوق واحد.
+            </p>
+
+            <div class="price">
+                299 جنيه
+            </div>
+
+            <button
+                class="add-btn"
+                onclick="addToCart('الصندوق الذهبي',299)">
+                أضف للسلة 🛒
+            </button>
+
         </div>
 
-        <button
-          class="add-btn"
-          onclick="addToCart('الصندوق الذهبي', 299)">
-          أضف للسلة 🛒
-        </button>
-      </div>
 
-      <!-- المنتج 2 -->
-      <div class="product">
-        <div class="product-icon">🎮</div>
+        <div class="product">
 
-        <h2>صندوق الجيمرز</h2>
+            <div class="product-icon">
+                🎮
+            </div>
 
-        <p>
-          مفاجآت لعشاق الألعاب والجيمينج.
-        </p>
+            <h2>
+                صندوق الجيمرز
+            </h2>
 
-        <div class="price">
-          399 جنيه
+            <p>
+                مفاجآت لعشاق الألعاب والجيمينج.
+            </p>
+
+            <div class="price">
+                399 جنيه
+            </div>
+
+            <button
+                class="add-btn"
+                onclick="addToCart('صندوق الجيمرز',399)">
+                أضف للسلة 🛒
+            </button>
+
         </div>
 
-        <button
-          class="add-btn"
-          onclick="addToCart('صندوق الجيمرز', 399)">
-          أضف للسلة 🛒
-        </button>
-      </div>
 
-      <!-- المنتج 3 -->
-      <div class="product">
-        <div class="product-icon">💎</div>
+        <div class="product">
 
-        <h2>الصندوق الفاخر</h2>
+            <div class="product-icon">
+                💎
+            </div>
 
-        <p>
-          صندوق مميز للهدايا والمناسبات.
-        </p>
+            <h2>
+                الصندوق الفاخر
+            </h2>
 
-        <div class="price">
-          599 جنيه
+            <p>
+                صندوق مميز للهدايا والمناسبات.
+            </p>
+
+            <div class="price">
+                599 جنيه
+            </div>
+
+            <button
+                class="add-btn"
+                onclick="addToCart('الصندوق الفاخر',599)">
+                أضف للسلة 🛒
+            </button>
+
         </div>
 
-        <button
-          class="add-btn"
-          onclick="addToCart('الصندوق الفاخر', 599)">
-          أضف للسلة 🛒
-        </button>
-      </div>
 
-      <!-- المنتج 4 -->
-      <div class="product">
-        <div class="product-icon">❓</div>
+        <div class="product">
 
-        <h2>الصندوق الغامض</h2>
+            <div class="product-icon">
+                ❓
+            </div>
 
-        <p>
-          مش هتعرف جواه إيه غير لما تفتحه 👀
-        </p>
+            <h2>
+                الصندوق الغامض
+            </h2>
 
-        <div class="price">
-          199 جنيه
+            <p>
+                مش هتعرف جواه إيه غير لما تفتحه 👀
+            </p>
+
+            <div class="price">
+                199 جنيه
+            </div>
+
+            <button
+                class="add-btn"
+                onclick="addToCart('الصندوق الغامض',199)">
+                أضف للسلة 🛒
+            </button>
+
         </div>
 
-        <button
-          class="add-btn"
-          onclick="addToCart('الصندوق الغامض', 199)">
-          أضف للسلة 🛒
-        </button>
-      </div>
 
     </div>
 
-  </div>
+</div>
 
-  <!-- شريط السلة -->
-  <div class="cart-bar">
+
+<div class="cart-bar">
 
     <div>
-      🛒 السلة:
-      <span id="cartCount">0</span>
-      منتج
+        🛒 السلة:
+        <span id="cartCount">0</span>
+        منتج
     </div>
 
     <button onclick="openCart()">
-      عرض السلة
+        عرض السلة
     </button>
 
-  </div>
+</div>
 
 
-  <!-- نافذة السلة -->
-  <div
-    id="cartModal"
-    onclick="closeCart(event)"
-    style="
-      display:none;
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.65);
-      z-index:1000;
-      padding:30px 15px;
-    "
-  >
+<div id="cartModal">
 
     <div
-      onclick="event.stopPropagation()"
-      style="
-        background:white;
-        max-width:500px;
-        margin:50px auto;
-        padding:25px;
-        border-radius:20px;
-      "
-    >
+        class="cart-box"
+        onclick="event.stopPropagation()">
 
-      <h2>🛒 سلة المشتريات</h2>
+        <h2>
+            🛒 سلة المشتريات
+        </h2>
 
-      <div id="cartItems"></div>
+        <div id="cartItems"></div>
 
-      <hr>
+        <div class="cart-total">
 
-      <h3>
-        الإجمالي:
-        <span id="cartTotal">0</span>
-        جنيه
-      </h3>
+            الإجمالي:
+            <span id="cartTotal">0</span>
+            جنيه
 
-      <button
-        onclick="checkout()"
-        style="
-          width:100%;
-          padding:13px;
-          border:0;
-          border-radius:12px;
-          background:#111;
-          color:white;
-          font-size:16px;
-        "
-      >
-        إتمام الطلب 🚀
-      </button>
+        </div>
 
-      <button
-    onclick="closeCartButton()"
-    style="
-        width:100%;
-        margin-top:10px;
-        padding:12px;
-        border:1px solid #ddd;
-        border-radius:12px;
-        background:white;
-        color:#111;
-        cursor:pointer;
-    "
->
-    إغلاق
-      </button>
+        <button
+            class="checkout-btn"
+            onclick="checkout()">
+
+            إتمام الطلب 🚀
+
+        </button>
+
+        <button
+            class="close-btn"
+            onclick="closeCartButton()">
+
+            إغلاق
+
+        </button>
 
     </div>
 
-  </div>
+</div>
 
-  <script src="script.js"></script>
+
+<script src="script.js"></script>
 
 </body>
-        </html>
+
+</html>
