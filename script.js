@@ -78,6 +78,11 @@ function checkout() {
         return;
     }
 
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    window.location.href = "checkout.html";
+}
+
     alert("تم تجهيز طلبك 🚀");
 
     cart = [];
