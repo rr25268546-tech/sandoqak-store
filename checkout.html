@@ -36,6 +36,7 @@
         }
 
         .title h1 {
+            font-size: 30px;
             margin-bottom: 10px;
         }
 
@@ -58,49 +59,67 @@
         .product {
             display: flex;
             justify-content: space-between;
-            padding: 12px 0;
+            align-items: center;
+            padding: 13px 0;
             border-bottom: 1px solid #252525;
+            gap: 10px;
+        }
+
+        .product:last-child {
+            border-bottom: none;
         }
 
         .total {
             display: flex;
             justify-content: space-between;
             margin-top: 18px;
-            font-size: 20px;
+            font-size: 21px;
             font-weight: bold;
         }
 
         label {
             display: block;
             margin-bottom: 7px;
+            color: #ddd;
         }
 
         input,
         textarea {
             width: 100%;
             padding: 13px;
-            margin-bottom: 15px;
+            margin-bottom: 16px;
             border: 1px solid #333;
             border-radius: 10px;
             background: #181818;
             color: white;
             font-size: 15px;
+            outline: none;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #00e5ff;
         }
 
         textarea {
-            min-height: 90px;
+            min-height: 100px;
+            resize: vertical;
         }
 
         .confirm {
             width: 100%;
-            padding: 14px;
+            padding: 15px;
             border: 0;
             border-radius: 12px;
             background: #00e5ff;
             color: #000;
-            font-weight: bold;
             font-size: 17px;
+            font-weight: bold;
             cursor: pointer;
+        }
+
+        .confirm:active {
+            transform: scale(.98);
         }
 
         .back {
@@ -111,15 +130,67 @@
             margin-top: 20px;
         }
 
+        .empty {
+            text-align: center;
+            color: #aaa;
+            padding: 25px 10px;
+        }
+
+        .success {
+            display: none;
+            text-align: center;
+            background: #111;
+            border: 1px solid #252525;
+            border-radius: 20px;
+            padding: 30px 20px;
+        }
+
+        .success-icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+
+        .success h2 {
+            margin-bottom: 10px;
+        }
+
+        .success p {
+            color: #aaa;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 12px;
+            }
+
+            .title h1 {
+                font-size: 26px;
+            }
+
+            .box {
+                padding: 16px;
+            }
+
+            .product {
+                font-size: 14px;
+            }
+
+        }
+
     </style>
 
 </head>
+
 
 <body>
 
 
 <div class="container">
 
+
+    <!-- العنوان -->
 
     <div class="title">
 
@@ -128,11 +199,13 @@
         </h1>
 
         <p>
-            اكتب بيانات التوصيل
+            راجع طلبك واكتب بيانات التوصيل
         </p>
 
     </div>
 
+
+    <!-- ملخص الطلب -->
 
     <div class="box">
 
@@ -149,8 +222,13 @@
             </span>
 
             <span>
-                <span id="orderTotal">0</span>
+
+                <span id="orderTotal">
+                    0
+                </span>
+
                 جنيه
+
             </span>
 
         </div>
@@ -158,7 +236,9 @@
     </div>
 
 
-    <div class="box">
+    <!-- بيانات العميل -->
+
+    <div class="box" id="customerBox">
 
         <h2>
             👤 بيانات العميل
@@ -167,13 +247,14 @@
 
         <form id="orderForm">
 
+
             <label>
                 الاسم
             </label>
 
             <input
-                id="name"
                 type="text"
+                id="name"
                 placeholder="اكتب اسمك"
                 required
             >
@@ -184,8 +265,8 @@
             </label>
 
             <input
-                id="phone"
                 type="tel"
+                id="phone"
                 placeholder="01xxxxxxxxx"
                 required
             >
@@ -197,23 +278,49 @@
 
             <textarea
                 id="address"
-                placeholder="اكتب عنوان التوصيل"
-                required>
-            </textarea>
+                placeholder="اكتب عنوان التوصيل بالتفصيل"
+                required
+            ></textarea>
 
 
             <button
-                class="confirm"
-                type="submit">
+                type="submit"
+                class="confirm">
 
                 تأكيد الطلب 🚀
 
             </button>
 
+
         </form>
 
     </div>
 
+
+    <!-- رسالة نجاح -->
+
+    <div
+        class="success"
+        id="successBox">
+
+        <div class="success-icon">
+            🎉
+        </div>
+
+        <h2>
+            تم تأكيد طلبك!
+        </h2>
+
+        <p>
+            شكرًا ليك ❤️
+            <br>
+            طلبك اتسجل بنجاح.
+        </p>
+
+    </div>
+
+
+    <!-- العودة للمتجر -->
 
     <a
         href="store.html"
@@ -229,17 +336,40 @@
 
 <script>
 
-let cart =
-    JSON.parse(localStorage.getItem("cart")) || [];
 
+/* =========================
+   تحميل السلة
+========================= */
+
+let cart =
+    JSON.parse(
+        localStorage.getItem("cart")
+    ) || [];
+
+
+/* =========================
+   عناصر الصفحة
+========================= */
 
 const orderItems =
     document.getElementById("orderItems");
 
-
 const orderTotal =
     document.getElementById("orderTotal");
 
+const orderForm =
+    document.getElementById("orderForm");
+
+const customerBox =
+    document.getElementById("customerBox");
+
+const successBox =
+    document.getElementById("successBox");
+
+
+/* =========================
+   حساب وعرض الطلب
+========================= */
 
 let total = 0;
 
@@ -247,16 +377,30 @@ let total = 0;
 if (cart.length === 0) {
 
     orderItems.innerHTML = `
-        <p style="color:#aaa;text-align:center;">
+
+        <div class="empty">
+
             السلة فاضية 🛒
-        </p>
+
+            <br><br>
+
+            ارجع للمتجر وأضف صندوقًا أولًا.
+
+        </div>
+
     `;
 
 } else {
 
+
     cart.forEach(function(item) {
 
-        total += Number(item.price);
+
+        const price =
+            Number(item.price) || 0;
+
+
+        total += price;
 
 
         orderItems.innerHTML += `
@@ -268,7 +412,7 @@ if (cart.length === 0) {
                 </span>
 
                 <strong>
-                    ${item.price} جنيه
+                    ${price} جنيه
                 </strong>
 
             </div>
@@ -283,42 +427,123 @@ if (cart.length === 0) {
 orderTotal.innerText = total;
 
 
-document
-    .getElementById("orderForm")
-    .addEventListener("submit", function(event) {
+/* =========================
+   تأكيد الطلب
+========================= */
+
+orderForm.addEventListener(
+    "submit",
+    function(event) {
 
         event.preventDefault();
 
 
+        /* التأكد من وجود منتجات */
+
         if (cart.length === 0) {
 
-            alert("السلة فاضية 🛒");
+            alert(
+                "السلة فاضية 🛒"
+            );
 
             return;
 
         }
 
 
+        /* بيانات العميل */
+
+        const name =
+            document
+            .getElementById("name")
+            .value
+            .trim();
+
+
+        const phone =
+            document
+            .getElementById("phone")
+            .value
+            .trim();
+
+
+        const address =
+            document
+            .getElementById("address")
+            .value
+            .trim();
+
+
+        /* التأكد من البيانات */
+
+        if (
+            name === "" ||
+            phone === "" ||
+            address === ""
+        ) {
+
+            alert(
+                "من فضلك اكتب كل البيانات المطلوبة ⚠️"
+            );
+
+            return;
+
+        }
+
+
+        /* إنشاء رقم للطلب */
+
+        const orderId =
+            Date.now();
+
+
+        /* إنشاء الطلب */
+
         const order = {
 
-            name:
-                document.getElementById("name").value,
+            id: orderId,
 
-            phone:
-                document.getElementById("phone").value,
+            name: name,
 
-            address:
-                document.getElementById("address").value,
+            phone: phone,
+
+            address: address,
 
             products: cart,
 
             total: total,
 
             date:
-                new Date().toLocaleString("ar-EG")
+                new Date()
+                .toLocaleString("ar-EG")
 
         };
 
+
+        /* =========================
+           جلب الطلبات القديمة
+        ========================= */
+
+        let orders =
+            JSON.parse(
+                localStorage.getItem("orders")
+            ) || [];
+
+
+        /* إضافة الطلب الجديد */
+
+        orders.push(order);
+
+
+        /* حفظ كل الطلبات */
+
+        localStorage.setItem(
+            "orders",
+            JSON.stringify(orders)
+        );
+
+
+        /* حفظ آخر طلب */
 
         localStorage.setItem(
             "lastOrder",
@@ -326,18 +551,47 @@ document
         );
 
 
-        localStorage.removeItem("cart");
+        /* تفريغ السلة */
 
+        localStorage.removeItem(
+            "cart"
+        );
+
+
+        /* إخفاء نموذج البيانات */
+
+        customerBox.style.display =
+            "none";
+
+
+        /* إظهار رسالة النجاح */
+
+        successBox.style.display =
+            "block";
+
+
+        /* رسالة نجاح */
 
         alert(
             "تم تأكيد طلبك بنجاح 🎉"
         );
 
 
-        window.location.href =
-            "index.html";
+        /* بعد ثانيتين نرجع للرئيسية */
 
-    });
+        setTimeout(
+            function() {
+
+                window.location.href =
+                    "index.html";
+
+            },
+            2000
+        );
+
+    }
+);
+
 
 </script>
 
