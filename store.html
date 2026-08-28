@@ -1,40 +1,103 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+let cart = [];
 
-  <title>المتجر | صندوقك</title>
+function addToCart(name, price) {
+    cart.push({
+        name: name,
+        price: price
+    });
 
-  <link rel="stylesheet" href="style.css">
+    updateCart();
+    alert("تم إضافة " + name + " للسلة 🛒");
+}
 
-  <style>
-    .store-page {
-      max-width: 1100px;
-      margin: auto;
-      padding: 30px 18px;
+function updateCart() {
+    const cartCount = document.getElementById("cartCount");
+    const cartItems = document.getElementById("cartItems");
+    const cartTotal = document.getElementById("cartTotal");
+
+    cartCount.innerText = cart.length;
+
+    cartItems.innerHTML = "";
+
+    let total = 0;
+
+    cart.forEach(function(item, index) {
+
+        total += item.price;
+
+        cartItems.innerHTML += `
+            <div style="
+                padding:15px 0;
+                border-bottom:1px solid #ddd;
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                gap:10px;
+            ">
+
+                <div>
+                    <strong>${item.name}</strong>
+                    <br>
+                    <span>${item.price} جنيه</span>
+                </div>
+
+                <button
+                    onclick="removeFromCart(${index})"
+                    style="
+                        background:#e53935;
+                        color:white;
+                        border:0;
+                        padding:7px 10px;
+                        border-radius:8px;
+                    "
+                >
+                    حذف
+                </button>
+
+            </div>
+        `;
+    });
+
+    cartTotal.innerText = total;
+}
+
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCart();
+}
+
+function openCart() {
+    document.getElementById("cartModal").style.display = "block";
+    updateCart();
+}
+
+function closeCart(event) {
+    if (event.target.id === "cartModal") {
+        document.getElementById("cartModal").style.display = "none";
+    }
+}
+
+function closeCartButton() {
+    document.getElementById("cartModal").style.display = "none";
+}
+
+function checkout() {
+
+    if (cart.length === 0) {
+        alert("السلة فاضية 🛒");
+        return;
     }
 
-    .store-title {
-      text-align: center;
-      margin-bottom: 30px;
-    }
+    alert("تم تجهيز طلبك 🚀");
 
-    .store-title h1 {
-      font-size: 36px;
-      margin-bottom: 10px;
-    }
+    cart = [];
 
-    .store-title p {
-      color: #777;
-    }
+    updateCart();
 
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
+    closeCartButton();
+}
 
+updateCart();
     .product {
       background: white;
       border-radius: 18px;
