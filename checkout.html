@@ -2,12 +2,15 @@
 <html lang="ar" dir="rtl">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>إتمام الطلب | صندوقك</title>
 
     <style>
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -19,22 +22,20 @@
             background: #090909;
             color: white;
             min-height: 100vh;
-            padding-bottom: 40px;
+            padding: 20px;
         }
 
         .container {
             max-width: 600px;
             margin: auto;
-            padding: 25px 18px;
         }
 
         .title {
             text-align: center;
-            margin-bottom: 25px;
+            margin: 20px 0 25px;
         }
 
         .title h1 {
-            font-size: 30px;
             margin-bottom: 10px;
         }
 
@@ -57,27 +58,21 @@
         .product {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            padding: 13px 0;
+            padding: 12px 0;
             border-bottom: 1px solid #252525;
-        }
-
-        .product:last-child {
-            border-bottom: none;
         }
 
         .total {
             display: flex;
             justify-content: space-between;
             margin-top: 18px;
-            font-size: 21px;
+            font-size: 20px;
             font-weight: bold;
         }
 
         label {
             display: block;
             margin-bottom: 7px;
-            color: #ddd;
         }
 
         input,
@@ -90,28 +85,21 @@
             background: #181818;
             color: white;
             font-size: 15px;
-            outline: none;
         }
 
         textarea {
             min-height: 90px;
-            resize: vertical;
-        }
-
-        input:focus,
-        textarea:focus {
-            border-color: #00e5ff;
         }
 
         .confirm {
             width: 100%;
-            padding: 15px;
-            border: none;
+            padding: 14px;
+            border: 0;
             border-radius: 12px;
             background: #00e5ff;
             color: #000;
-            font-size: 17px;
             font-weight: bold;
+            font-size: 17px;
             cursor: pointer;
         }
 
@@ -120,101 +108,148 @@
             text-align: center;
             color: #aaa;
             text-decoration: none;
-            margin-top: 18px;
+            margin-top: 20px;
         }
 
-        .empty {
-            text-align: center;
-            color: #aaa;
-            padding: 20px;
-        }
     </style>
+
 </head>
 
 <body>
 
+
 <div class="container">
 
+
     <div class="title">
-        <h1>📦 إتمام الطلب</h1>
-        <p>راجع طلبك واكتب بيانات التوصيل</p>
+
+        <h1>
+            📦 إتمام الطلب
+        </h1>
+
+        <p>
+            اكتب بيانات التوصيل
+        </p>
+
     </div>
+
 
     <div class="box">
 
-        <h2>🛒 طلبك</h2>
+        <h2>
+            🛒 طلبك
+        </h2>
 
         <div id="orderItems"></div>
 
         <div class="total">
-            <span>الإجمالي</span>
+
+            <span>
+                الإجمالي
+            </span>
+
             <span>
                 <span id="orderTotal">0</span>
                 جنيه
             </span>
+
         </div>
 
     </div>
 
+
     <div class="box">
 
-        <h2>👤 بيانات العميل</h2>
+        <h2>
+            👤 بيانات العميل
+        </h2>
+
 
         <form id="orderForm">
 
-            <label>الاسم</label>
+            <label>
+                الاسم
+            </label>
+
             <input
-                type="text"
                 id="name"
+                type="text"
                 placeholder="اكتب اسمك"
                 required
             >
 
-            <label>رقم الهاتف</label>
+
+            <label>
+                رقم الهاتف
+            </label>
+
             <input
-                type="tel"
                 id="phone"
+                type="tel"
                 placeholder="01xxxxxxxxx"
                 required
             >
 
-            <label>العنوان</label>
+
+            <label>
+                العنوان
+            </label>
+
             <textarea
                 id="address"
-                placeholder="اكتب عنوان التوصيل بالتفصيل"
-                required
-            ></textarea>
+                placeholder="اكتب عنوان التوصيل"
+                required>
+            </textarea>
 
-            <button type="submit" class="confirm">
+
+            <button
+                class="confirm"
+                type="submit">
+
                 تأكيد الطلب 🚀
+
             </button>
 
         </form>
 
     </div>
 
-    <a href="store.html" class="back">
+
+    <a
+        href="store.html"
+        class="back">
+
         ← العودة للمتجر
+
     </a>
+
 
 </div>
 
 
 <script>
 
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let cart =
+    JSON.parse(localStorage.getItem("cart")) || [];
 
-const orderItems = document.getElementById("orderItems");
-const orderTotal = document.getElementById("orderTotal");
+
+const orderItems =
+    document.getElementById("orderItems");
+
+
+const orderTotal =
+    document.getElementById("orderTotal");
+
 
 let total = 0;
+
 
 if (cart.length === 0) {
 
     orderItems.innerHTML = `
-        <div class="empty">
+        <p style="color:#aaa;text-align:center;">
             السلة فاضية 🛒
-        </div>
+        </p>
     `;
 
 } else {
@@ -223,7 +258,9 @@ if (cart.length === 0) {
 
         total += Number(item.price);
 
+
         orderItems.innerHTML += `
+
             <div class="product">
 
                 <span>
@@ -235,48 +272,76 @@ if (cart.length === 0) {
                 </strong>
 
             </div>
+
         `;
 
     });
 
 }
 
+
 orderTotal.innerText = total;
 
 
-document.getElementById("orderForm").addEventListener("submit", function(event) {
+document
+    .getElementById("orderForm")
+    .addEventListener("submit", function(event) {
 
-    event.preventDefault();
+        event.preventDefault();
 
-    if (cart.length === 0) {
-        alert("السلة فاضية 🛒");
-        return;
-    }
 
-    const name = document.getElementById("name").value;
-    const phone = document.getElementById("phone").value;
-    const address = document.getElementById("address").value;
+        if (cart.length === 0) {
 
-    const order = {
-        name: name,
-        phone: phone,
-        address: address,
-        products: cart,
-        total: total,
-        date: new Date().toLocaleString("ar-EG")
-    };
+            alert("السلة فاضية 🛒");
 
-    localStorage.setItem("lastOrder", JSON.stringify(order));
+            return;
 
-    localStorage.removeItem("cart");
+        }
 
-    alert("تم إرسال طلبك بنجاح 🎉");
 
-    window.location.href = "index.html";
+        const order = {
 
-});
+            name:
+                document.getElementById("name").value,
+
+            phone:
+                document.getElementById("phone").value,
+
+            address:
+                document.getElementById("address").value,
+
+            products: cart,
+
+            total: total,
+
+            date:
+                new Date().toLocaleString("ar-EG")
+
+        };
+
+
+        localStorage.setItem(
+            "lastOrder",
+            JSON.stringify(order)
+        );
+
+
+        localStorage.removeItem("cart");
+
+
+        alert(
+            "تم تأكيد طلبك بنجاح 🎉"
+        );
+
+
+        window.location.href =
+            "index.html";
+
+    });
 
 </script>
 
+
 </body>
+
 </html>
