@@ -2,12 +2,15 @@
 <html lang="ar" dir="rtl">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>لوحة التحكم | SANDOQAK</title>
 
     <style>
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -22,7 +25,7 @@
         }
 
         header {
-            padding: 20px;
+            padding: 18px 20px;
             border-bottom: 1px solid #222;
             display: flex;
             justify-content: space-between;
@@ -38,7 +41,7 @@
             color: #00e5ff;
         }
 
-        .back {
+        .home {
             background: #00e5ff;
             color: #000;
             text-decoration: none;
@@ -54,6 +57,7 @@
         }
 
         .title {
+            text-align: center;
             margin-bottom: 25px;
         }
 
@@ -80,14 +84,14 @@
             padding: 20px;
         }
 
-        .stat span {
+        .stat-title {
             color: #aaa;
-            display: block;
             margin-bottom: 10px;
         }
 
-        .stat strong {
-            font-size: 26px;
+        .stat-number {
+            font-size: 27px;
+            font-weight: bold;
         }
 
         .orders {
@@ -97,8 +101,21 @@
             padding: 20px;
         }
 
-        .orders h2 {
+        .orders-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 20px;
+        }
+
+        .refresh {
+            background: #00e5ff;
+            color: #000;
+            border: 0;
+            padding: 9px 14px;
+            border-radius: 9px;
+            font-weight: bold;
+            cursor: pointer;
         }
 
         .empty {
@@ -110,26 +127,30 @@
         .order {
             background: #181818;
             border: 1px solid #292929;
-            border-radius: 14px;
+            border-radius: 15px;
             padding: 18px;
             margin-bottom: 15px;
         }
 
-        .order-head {
+        .order:last-child {
+            margin-bottom: 0;
+        }
+
+        .order-header {
             display: flex;
             justify-content: space-between;
             gap: 10px;
             margin-bottom: 15px;
         }
 
-        .order-number {
+        .order-id {
             color: #00e5ff;
             font-weight: bold;
         }
 
         .customer {
-            line-height: 1.8;
             color: #ddd;
+            line-height: 1.9;
             margin-bottom: 15px;
         }
 
@@ -153,24 +174,13 @@
             margin-bottom: 15px;
         }
 
-        .delete-btn {
+        .delete {
             background: #e53935;
             color: white;
             border: 0;
-            padding: 10px 15px;
+            padding: 9px 14px;
             border-radius: 9px;
             cursor: pointer;
-        }
-
-        .refresh-btn {
-            background: #00e5ff;
-            color: #000;
-            border: 0;
-            padding: 10px 16px;
-            border-radius: 10px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-bottom: 15px;
         }
 
         @media (max-width: 600px) {
@@ -179,7 +189,13 @@
                 grid-template-columns: 1fr;
             }
 
-            .order-head {
+            .orders-title {
+                align-items: flex-start;
+                gap: 10px;
+                flex-direction: column;
+            }
+
+            .order-header {
                 flex-direction: column;
             }
 
@@ -188,9 +204,11 @@
             }
 
         }
+
     </style>
 
 </head>
+
 
 <body>
 
@@ -201,7 +219,7 @@
         SANDOQ<span>AK</span> 👑
     </div>
 
-    <a href="index.html" class="back">
+    <a href="index.html" class="home">
         الرئيسية
     </a>
 
@@ -218,7 +236,7 @@
         </h1>
 
         <p>
-            إدارة ومتابعة الطلبات
+            متابعة وإدارة طلبات العملاء
         </p>
 
     </div>
@@ -226,63 +244,83 @@
 
     <div class="stats">
 
+
         <div class="stat">
 
-            <span>
+            <div class="stat-title">
                 📦 عدد الطلبات
-            </span>
+            </div>
 
-            <strong id="ordersCount">
+            <div
+                class="stat-number"
+                id="ordersCount">
+
                 0
-            </strong>
+
+            </div>
 
         </div>
 
 
         <div class="stat">
 
-            <span>
+            <div class="stat-title">
                 💰 إجمالي المبيعات
-            </span>
+            </div>
 
-            <strong id="salesTotal">
+            <div
+                class="stat-number"
+                id="salesTotal">
+
                 0 جنيه
-            </strong>
+
+            </div>
 
         </div>
 
 
         <div class="stat">
 
-            <span>
-                🛒 إجمالي المنتجات
-            </span>
+            <div class="stat-title">
+                🛒 عدد المنتجات
+            </div>
 
-            <strong id="productsCount">
+            <div
+                class="stat-number"
+                id="productsCount">
+
                 0
-            </strong>
+
+            </div>
 
         </div>
+
 
     </div>
 
 
-    <button
-        class="refresh-btn"
-        onclick="loadOrders()">
-
-        🔄 تحديث الطلبات
-
-    </button>
-
-
     <div class="orders">
 
-        <h2>
-            📋 الطلبات
-        </h2>
+
+        <div class="orders-title">
+
+            <h2>
+                📋 الطلبات
+            </h2>
+
+            <button
+                class="refresh"
+                onclick="loadOrders()">
+
+                🔄 تحديث
+
+            </button>
+
+        </div>
+
 
         <div id="ordersList"></div>
+
 
     </div>
 
@@ -292,184 +330,44 @@
 
 <script>
 
+
 function loadOrders() {
+
+    const orders =
+        JSON.parse(
+            localStorage.getItem("orders")
+        ) || [];
+
 
     const ordersList =
         document.getElementById("ordersList");
 
-    const orders =
-        JSON.parse(localStorage.getItem("orders")) || [];
 
-    let sales = 0;
-    let products = 0;
+    const ordersCount =
+        document.getElementById("ordersCount");
 
 
-    document.getElementById("ordersCount").innerText =
+    const salesTotal =
+        document.getElementById("salesTotal");
+
+
+    const productsCount =
+        document.getElementById("productsCount");
+
+
+    ordersCount.innerText =
         orders.length;
 
 
-    if (orders.length === 0) {
+    let sales = 0;
 
-        ordersList.innerHTML = `
-            <div class="empty">
-                لا توجد طلبات حتى الآن 📦
-            </div>
-        `;
+    let products = 0;
 
-        document.getElementById("salesTotal").innerText =
-            "0 جنيه";
 
-        document.getElementById("productsCount").innerText =
-            "0";
+    orders.forEach(function(order) {
 
-        return;
+        sales +=
+            Number(order.total) || 0;
 
-    }
 
-
-    ordersList.innerHTML = "";
-
-
-    orders.forEach(function(order, index) {
-
-        sales += Number(order.total) || 0;
-
-        products += order.products
-            ? order.products.length
-            : 0;
-
-
-        let productsHTML = "";
-
-
-        if (order.products) {
-
-            order.products.forEach(function(product) {
-
-                productsHTML += `
-                    <div class="product">
-
-                        <span>
-                            ${product.name}
-                        </span>
-
-                        <strong>
-                            ${product.price} جنيه
-                        </strong>
-
-                    </div>
-                `;
-
-            });
-
-        }
-
-
-        ordersList.innerHTML += `
-
-            <div class="order">
-
-                <div class="order-head">
-
-                    <div class="order-number">
-                        طلب #${index + 1}
-                    </div>
-
-                    <div>
-                        ${order.date || ""}
-                    </div>
-
-                </div>
-
-
-                <div class="customer">
-
-                    👤 ${order.name || "غير معروف"}
-
-                    <br>
-
-                    📱 ${order.phone || "غير موجود"}
-
-                    <br>
-
-                    📍 ${order.address || "غير موجود"}
-
-                </div>
-
-
-                <div class="products">
-
-                    ${productsHTML}
-
-                </div>
-
-
-                <div class="total">
-
-                    💰 الإجمالي:
-                    ${order.total || 0}
-                    جنيه
-
-                </div>
-
-
-                <button
-                    class="delete-btn"
-                    onclick="deleteOrder(${index})">
-
-                    🗑️ حذف الطلب
-
-                </button>
-
-            </div>
-
-        `;
-
-    });
-
-
-    document.getElementById("salesTotal").innerText =
-        sales + " جنيه";
-
-
-    document.getElementById("productsCount").innerText =
-        products;
-
-}
-
-
-function deleteOrder(index) {
-
-    if (!confirm("هل تريد حذف هذا الطلب؟")) {
-
-        return;
-
-    }
-
-
-    const orders =
-        JSON.parse(localStorage.getItem("orders")) || [];
-
-
-    orders.splice(index, 1);
-
-
-    localStorage.setItem(
-        "orders",
-        JSON.stringify(orders)
-    );
-
-
-    loadOrders();
-
-}
-
-
-loadOrders();
-
-</script>
-
-
-</body>
-
-</html>
+        if (
