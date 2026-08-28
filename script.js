@@ -1,228 +1,87 @@
-// ================================
-// SANDOQAK - Main JavaScript
-// ================================
+let cart = [];
 
-let cart = JSON.parse(
-  localStorage.getItem("sandoqak_cart") || "[]"
-);
-
-// حفظ السلة
-function saveCart() {
-  localStorage.setItem(
-    "sandoqak_cart",
-    JSON.stringify(cart)
-  );
-
-  updateCartCount();
-}
-
-// تحديث رقم السلة
-function updateCartCount() {
-  const count = document.getElementById("cartCount");
-
-  if (count) {
-    count.textContent = cart.length;
-  }
-}
-
-// إضافة منتج للسلة
 function addToCart(name, price) {
+    cart.push({
+        name: name,
+        price: price
+    });
 
-  cart.push({
-    name: name,
-    price: price
-  });
+    updateCart();
 
-  saveCart();
-
-  alert("🎁 تمت إضافة المنتج إلى السلة");
+    alert("تم إضافة " + name + " للسلة 🛒");
 }
 
-// فتح السلة
+function updateCart() {
+    const cartCount = document.getElementById("cartCount");
+    const cartItems = document.getElementById("cartItems");
+    const cartTotal = document.getElementById("cartTotal");
+
+    cartCount.textContent = cart.length;
+
+    cartItems.innerHTML = "";
+
+    let total = 0;
+
+    cart.forEach((item, index) => {
+        total += item.price;
+
+        const div = document.createElement("div");
+
+        div.style.padding = "12px 0";
+        div.style.borderBottom = "1px solid #eee";
+
+        div.innerHTML = `
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span>${item.name}</span>
+                <strong>${item.price} جنيه</strong>
+                <button
+                    onclick="removeFromCart(${index})"
+                    style="
+                        background:#e53935;
+                        color:white;
+                        border:0;
+                        padding:6px 10px;
+                        border-radius:8px;
+                        cursor:pointer;
+                    "
+                >
+                    حذف
+                </button>
+            </div>
+        `;
+
+        cartItems.appendChild(div);
+    });
+
+    cartTotal.textContent = total;
+}
+
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCart();
+}
+
 function openCart() {
-
-  renderCart();
-
-  const modal = document.getElementById("cartModal");
-
-  if (modal) {
-    modal.classList.add("show");
-  }
+    document.getElementById("cartModal").style.display = "block";
+    updateCart();
 }
 
-// إغلاق السلة
 function closeCart(event) {
-
-  if (
-    !event ||
-    event.target.id === "cartModal"
-  ) {
-
-    const modal =
-      document.getElementById("cartModal");
-
-    if (modal) {
-      modal.classList.remove("show");
+    if (event.target.id === "cartModal") {
+        document.getElementById("cartModal").style.display = "none";
     }
-  }
 }
 
-// عرض المنتجات داخل السلة
-function renderCart() {
-
-  const box =
-    document.getElementById("cartItems");
-
-  const total =
-    document.getElementById("cartTotal");
-
-  if (!box || !total) return;
-
-  if (cart.length === 0) {
-
-    box.innerHTML =
-      '<p style="color:#888">السلة فاضية لسه 😄</p>';
-
-    total.textContent = "0";
-
-    return;
-  }
-
-  box.innerHTML = cart
-    .map(function (item, index) {
-
-      return `
-        <div class="cart-item">
-
-          <span>
-            ${item.name}
-          </span>
-
-          <span>
-            ${item.price} جنيه
-
-            <button
-              onclick="removeItem(${index})"
-              style="
-                margin-right:8px;
-                background:none;
-                border:0;
-                color:#ff6b6b;
-                cursor:pointer;
-              "
-            >
-              حذف
-            </button>
-
-          </span>
-
-        </div>
-      `;
-
-    })
-    .join("");
-
-  const totalPrice =
-    cart.reduce(
-      function (sum, item) {
-        return sum + Number(item.price);
-      },
-      0
-    );
-
-  total.textContent = totalPrice;
-}
-
-// حذف منتج
-function removeItem(index) {
-
-  cart.splice(index, 1);
-
-  saveCart();
-
-  renderCart();
-}
-
-// تأكيد الطلب
 function checkout() {
+    if (cart.length === 0) {
+        alert("السلة فاضية 🛒");
+        return;
+    }
 
-  if (cart.length === 0) {
+    alert("تم تجهيز طلبك 🚀");
 
-    alert("🛒 السلة فاضية");
+    cart = [];
+    updateCart();
 
-    return;
-  }
-
-  alert(
-    "🔥 الطلب جاهز!\n\n" +
-    "دي نسخة تجريبية حاليًا.\n" +
-    "في المرحلة القادمة هنربط الطلبات والدفع الحقيقي."
-  );
+    document.getElementById("cartModal").style.display = "none";
 }
-
-// ================================
-// فتح الصندوق بالكود
-// ================================
-
-function unlockBox() {
-
-  const input =
-    document.getElementById("code");
-
-  const result =
-    document.getElementById("unlockResult");
-
-  if (!input || !result) return;
-
-  const code =
-    input.value
-      .trim()
-      .toUpperCase();
-
-  if (code === "SANDOQAK001") {
-
-    result.innerHTML = `
-      🎉 مبروك!
-
-      <br><br>
-
-      🔓 تم فتح Level 1
-
-      <br><br>
-
-      🧩 التحدي:
-
-      <br>
-
-      ما الشيء الذي له أسنان
-      ولا يعض؟
-    `;
-
-  } else {
-
-    result.innerHTML = `
-      ❌ الكود غير صحيح
-
-      <br><br>
-
-      جرّب الكود التجريبي:
-
-      <br>
-
-      <b>SANDOQAK001</b>
-    `;
-  }
-}
-
-// ================================
-// تشغيل الموقع
-// ================================
-
-document.addEventListener(
-  "DOMContentLoaded",
-  function () {
-
-    updateCartCount();
-
-  }
-);
