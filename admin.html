@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>لوحة الأدمن | SANDOQAK</title>
+<title>SANDOQAK | لوحة الإدارة</title>
 
 <style>
 
@@ -19,9 +19,9 @@
 
 body{
     background:#090909;
-    color:white;
+    color:#fff;
     min-height:100vh;
-    padding:20px;
+    padding:15px;
 }
 
 .container{
@@ -29,13 +29,16 @@ body{
     margin:auto;
 }
 
-/* ================= LOGIN ================= */
+
+/* =========================
+   LOGIN
+========================= */
 
 .login-box{
     max-width:420px;
-    margin:70px auto;
+    margin:60px auto;
     background:#111;
-    border:1px solid #252525;
+    border:1px solid #292929;
     border-radius:20px;
     padding:25px;
 }
@@ -47,57 +50,52 @@ body{
 
 .login-box p{
     text-align:center;
-    color:#aaa;
-    margin-bottom:25px;
+    color:#999;
     line-height:1.7;
+    margin-bottom:25px;
 }
 
-.input-box{
+.input-group{
     position:relative;
     margin-bottom:15px;
 }
 
-input{
+.input-group input{
     width:100%;
-    padding:14px;
-    background:#181818;
-    color:white;
-    border:1px solid #333;
+    height:48px;
+    padding:12px;
     border-radius:10px;
+    border:1px solid #333;
+    background:#181818;
+    color:#fff;
     outline:none;
     font-size:15px;
 }
 
-input:focus{
+.input-group input:focus{
     border-color:#00e5ff;
 }
 
 .password-input{
-    padding-left:95px;
+    padding-left:90px !important;
 }
 
-.show-password{
+.show-btn{
     position:absolute;
-    left:7px;
-    top:7px;
-    height:34px;
-    padding:0 10px;
+    left:6px;
+    top:6px;
+    height:36px;
     border:0;
     border-radius:8px;
+    padding:0 10px;
     background:#333;
-    color:white;
+    color:#fff;
     cursor:pointer;
-    font-size:13px;
-    z-index:5;
-}
-
-.show-password:active{
-    transform:scale(.96);
 }
 
 .login-btn{
     width:100%;
-    padding:14px;
+    height:48px;
     border:0;
     border-radius:10px;
     background:#00e5ff;
@@ -111,28 +109,32 @@ input:focus{
     opacity:.6;
 }
 
-.message{
+.login-message{
     text-align:center;
-    margin-top:15px;
     color:#ff7777;
+    margin-top:15px;
     line-height:1.6;
 }
 
-/* ================= ADMIN ================= */
+
+/* =========================
+   ADMIN
+========================= */
 
 #adminPanel{
     display:none;
 }
 
-header{
+.header{
     display:flex;
     justify-content:space-between;
     align-items:center;
+    gap:10px;
     margin-bottom:25px;
 }
 
 .logo{
-    font-size:24px;
+    font-size:25px;
     font-weight:bold;
 }
 
@@ -148,17 +150,25 @@ header{
 .header-btn{
     border:0;
     border-radius:10px;
-    padding:10px 14px;
+    padding:10px 15px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.refresh{
     background:#00e5ff;
     color:#000;
-    font-weight:bold;
-    cursor:pointer;
 }
 
 .logout{
     background:#e53935;
-    color:white;
+    color:#fff;
 }
+
+
+/* =========================
+   TITLE
+========================= */
 
 .title{
     text-align:center;
@@ -171,54 +181,70 @@ header{
 }
 
 .title p{
-    color:#aaa;
+    color:#999;
 }
+
+
+/* =========================
+   STATS
+========================= */
 
 .stats{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:15px;
-    margin-bottom:25px;
+    margin-bottom:20px;
 }
 
 .stat{
     background:#111;
-    border:1px solid #252525;
+    border:1px solid #292929;
     border-radius:18px;
     padding:20px;
 }
 
-.stat small{
-    color:#aaa;
+.stat-title{
+    color:#999;
 }
 
-.stat h2{
-    margin-top:10px;
+.stat-value{
     font-size:28px;
+    font-weight:bold;
+    margin-top:10px;
 }
 
-.orders{
+
+/* =========================
+   ORDERS
+========================= */
+
+.orders-box{
     background:#111;
-    border:1px solid #252525;
+    border:1px solid #292929;
     border-radius:18px;
-    padding:20px;
+    padding:18px;
 }
 
-.orders-header{
-    margin-bottom:20px;
+.orders-title{
+    margin-bottom:18px;
 }
 
 .order{
     background:#181818;
-    border:1px solid #292929;
+    border:1px solid #303030;
     border-radius:15px;
     padding:18px;
     margin-bottom:15px;
 }
 
-.order-top{
+.order:last-child{
+    margin-bottom:0;
+}
+
+.order-header{
     display:flex;
     justify-content:space-between;
+    align-items:center;
     gap:10px;
     margin-bottom:15px;
 }
@@ -228,36 +254,80 @@ header{
     font-weight:bold;
 }
 
+.order-date{
+    color:#888;
+    font-size:13px;
+}
+
 .customer{
     color:#ddd;
     line-height:2;
 }
 
 .products{
-    border-top:1px solid #292929;
-    border-bottom:1px solid #292929;
-    margin:12px 0;
+    margin-top:15px;
     padding:12px 0;
+    border-top:1px solid #303030;
+    border-bottom:1px solid #303030;
 }
 
 .product{
     display:flex;
     justify-content:space-between;
-    padding:6px 0;
+    gap:10px;
+    padding:7px 0;
+}
+
+.order-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-top:15px;
 }
 
 .total{
-    font-size:20px;
+    font-size:19px;
     font-weight:bold;
-    margin-bottom:15px;
 }
 
-.delete{
-    background:#e53935;
-    color:white;
+.status-box{
+    margin-top:15px;
+}
+
+.status-label{
+    display:block;
+    margin-bottom:7px;
+    color:#bbb;
+}
+
+.status-select{
+    width:100%;
+    height:43px;
+    border:1px solid #333;
+    border-radius:9px;
+    background:#222;
+    color:#fff;
+    padding:8px;
+    outline:none;
+}
+
+.status-select:focus{
+    border-color:#00e5ff;
+}
+
+.order-actions{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:12px;
+}
+
+.delete-btn{
     border:0;
     border-radius:9px;
     padding:9px 14px;
+    background:#e53935;
+    color:#fff;
     cursor:pointer;
 }
 
@@ -265,32 +335,36 @@ header{
 .loading{
     text-align:center;
     padding:35px 10px;
-    color:#aaa;
+    color:#999;
 }
 
 .error{
-    background:#3a1111;
-    border:1px solid #7a2222;
-    color:#ffb3b3;
+    background:#351212;
+    border:1px solid #702020;
+    color:#ffbaba;
+    border-radius:10px;
     padding:15px;
-    border-radius:12px;
     line-height:1.7;
 }
+
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:600px){
 
     body{
-        padding:12px;
+        padding:10px;
     }
 
     .stats{
         grid-template-columns:1fr;
     }
 
-    header{
+    .header{
         flex-direction:column;
-        align-items:flex-start;
-        gap:15px;
+        align-items:stretch;
     }
 
     .header-buttons{
@@ -301,8 +375,14 @@ header{
         flex:1;
     }
 
-    .order-top{
+    .order-header{
         flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .order-bottom{
+        flex-direction:column;
+        align-items:stretch;
     }
 
 }
@@ -313,6 +393,7 @@ header{
 
 
 <body>
+
 
 <div class="container">
 
@@ -337,7 +418,7 @@ header{
     </p>
 
 
-    <div class="input-box">
+    <div class="input-group">
 
         <input
             type="email"
@@ -349,69 +430,24 @@ header{
     </div>
 
 
-    <div class="input-box">
+    <div class="input-group">
 
-        <div style="position:relative;">
-
-    <input
-        type="password"
-        id="password"
-        class="password-input"
-        placeholder="كلمة المرور"
-        autocomplete="current-password"
-        style="padding-left:90px;"
-    >
-
-    <button
-        type="button"
-        id="showPassword"
-        onclick="
-            const p = document.getElementById('password');
-            const b = document.getElementById('showPassword');
-
-            if (p.type === 'password') {
-                p.type = 'text';
-                b.innerHTML = '🙈 إخفاء';
-            } else {
-                p.type = 'password';
-                b.innerHTML = '👁️ إظهار';
-            }
-        "
-        style="
-            position:absolute;
-            left:7px;
-            top:7px;
-            height:34px;
-            padding:0 10px;
-            border:0;
-            border-radius:8px;
-            background:#333;
-            color:white;
-            cursor:pointer;
-            z-index:10;
-        "
-    >
-        👁️ إظهار
-    </button>
-
-</div>
+        <input
+            type="password"
+            id="password"
+            class="password-input"
+            placeholder="كلمة المرور"
+            autocomplete="current-password"
+        >
 
         <button
-    type="button"
-    onclick="document.getElementById('password').type='text'"
-    style="
-        position:absolute;
-        left:7px;
-        top:7px;
-        z-index:10;
-        background:#333;
-        color:white;
-        border:0;
-        padding:8px 10px;
-        border-radius:8px;
-    ">
-    👁️ إظهار
-</button>
+            type="button"
+            class="show-btn"
+            onclick="togglePassword()"
+            id="showPassword"
+        >
+            👁️ إظهار
+        </button>
 
     </div>
 
@@ -426,9 +462,9 @@ header{
 
 
     <div
-        class="message"
-        id="loginMessage">
-    </div>
+        class="login-message"
+        id="loginMessage"
+    ></div>
 
 </div>
 
@@ -441,70 +477,602 @@ header{
 <div id="adminPanel">
 
 
-<header>
+    <div class="header">
 
-    <div class="logo">
-        SANDOQ<span>AK</span> 👑
+        <div class="logo">
+            SANDOQ<span>AK</span> 👑
+        </div>
+
+
+        <div class="header-buttons">
+
+            <button
+                type="button"
+                class="header-btn refresh"
+                id="refreshBtn"
+            >
+                🔄 تحديث
+            </button>
+
+
+            <button
+                type="button"
+                class="header-btn logout"
+                id="logoutBtn"
+            >
+                خروج
+            </button>
+
+        </div>
+
     </div>
 
 
-    <div class="header-buttons">
 
-        <button
-            type="button"
-            class="header-btn"
-            id="refreshBtn"
-        >
-            🔄 تحديث
-        </button>
+    <div class="title">
 
+        <h1>
+            📦 لوحة الطلبات
+        </h1>
 
-        <button
-            type="button"
-            class="header-btn logout"
-            id="logoutBtn"
-        >
-            خروج
-        </button>
+        <p>
+            إدارة ومتابعة طلبات العملاء
+        </p>
 
     </div>
 
-</header>
+
+
+    <div class="stats">
+
+
+        <div class="stat">
+
+            <div class="stat-title">
+                📦 عدد الطلبات
+            </div>
+
+            <div
+                class="stat-value"
+                id="ordersCount"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-title">
+                💰 إجمالي المبيعات
+            </div>
+
+            <div
+                class="stat-value"
+                id="salesTotal"
+            >
+                0 جنيه
+            </div>
+
+        </div>
+
+
+    </div>
 
 
 
-<div class="title">
+    <div class="orders-box">
 
-    <h1>
-        📦 لوحة الطلبات
-    </h1>
+        <h2 class="orders-title">
+            📋 الطلبات
+        </h2>
 
-    <p>
-        الطلبات المسجلة في Firebase
-    </p>
+
+        <div id="ordersList">
+
+            <div class="loading">
+                جاري تحميل الطلبات... ⏳
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
 
 </div>
 
 
 
-<div class="stats">
+<!-- =========================
+     PASSWORD BUTTON
+========================= -->
+
+<script>
+
+function togglePassword(){
+
+    const password =
+        document.getElementById("password");
+
+    const button =
+        document.getElementById("showPassword");
 
 
-    <div class="stat">
+    if(
+        password.type === "password"
+    ){
 
-        <small>
-            📦 عدد الطلبات
-        </small>
+        password.type = "text";
 
-        <h2 id="ordersCount">
-            0
-        </h2>
+        button.innerHTML =
+            "🙈 إخفاء";
 
-    </div>
+    }else{
+
+        password.type = "password";
+
+        button.innerHTML =
+            "👁️ إظهار";
+
+    }
+
+}
+
+</script>
 
 
-    <div class="stat">
 
-        <small>
-            💰 إجمالي المبيعات
-       
+<!-- =========================
+     FIREBASE
+========================= -->
+
+<script type="module">
+
+
+import { db } from "./firebase.js";
+
+
+import {
+    initializeApp
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+    collection,
+    getDocs,
+    updateDoc,
+    deleteDoc,
+    doc
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyC3NvbBmiX-2nBBFw-X6KBkpU_8ZOQnDvQ",
+
+    authDomain:
+    "sandoqak-479c4.firebaseapp.com",
+
+    projectId:
+    "sandoqak-479c4",
+
+    storageBucket:
+    "sandoqak-479c4.firebasestorage.app",
+
+    messagingSenderId:
+    "295608980009",
+
+    appId:
+    "1:295608980009:web:f3176896d1b5f461c30238"
+
+};
+
+
+
+/* =========================
+   AUTH APP
+========================= */
+
+const authApp =
+    initializeApp(
+        firebaseConfig,
+        "adminAuthentication"
+    );
+
+
+const auth =
+    getAuth(authApp);
+
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const loginBox =
+    document.getElementById("loginBox");
+
+const adminPanel =
+    document.getElementById("adminPanel");
+
+const emailInput =
+    document.getElementById("email");
+
+const passwordInput =
+    document.getElementById("password");
+
+const loginBtn =
+    document.getElementById("loginBtn");
+
+const loginMessage =
+    document.getElementById("loginMessage");
+
+const logoutBtn =
+    document.getElementById("logoutBtn");
+
+const refreshBtn =
+    document.getElementById("refreshBtn");
+
+const ordersList =
+    document.getElementById("ordersList");
+
+const ordersCount =
+    document.getElementById("ordersCount");
+
+const salesTotal =
+    document.getElementById("salesTotal");
+
+
+
+/* =========================
+   LOGIN
+========================= */
+
+loginBtn.addEventListener(
+    "click",
+    async function(){
+
+        const email =
+            emailInput.value.trim();
+
+        const password =
+            passwordInput.value;
+
+
+        if(
+            email === "" ||
+            password === ""
+        ){
+
+            loginMessage.innerText =
+                "من فضلك اكتب الإيميل وكلمة المرور.";
+
+            return;
+
+        }
+
+
+        loginBtn.disabled = true;
+
+        loginBtn.innerText =
+            "جاري تسجيل الدخول... ⏳";
+
+
+        loginMessage.innerText = "";
+
+
+        try{
+
+            await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+
+        }catch(error){
+
+            console.error(error);
+
+            loginMessage.innerText =
+                "الإيميل أو كلمة المرور غير صحيحة.";
+
+            loginBtn.disabled = false;
+
+            loginBtn.innerText =
+                "تسجيل الدخول 🔐";
+
+        }
+
+    }
+);
+
+
+
+/* =========================
+   AUTH STATE
+========================= */
+
+onAuthStateChanged(
+    auth,
+    function(user){
+
+        if(user){
+
+            loginBox.style.display =
+                "none";
+
+            adminPanel.style.display =
+                "block";
+
+            loadOrders();
+
+        }else{
+
+            loginBox.style.display =
+                "block";
+
+            adminPanel.style.display =
+                "none";
+
+        }
+
+    }
+);
+
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+logoutBtn.addEventListener(
+    "click",
+    async function(){
+
+        await signOut(auth);
+
+    }
+);
+
+
+
+/* =========================
+   REFRESH
+========================= */
+
+refreshBtn.addEventListener(
+    "click",
+    function(){
+
+        loadOrders();
+
+    }
+);
+
+
+
+/* =========================
+   LOAD ORDERS
+========================= */
+
+async function loadOrders(){
+
+    ordersList.innerHTML = `
+
+        <div class="loading">
+            جاري تحميل الطلبات... ⏳
+        </div>
+
+    `;
+
+
+    try{
+
+        const snapshot =
+            await getDocs(
+                collection(
+                    db,
+                    "orders"
+                )
+            );
+
+
+        ordersCount.innerText =
+            snapshot.size;
+
+
+        let sales =
+            0;
+
+
+        if(snapshot.empty){
+
+            ordersList.innerHTML = `
+
+                <div class="empty">
+                    لا توجد طلبات حتى الآن 📦
+                </div>
+
+            `;
+
+            salesTotal.innerText =
+                "0 جنيه";
+
+            return;
+
+        }
+
+
+        ordersList.innerHTML = "";
+
+
+        snapshot.forEach(
+            function(orderDoc){
+
+                const order =
+                    orderDoc.data();
+
+
+                sales +=
+                    Number(order.total) || 0;
+
+
+                let productsHTML = "";
+
+
+                if(
+                    Array.isArray(
+                        order.products
+                    )
+                ){
+
+                    order.products.forEach(
+                        function(product){
+
+                            productsHTML += `
+
+                                <div class="product">
+
+                                    <span>
+                                        ${product.name || "منتج"}
+                                    </span>
+
+                                    <strong>
+                                        ${Number(product.price) || 0}
+                                        جنيه
+                                    </strong>
+
+                                </div>
+
+                            `;
+
+                        }
+                    );
+
+                }
+
+
+                let date = "";
+
+
+                if(order.createdAt){
+
+                    try{
+
+                        date =
+                            order.createdAt
+                                .toDate()
+                                .toLocaleString(
+                                    "ar-EG"
+                                );
+
+                    }catch(e){
+
+                        date = "";
+
+                    }
+
+                }
+
+
+                const currentStatus =
+                    order.status || "new";
+
+
+                const orderElement =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                orderElement.className =
+                    "order";
+
+
+                orderElement.innerHTML = `
+
+                    <div class="order-header">
+
+                        <div class="order-id">
+                            📦 طلب #${orderDoc.id}
+                        </div>
+
+                        <div class="order-date">
+                            ${date}
+                        </div>
+
+                    </div>
+
+
+                    <div class="customer">
+
+                        👤 الاسم:
+                        ${order.name || "غير موجود"}
+
+                        <br>
+
+                        📱 الهاتف:
+                        ${order.phone || "غير موجود"}
+
+                        <br>
+
+                        📍 العنوان:
+                        ${order.address || "غير موجود"}
+
+                    </div>
+
+
+                    <div class="products">
+
+                        ${productsHTML}
+
+                    </div>
+
+
+                    <div class="order-bottom">
+
+                        <div class="total">
+
+                            💰 ${Number(order.total) || 0}
+                            جنيه
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="status-box">
+
+                        <label class="status-label">
+                            📌 حالة الطلب
+                        </label>
+
+
+                        <select
+                            class="status-select"
+                        >
+
+                            <option
+                               
