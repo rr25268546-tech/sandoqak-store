@@ -360,13 +360,21 @@ header{
         >
 
         <button
-            type="button"
-            id="showPassword"
-            class="show-password"
-            onclick="togglePassword()"
-        >
-            👁️ إظهار
-        </button>
+    type="button"
+    onclick="document.getElementById('password').type='text'"
+    style="
+        position:absolute;
+        left:7px;
+        top:7px;
+        z-index:10;
+        background:#333;
+        color:white;
+        border:0;
+        padding:8px 10px;
+        border-radius:8px;
+    ">
+    👁️ إظهار
+</button>
 
     </div>
 
