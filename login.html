@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SANDOQAK | تسجيل الدخول</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:#090909;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.box{
+    width:100%;
+    max-width:420px;
+    background:#111;
+    border:1px solid #292929;
+    border-radius:20px;
+    padding:25px;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#999;
+    margin-bottom:25px;
+}
+
+label{
+    display:block;
+    margin-bottom:7px;
+    color:#ccc;
+}
+
+input{
+    width:100%;
+    height:48px;
+    background:#181818;
+    border:1px solid #333;
+    border-radius:10px;
+    color:white;
+    padding:12px;
+    font-size:16px;
+    outline:none;
+    margin-bottom:15px;
+}
+
+input:focus{
+    border-color:#00e5ff;
+}
+
+button{
+    width:100%;
+    height:48px;
+    border:0;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.send{
+    background:#00e5ff;
+    color:#000;
+}
+
+.verify{
+    background:#22c55e;
+    color:white;
+    margin-top:10px;
+}
+
+button:disabled{
+    opacity:.5;
+}
+
+#codeBox{
+    display:none;
+}
+
+#message{
+    margin-top:15px;
+    text-align:center;
+    line-height:1.6;
+}
+
+.error{
+    color:#ff7777;
+}
+
+.success{
+    color:#6dff91;
+}
+
+#recaptcha-container{
+    margin:15px 0;
+    display:flex;
+    justify-content:center;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <h1>📦 SANDOQAK</h1>
+
+    <p class="subtitle">
+        تسجيل الدخول أو إنشاء حساب
+    </p>
+
+
+    <label>
+        رقم الهاتف
+    </label>
+
+    <input
+        id="phone"
+        type="tel"
+        placeholder="مثال: 01012345678"
+        autocomplete="tel"
+    >
+
+
+    <div id="recaptcha-container"></div>
+
+
+    <button
+        id="sendBtn"
+        class="send"
+        type="button"
+    >
+        إرسال كود التحقق 📱
+    </button>
+
+
+    <div id="codeBox">
+
+        <label style="margin-top:20px;">
+            كود التحقق
+        </label>
+
+        <input
+            id="code"
+            type="text"
+            inputmode="numeric"
+            maxlength="6"
+            placeholder="أدخل الكود"
+            autocomplete="one-time-code"
+        >
+
+        <button
+            id="verifyBtn"
+            class="verify"
+            type="button"
+        >
+            تأكيد الكود ✅
+        </button>
+
+    </div>
+
+
+    <div id="message"></div>
+
+</div>
+
+
+<script type="module">
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+    getAuth,
+    RecaptchaVerifier,
+    signInWithPhoneNumber
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+import {
+    getFirestore,
+    doc,
+    setDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* =========================
+   FIREBASE
+========================= */
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyC3NvbBmiX-2nBBFw-X6KBkpU_8ZOQnDvQ",
+
+    authDomain:
+    "sandoqak-479c4.firebaseapp.com",
+
+    projectId:
+    "sandoqak-479c4",
+
+    storageBucket:
+    "sandoqak-479c4.firebasestorage.app",
+
+    messagingSenderId:
+    "295608980009",
+
+    appId:
+    "1:295608980009:web:f3176896d1b5f461c30238"
+
+};
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+
+const auth =
+    getAuth(app);
+
+
+const db =
+    getFirestore(app);
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const phoneInput =
+    document.getElementById("phone");
+
+const codeInput =
+    document.getElementById("code");
+
+const sendBtn =
+    document.getElementById("sendBtn");
+
+const verifyBtn =
+    document.getElementById("verifyBtn");
+
+const codeBox =
+    document.getElementById("codeBox");
+
+const message =
+    document.getElementById("message");
+
+
+let confirmationResult = null;
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+function showMessage(
+    text,
+    type
+){
+
+    message.className = type;
+
+    message.innerText = text;
+
+}
+
+
+/* =========================
+   FORMAT PHONE
+========================= */
+
+function formatEgyptPhone(
+    phone
+){
+
+    phone =
+        phone.replace(
+            /\s+/g,
+            ""
+        );
+
+
+    if(
+        phone.startsWith("01")
+    ){
+
+        return "+20" +
+            phone.substring(1);
+
+    }
+
+
+    if(
+        phone.startsWith("+20")
+    ){
+
+        return phone;
+
+    }
+
+
+    return phone;
+
+}
+
+
+/* =========================
+   RECAPTCHA
+========================= */
+
+window.recaptchaVerifier =
+    new RecaptchaVerifier(
+        auth,
+        "recaptcha-container",
+        {
+            size:"normal"
+        }
+    );
+
+
+/* =========================
+   SEND CODE
+========================= */
+
+sendBtn.addEventListener(
+    "click",
+    async function(){
+
+        let phone =
+            formatEgyptPhone(
+                phoneInput.value.trim()
+            );
+
+
+        if(
+            !phone.startsWith("+20") ||
+            phone.length !== 13
+        ){
+
+            showMessage(
+                "❌ اكتب رقم مصري صحيح مثل 01012345678",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        sendBtn.disabled = true;
+
+        sendBtn.innerText =
+            "جاري إرسال الكود...";
+
+
+        try{
+
+            confirmationResult =
+                await signInWithPhoneNumber(
+                    auth,
+                    phone,
+                    window.recaptchaVerifier
+                );
+
+
+            codeBox.style.display =
+                "block";
+
+
+            showMessage(
+                "✅ تم إرسال كود التحقق إلى هاتفك.",
+                "success"
+            );
+
+
+            sendBtn.innerText =
+                "تم إرسال الكود";
+
+
+        }catch(error){
+
+            console.error(error);
+
+
+            showMessage(
+                "❌ لم نتمكن من إرسال الكود. حاول مرة أخرى.",
+                "error"
+            );
+
+
+            sendBtn.disabled =
+                false;
+
+
+            sendBtn.innerText =
+                "إرسال كود التحقق 📱";
+
+
+            try{
+
+                window.recaptchaVerifier.clear();
+
+                window.recaptchaVerifier =
+                    new RecaptchaVerifier(
+                        auth,
+                        "recaptcha-container",
+                        {
+                            size:"normal"
+                        }
+                    );
+
+            }catch(e){}
+
+        }
+
+    }
+);
+
+
+/* =========================
+   VERIFY CODE
+========================= */
+
+verifyBtn.addEventListener(
+    "click",
+    async function(){
+
+        const code =
+            codeInput.value.trim();
+
+
+        if(
+            code.length !== 6
+        ){
+
+            showMessage(
+                "❌ أدخل كود التحقق المكون من 6 أرقام.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        verifyBtn.disabled =
+            true;
+
+
+        verifyBtn.innerText =
+            "جاري التحقق...";
+
+
+        try{
+
+            const result =
+                await confirmationResult
+                    .confirm(code);
+
+
+            const user =
+                result.user;
+
+
+            /* =====================
+               CREATE CUSTOMER
+            ===================== */
+
+            await setDoc(
+
+                doc(
+                    db,
+                    "customers",
+                    user.uid
+                ),
+
+                {
+                    uid:user.uid,
+
+                    phone:user.phoneNumber,
+
+                    points:0,
+
+                    totalPurchases:0,
+
+                    createdAt:
+                        serverTimestamp()
+
+                },
+
+                {
+                    merge:true
+                }
+
+            );
+
+
+            showMessage(
+                "🎉 تم تسجيل الدخول بنجاح!",
+                "success"
+            );
+
+
+            setTimeout(
+                function(){
+
+                    window.location.href =
+                        "index.html";
+
+                },
+                1200
+            );
+
+
+        }catch(error){
+
+            console.error(error);
+
+
+            showMessage(
+                "❌ كود التحقق غير صحيح أو انتهت صلاحيته.",
+                "error"
+            );
+
+
+            verifyBtn.disabled =
+                false;
+
+
+            verifyBtn.innerText =
+                "تأكيد الكود ✅";
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>
