@@ -2,10 +2,13 @@
 <html lang="ar" dir="rtl">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SANDOQAK | الحساب</title>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>SANDOQAK | المنتجات</title>
 
 <style>
 
@@ -20,32 +23,218 @@ body{
     min-height:100vh;
     background:#090909;
     color:#fff;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    height:70px;
+    background:#111;
+    border-bottom:1px solid #292929;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 20px;
+
+    position:sticky;
+    top:0;
+    z-index:20;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.header-btn{
+    background:#00e5ff;
+    color:#000;
+    border:0;
+    border-radius:9px;
+    padding:10px 15px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+
+/* =========================
+   PRODUCTS
+========================= */
+
+.container{
+    width:100%;
+    max-width:1100px;
+    margin:auto;
+    padding:25px 18px 50px;
+}
+
+.page-title{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.page-title h1{
+    margin-bottom:8px;
+}
+
+.page-title p{
+    color:#888;
+}
+
+
+.products{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(220px,1fr));
+
+    gap:18px;
+}
+
+.product{
+    background:#111;
+    border:1px solid #292929;
+    border-radius:18px;
+    padding:15px;
+
+    transition:.2s;
+}
+
+.product:hover{
+    transform:translateY(-3px);
+    border-color:#444;
+}
+
+.product-image{
+    width:100%;
+    height:190px;
+
+    background:#1a1a1a;
+
+    border-radius:13px;
+
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:20px;
+
+    font-size:60px;
+
+    margin-bottom:15px;
 }
 
-.box{
+.product h2{
+    font-size:18px;
+    margin-bottom:8px;
+}
+
+.product p{
+    color:#888;
+    font-size:14px;
+    line-height:1.6;
+    min-height:45px;
+}
+
+.price{
+    margin:14px 0;
+    font-size:20px;
+    font-weight:bold;
+    color:#00e5ff;
+}
+
+.order-btn{
+    width:100%;
+    height:45px;
+
+    background:#22c55e;
+    color:#fff;
+
+    border:0;
+    border-radius:9px;
+
+    cursor:pointer;
+
+    font-size:16px;
+    font-weight:bold;
+}
+
+
+/* =========================
+   OVERLAY
+========================= */
+
+.overlay{
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.75);
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:18px;
+
+    z-index:100;
+}
+
+.modal{
     width:100%;
     max-width:430px;
+
+    max-height:92vh;
+    overflow-y:auto;
+
     background:#111;
+
     border:1px solid #292929;
-    border-radius:22px;
-    padding:25px;
-    box-shadow:0 15px 50px rgba(0,0,0,.45);
+    border-radius:20px;
+
+    padding:22px;
+
+    position:relative;
 }
 
-h1{
+.close{
+    position:absolute;
+    left:15px;
+    top:12px;
+
+    width:35px;
+    height:35px;
+
+    border-radius:50%;
+
+    background:#222;
+    color:#fff;
+
+    border:1px solid #333;
+
+    cursor:pointer;
+
+    font-size:18px;
+}
+
+.modal h2{
     text-align:center;
     margin-bottom:8px;
 }
 
-.subtitle{
+.modal-subtitle{
     text-align:center;
-    color:#999;
-    margin-bottom:25px;
+    color:#888;
+    font-size:13px;
+    margin-bottom:20px;
 }
+
+
+/* =========================
+   FORMS
+========================= */
 
 label{
     display:block;
@@ -53,116 +242,151 @@ label{
     color:#ccc;
 }
 
-input{
+input,
+textarea{
     width:100%;
-    height:48px;
+
     background:#181818;
-    border:1px solid #333;
-    border-radius:10px;
     color:#fff;
+
+    border:1px solid #333;
+
+    border-radius:10px;
+
     padding:12px;
+
     font-size:16px;
+
     outline:none;
+
     margin-bottom:14px;
 }
 
-input:focus{
+input{
+    height:48px;
+}
+
+textarea{
+    min-height:90px;
+    resize:vertical;
+}
+
+input:focus,
+textarea:focus{
     border-color:#00e5ff;
-}
-
-button{
-    border:0;
-    cursor:pointer;
-    font-size:16px;
-    font-weight:bold;
-}
-
-button:disabled{
-    opacity:.5;
-    cursor:not-allowed;
 }
 
 .main-btn{
     width:100%;
     height:48px;
+
+    border:0;
     border-radius:10px;
+
     background:#00e5ff;
     color:#000;
+
+    font-size:16px;
+    font-weight:bold;
+
+    cursor:pointer;
 }
 
-.register-btn{
-    width:100%;
-    height:48px;
-    border-radius:10px;
+.green-btn{
     background:#22c55e;
     color:#fff;
 }
 
-.switch-btn{
+.switch{
     width:100%;
+
+    margin-top:13px;
+
     background:transparent;
     color:#00e5ff;
-    margin-top:15px;
+
+    border:0;
+
+    cursor:pointer;
+
     padding:8px;
 }
 
-#registerBox{
+.google-btn{
+    width:100%;
+    height:45px;
+
+    margin-top:12px;
+
+    background:#fff;
+    color:#333;
+
+    border:0;
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+}
+
+.separator{
+    text-align:center;
+    color:#666;
+    font-size:13px;
+    margin:17px 0;
+}
+
+
+/* =========================
+   ORDER
+========================= */
+
+#orderBox{
     display:none;
 }
 
-.other-title{
-    text-align:center;
-    color:#777;
-    font-size:13px;
-    margin-top:20px;
-    margin-bottom:13px;
-}
-
-.social-options{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-.social-btn{
-    width:52px;
-    height:52px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:21px;
-    transition:.2s;
-    border:1px solid #333;
-}
-
-.social-btn:hover{
-    transform:translateY(-3px);
-    border-color:#777;
-}
-
-.google-circle{
-    background:#fff;
-    color:#4285F4;
-}
-
-#recaptcha-box{
-    margin:12px 0;
-    padding:10px;
+.order-product{
+    background:#181818;
     border:1px solid #292929;
-    border-radius:10px;
-    background:#0d0d0d;
-    color:#777;
-    font-size:12px;
+
+    border-radius:12px;
+
+    padding:13px;
+
+    margin-bottom:17px;
+
     text-align:center;
 }
+
+.order-product-name{
+    font-weight:bold;
+}
+
+.order-product-price{
+    color:#00e5ff;
+    margin-top:6px;
+}
+
+.order-info{
+    color:#888;
+    font-size:12px;
+    line-height:1.7;
+    margin-bottom:15px;
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
 
 #message{
-    margin-top:15px;
-    text-align:center;
-    line-height:1.6;
     min-height:25px;
-    word-break:break-word;
+
+    text-align:center;
+
+    line-height:1.6;
+
+    margin-top:13px;
 }
 
 .error{
@@ -177,216 +401,540 @@ button:disabled{
     color:#ccc;
 }
 
-.small{
-    color:#777;
-    font-size:12px;
-    text-align:center;
-    margin-top:15px;
-    line-height:1.6;
+
+/* =========================
+   USER MENU
+========================= */
+
+#userMenu{
+    display:none;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    header{
+        padding:0 13px;
+    }
+
+    .logo{
+        font-size:18px;
+    }
+
+    .container{
+        padding:20px 13px 40px;
+    }
+
+    .products{
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+
+        gap:10px;
+    }
+
+    .product{
+        padding:10px;
+    }
+
+    .product-image{
+        height:130px;
+        font-size:45px;
+    }
+
+    .product h2{
+        font-size:15px;
+    }
+
+    .product p{
+        font-size:12px;
+    }
+
+    .price{
+        font-size:17px;
+    }
+
+    .order-btn{
+        font-size:14px;
+    }
+
 }
 
 </style>
+
 </head>
+
 
 <body>
 
-<div class="box">
 
-    <h1>📦 SANDOQAK</h1>
+<!-- =========================
+     HEADER
+========================= -->
 
-    <p class="subtitle">
-        تسجيل الدخول أو إنشاء حساب
-    </p>
+<header>
 
-
-    <!-- =========================
-         LOGIN
-    ========================== -->
-
-    <div id="loginBox">
-
-        <label for="loginPhone">
-            رقم الهاتف المصري
-        </label>
-
-        <input
-            id="loginPhone"
-            type="tel"
-            placeholder="01012345678"
-            autocomplete="tel"
-            inputmode="numeric"
-        >
+    <div class="logo">
+        📦 SANDOQAK
+    </div>
 
 
-        <label for="loginPassword">
-            كلمة المرور
-        </label>
-
-        <input
-            id="loginPassword"
-            type="password"
-            placeholder="كلمة المرور"
-            autocomplete="current-password"
-        >
+    <button
+        id="accountBtn"
+        class="header-btn"
+    >
+        تسجيل الدخول
+    </button>
 
 
-        <!-- reCAPTCHA للحماية فقط -->
-        <div id="recaptcha-box">
-            🛡️ سيتم استخدام الحماية ضد الطلبات الآلية فقط
-        </div>
-
+    <div id="userMenu">
 
         <button
-            id="loginBtn"
-            class="main-btn"
-            type="button"
+            id="logoutBtn"
+            class="header-btn"
         >
-            تسجيل الدخول 🔐
-        </button>
-
-
-        <button
-            id="showRegisterBtn"
-            class="switch-btn"
-            type="button"
-        >
-            ليس لديك حساب؟ إنشاء حساب جديد
+            تسجيل الخروج
         </button>
 
     </div>
 
+</header>
 
-    <!-- =========================
-         REGISTER
-    ========================== -->
 
-    <div id="registerBox">
+<!-- =========================
+     PRODUCTS
+========================= -->
 
-        <label for="registerName">
+<main class="container">
+
+    <div class="page-title">
+
+        <h1>
+            المنتجات
+        </h1>
+
+        <p>
+            اختر المنتج الذي تريد طلبه
+        </p>
+
+    </div>
+
+
+    <div class="products">
+
+
+        <!-- PRODUCT 1 -->
+
+        <div
+            class="product"
+            data-id="product-1"
+            data-name="المنتج الأول"
+            data-price="150"
+        >
+
+            <div class="product-image">
+                📦
+            </div>
+
+            <h2>
+                المنتج الأول
+            </h2>
+
+            <p>
+                وصف المنتج الأول.
+                يمكنك تغيير البيانات والصورة لاحقًا.
+            </p>
+
+            <div class="price">
+                150 جنيه
+            </div>
+
+            <button
+                class="order-btn"
+                type="button"
+            >
+                طلب المنتج
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCT 2 -->
+
+        <div
+            class="product"
+            data-id="product-2"
+            data-name="المنتج الثاني"
+            data-price="250"
+        >
+
+            <div class="product-image">
+                🎁
+            </div>
+
+            <h2>
+                المنتج الثاني
+            </h2>
+
+            <p>
+                وصف المنتج الثاني.
+            </p>
+
+            <div class="price">
+                250 جنيه
+            </div>
+
+            <button
+                class="order-btn"
+                type="button"
+            >
+                طلب المنتج
+            </button>
+
+        </div>
+
+
+        <!-- PRODUCT 3 -->
+
+        <div
+            class="product"
+            data-id="product-3"
+            data-name="المنتج الثالث"
+            data-price="350"
+        >
+
+            <div class="product-image">
+                🛍️
+            </div>
+
+            <h2>
+                المنتج الثالث
+            </h2>
+
+            <p>
+                وصف المنتج الثالث.
+            </p>
+
+            <div class="price">
+                350 جنيه
+            </div>
+
+            <button
+                class="order-btn"
+                type="button"
+            >
+                طلب المنتج
+            </button>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+<!-- =========================
+     AUTH OVERLAY
+========================= -->
+
+<div
+    id="authOverlay"
+    class="overlay"
+>
+
+    <div class="modal">
+
+        <button
+            id="closeAuth"
+            class="close"
+            type="button"
+        >
+            ×
+        </button>
+
+
+        <!-- LOGIN -->
+
+        <div id="loginBox">
+
+            <h2>
+                تسجيل الدخول
+            </h2>
+
+            <p class="modal-subtitle">
+                سجل دخولك لإكمال طلب المنتج
+            </p>
+
+
+            <label>
+                رقم الهاتف المصري
+            </label>
+
+            <input
+                id="loginPhone"
+                type="tel"
+                placeholder="01012345678"
+                inputmode="numeric"
+            >
+
+
+            <label>
+                كلمة المرور
+            </label>
+
+            <input
+                id="loginPassword"
+                type="password"
+                placeholder="كلمة المرور"
+            >
+
+
+            <button
+                id="loginBtn"
+                class="main-btn"
+                type="button"
+            >
+                تسجيل الدخول
+            </button>
+
+
+            <button
+                id="showRegister"
+                class="switch"
+                type="button"
+            >
+                ليس لديك حساب؟ إنشاء حساب
+            </button>
+
+
+            <div class="separator">
+                أو
+            </div>
+
+
+            <button
+                id="googleBtn"
+                class="google-btn"
+                type="button"
+            >
+                G &nbsp; الدخول باستخدام Google
+            </button>
+
+        </div>
+
+
+        <!-- REGISTER -->
+
+        <div id="registerBox" style="display:none;">
+
+            <h2>
+                إنشاء حساب
+            </h2>
+
+            <p class="modal-subtitle">
+                أنشئ حسابك لإكمال الطلب
+            </p>
+
+
+            <label>
+                الاسم
+            </label>
+
+            <input
+                id="registerName"
+                type="text"
+                placeholder="اكتب اسمك"
+                autocomplete="name"
+            >
+
+
+            <label>
+                رقم الهاتف
+            </label>
+
+            <input
+                id="registerPhone"
+                type="tel"
+                placeholder="01012345678"
+                inputmode="numeric"
+                autocomplete="tel"
+            >
+
+
+            <label>
+                البريد الإلكتروني
+            </label>
+
+            <input
+                id="registerEmail"
+                type="email"
+                placeholder="example@email.com"
+                autocomplete="email"
+            >
+
+
+            <label>
+                كلمة المرور
+            </label>
+
+            <input
+                id="registerPassword"
+                type="password"
+                placeholder="6 أحرف أو أكثر"
+                autocomplete="new-password"
+            >
+
+
+            <label>
+                تأكيد كلمة المرور
+            </label>
+
+            <input
+                id="registerPassword2"
+                type="password"
+                placeholder="أعد كلمة المرور"
+                autocomplete="new-password"
+            >
+
+
+            <button
+                id="registerBtn"
+                class="main-btn green-btn"
+                type="button"
+            >
+                إنشاء الحساب
+            </button>
+
+
+            <button
+                id="showLogin"
+                class="switch"
+                type="button"
+            >
+                لديك حساب؟ تسجيل الدخول
+            </button>
+
+        </div>
+
+
+        <div id="message"></div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     ORDER OVERLAY
+========================= -->
+
+<div
+    id="orderOverlay"
+    class="overlay"
+>
+
+    <div class="modal">
+
+        <button
+            id="closeOrder"
+            class="close"
+            type="button"
+        >
+            ×
+        </button>
+
+
+        <h2>
+            إكمال الطلب
+        </h2>
+
+        <p class="modal-subtitle">
+            أدخل عنوان التوصيل
+        </p>
+
+
+        <div class="order-product">
+
+            <div
+                id="orderProductName"
+                class="order-product-name"
+            ></div>
+
+            <div
+                id="orderProductPrice"
+                class="order-product-price"
+            ></div>
+
+        </div>
+
+
+        <label>
             الاسم
         </label>
 
         <input
-            id="registerName"
+            id="orderName"
             type="text"
-            placeholder="اكتب اسمك"
-            autocomplete="name"
+            placeholder="اسم المستلم"
         >
 
 
-        <label for="registerPhone">
-            رقم الهاتف المصري
+        <label>
+            رقم الهاتف
         </label>
 
         <input
-            id="registerPhone"
+            id="orderPhone"
             type="tel"
-            placeholder="01012345678"
-            autocomplete="tel"
+            placeholder="رقم الهاتف"
             inputmode="numeric"
         >
 
 
-        <label for="registerEmail">
-            البريد الإلكتروني
+        <label>
+            عنوان التوصيل
+        </label>
+
+        <textarea
+            id="orderAddress"
+            placeholder="المحافظة - المنطقة - الشارع - رقم المنزل"
+        ></textarea>
+
+
+        <label>
+            الكمية
         </label>
 
         <input
-            id="registerEmail"
-            type="email"
-            placeholder="example@email.com"
-            autocomplete="email"
+            id="orderQuantity"
+            type="number"
+            min="1"
+            value="1"
         >
 
 
-        <label for="registerPassword">
-            كلمة المرور
-        </label>
-
-        <input
-            id="registerPassword"
-            type="password"
-            placeholder="6 أحرف أو أكثر"
-            autocomplete="new-password"
-        >
-
-
-        <label for="registerPassword2">
-            تأكيد كلمة المرور
-        </label>
-
-        <input
-            id="registerPassword2"
-            type="password"
-            placeholder="أعد كتابة كلمة المرور"
-            autocomplete="new-password"
-        >
-
-
-        <div id="recaptcha-register-box">
-            🛡️ حماية التسجيل من الاستخدام الآلي
-        </div>
+        <p class="order-info">
+            سيتم حفظ بيانات الطلب في Firestore
+            باسم العميل ورقم الهاتف والعنوان.
+        </p>
 
 
         <button
-            id="registerBtn"
-            class="register-btn"
+            id="submitOrder"
+            class="main-btn green-btn"
             type="button"
         >
-            إنشاء الحساب 🎁
+            تأكيد الطلب ✅
         </button>
 
 
-        <button
-            id="showLoginBtn"
-            class="switch-btn"
-            type="button"
-        >
-            لديك حساب بالفعل؟ تسجيل الدخول
-        </button>
+        <div id="orderMessage"></div>
 
     </div>
-
-
-    <!-- =========================
-         GOOGLE
-    ========================== -->
-
-    <div class="other-title">
-        أو الدخول باستخدام
-    </div>
-
-
-    <div class="social-options">
-
-        <button
-            id="googleBtn"
-            class="social-btn google-circle"
-            type="button"
-            title="Google"
-        >
-            G
-        </button>
-
-    </div>
-
-
-    <p class="small">
-
-        📱 رقم الهاتف بيانات أساسية للعميل.
-
-        <br>
-
-        📧 البريد الإلكتروني يستخدم للمصادقة.
-
-        <br>
-
-        🎁 النقاط والمشتريات محفوظة ولن يتم تصفيرها.
-
-    </p>
-
-
-    <div id="message"></div>
 
 </div>
 
@@ -406,7 +954,7 @@ from
 
 
 /* =========================================
-   FIREBASE AUTH
+   AUTH
 ========================================= */
 
 import {
@@ -414,7 +962,9 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     GoogleAuthProvider,
-    signInWithPopup
+    signInWithPopup,
+    onAuthStateChanged,
+    signOut
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
@@ -429,6 +979,8 @@ import {
     doc,
     getDoc,
     setDoc,
+    addDoc,
+    collection,
     serverTimestamp
 }
 from
@@ -436,7 +988,7 @@ from
 
 
 /* =========================================
-   FIREBASE CONFIG
+   CONFIG
 ========================================= */
 
 const firebaseConfig = {
@@ -463,7 +1015,7 @@ const firebaseConfig = {
 
 
 /* =========================================
-   INITIALIZE FIREBASE
+   INITIALIZE
 ========================================= */
 
 const app =
@@ -480,50 +1032,39 @@ const db =
    ELEMENTS
 ========================================= */
 
+const authOverlay =
+    document.getElementById("authOverlay");
+
+const orderOverlay =
+    document.getElementById("orderOverlay");
+
 const loginBox =
     document.getElementById("loginBox");
 
 const registerBox =
     document.getElementById("registerBox");
 
-const loginPhone =
-    document.getElementById("loginPhone");
-
-const loginPassword =
-    document.getElementById("loginPassword");
-
-const registerName =
-    document.getElementById("registerName");
-
-const registerPhone =
-    document.getElementById("registerPhone");
-
-const registerEmail =
-    document.getElementById("registerEmail");
-
-const registerPassword =
-    document.getElementById("registerPassword");
-
-const registerPassword2 =
-    document.getElementById("registerPassword2");
-
-const loginBtn =
-    document.getElementById("loginBtn");
-
-const registerBtn =
-    document.getElementById("registerBtn");
-
-const googleBtn =
-    document.getElementById("googleBtn");
-
-const showRegisterBtn =
-    document.getElementById("showRegisterBtn");
-
-const showLoginBtn =
-    document.getElementById("showLoginBtn");
-
 const message =
     document.getElementById("message");
+
+const orderMessage =
+    document.getElementById("orderMessage");
+
+const accountBtn =
+    document.getElementById("accountBtn");
+
+const userMenu =
+    document.getElementById("userMenu");
+
+const logoutBtn =
+    document.getElementById("logoutBtn");
+
+
+/* =========================================
+   CURRENT PRODUCT
+========================================= */
+
+let selectedProduct = null;
 
 
 /* =========================================
@@ -541,8 +1082,19 @@ function showMessage(text,type){
 }
 
 
+function showOrderMessage(text,type){
+
+    orderMessage.textContent =
+        text;
+
+    orderMessage.className =
+        type || "";
+
+}
+
+
 /* =========================================
-   PHONE FORMAT
+   PHONE
 ========================================= */
 
 function formatEgyptPhone(phone){
@@ -554,10 +1106,6 @@ function formatEgyptPhone(phone){
         .replace(/-/g,"");
 
 
-    /*
-       01012345678
-    */
-
     if(
         /^01[0125]\d{8}$/.test(phone)
     ){
@@ -568,10 +1116,6 @@ function formatEgyptPhone(phone){
     }
 
 
-    /*
-       +201012345678
-    */
-
     if(
         /^\+201[0125]\d{8}$/.test(phone)
     ){
@@ -580,10 +1124,6 @@ function formatEgyptPhone(phone){
 
     }
 
-
-    /*
-       201012345678
-    */
 
     if(
         /^201[0125]\d{8}$/.test(phone)
@@ -595,49 +1135,39 @@ function formatEgyptPhone(phone){
     }
 
 
-    /*
-       00201012345678
-    */
-
-    if(
-        /^00201[0125]\d{8}$/.test(phone)
-    ){
-
-        return "+" +
-            phone.substring(2);
-
-    }
-
-
     return "";
 
 }
 
 
 /* =========================================
-   PHONE INTERNAL ID
+   INTERNAL PHONE ACCOUNT
 ========================================= */
 
 function phoneToEmail(phone){
 
     return (
+
         phone
         .replace("+","")
         .replace(/\D/g,"")
+
         +
-        "@sandoqak.local"
+
+        "@sandoqak-phone.local"
+
     );
 
 }
 
 
 /* =========================================
-   CUSTOMER
+   SAVE CUSTOMER
 ========================================= */
 
 async function saveCustomer(
     user,
-    data
+    data = {}
 ){
 
     const customerRef =
@@ -648,18 +1178,14 @@ async function saveCustomer(
         );
 
 
-    const customerSnap =
+    const snapshot =
         await getDoc(
             customerRef
         );
 
 
-    /*
-       العميل جديد
-    */
-
     if(
-        !customerSnap.exists()
+        !snapshot.exists()
     ){
 
         await setDoc(
@@ -703,26 +1229,19 @@ async function saveCustomer(
     }
 
 
-    /*
-       العميل موجود:
-       لا نلمس النقاط والمشتريات.
-       نحدّث فقط البيانات الأساسية
-       إذا كانت متاحة.
-    */
-
-    const oldData =
-        customerSnap.data();
+    const old =
+        snapshot.data();
 
 
-    const updateData = {};
+    const update = {};
 
 
     if(
         data.name &&
-        data.name !== oldData.name
+        !old.name
     ){
 
-        updateData.name =
+        update.name =
             data.name;
 
     }
@@ -730,10 +1249,10 @@ async function saveCustomer(
 
     if(
         data.phone &&
-        data.phone !== oldData.phone
+        !old.phone
     ){
 
-        updateData.phone =
+        update.phone =
             data.phone;
 
     }
@@ -741,24 +1260,24 @@ async function saveCustomer(
 
     if(
         user.email &&
-        user.email !== oldData.email
+        !old.email
     ){
 
-        updateData.email =
+        update.email =
             user.email;
 
     }
 
 
     if(
-        Object.keys(updateData).length > 0
+        Object.keys(update).length
     ){
 
         await setDoc(
 
             customerRef,
 
-            updateData,
+            update,
 
             {
                 merge:true
@@ -772,570 +1291,1201 @@ async function saveCustomer(
 
 
 /* =========================================
-   REGISTER
+   OPEN AUTH
 ========================================= */
 
-registerBtn.addEventListener(
-    "click",
-    async function(){
+function openAuth(){
 
-        const name =
-            registerName.value.trim();
+    authOverlay.style.display =
+        "flex";
 
-        const phone =
-            formatEgyptPhone(
-                registerPhone.value
-            );
+    loginBox.style.display =
+        "block";
 
-        const email =
-            registerEmail.value.trim();
+    registerBox.style.display =
+        "none";
 
-        const password =
-            registerPassword.value;
+    showMessage(
+        "",
+        ""
+    );
 
-        const password2 =
-            registerPassword2.value;
+}
 
 
-        /* =========================
-           NAME
-        ========================== */
+/* =========================================
+   CLOSE AUTH
+========================================= */
 
-        if(
-            name.length < 2
-        ){
+document.getElementById(
+    "closeAuth"
+).onclick = function(){
 
-            showMessage(
-                "❌ اكتب الاسم بشكل صحيح.",
-                "error"
-            );
+    authOverlay.style.display =
+        "none";
 
-            return;
-
-        }
+};
 
 
-        /* =========================
-           PHONE
-        ========================== */
+/* =========================================
+   SHOW REGISTER
+========================================= */
 
-        if(!phone){
+document.getElementById(
+    "showRegister"
+).onclick = function(){
 
-            showMessage(
-                "❌ رقم الهاتف المصري غير صحيح.",
-                "error"
-            );
+    loginBox.style.display =
+        "none";
 
-            return;
+    registerBox.style.display =
+        "block";
 
-        }
+    showMessage(
+        "",
+        ""
+    );
 
-
-        /* =========================
-           EMAIL
-        ========================== */
-
-        if(
-            !email ||
-            !email.includes("@")
-        ){
-
-            showMessage(
-                "❌ اكتب بريدًا إلكترونيًا صحيحًا.",
-                "error"
-            );
-
-            return;
-
-        }
+};
 
 
-        /* =========================
-           PASSWORD
-        ========================== */
+/* =========================================
+   SHOW LOGIN
+========================================= */
 
-        if(
-            password.length < 6
-        ){
+document.getElementById(
+    "showLogin"
+).onclick = function(){
 
-            showMessage(
-                "❌ كلمة المرور يجب أن تكون 6 أحرف أو أكثر.",
-                "error"
-            );
+    registerBox.style.display =
+        "none";
 
-            return;
+    loginBox.style.display =
+        "block";
 
-        }
+    showMessage(
+        "",
+        ""
+    );
 
-
-        if(
-            password !== password2
-        ){
-
-            showMessage(
-                "❌ كلمتا المرور غير متطابقتين.",
-                "error"
-            );
-
-            return;
-
-        }
+};
 
 
-        registerBtn.disabled =
-            true;
+/* =========================================
+   ACCOUNT BUTTON
+========================================= */
 
-        registerBtn.textContent =
-            "جاري إنشاء الحساب...";
+accountBtn.onclick = function(){
 
+    if(
+        auth.currentUser
+    ){
 
-        try{
+        return;
 
-            /*
-               Firebase Auth يستخدم البريد
-               للمصادقة.
-            */
+    }
 
-            const result =
-                await createUserWithEmailAndPassword(
+    openAuth();
 
-                    auth,
-
-                    email,
-
-                    password
-
-                );
+};
 
 
-            /*
-               حفظ بيانات العميل.
-            */
+/* =========================================
+   PRODUCT ORDER BUTTONS
+========================================= */
 
-            await saveCustomer(
+document.querySelectorAll(
+    ".order-btn"
+).forEach(
 
-                result.user,
+    function(button){
 
-                {
+        button.addEventListener(
+            "click",
+            function(){
+
+                const product =
+                    button.closest(".product");
+
+
+                selectedProduct = {
+
+                    id:
+                        product.dataset.id,
 
                     name:
-                        name,
+                        product.dataset.name,
 
-                    phone:
-                        phone,
+                    price:
+                        Number(
+                            product.dataset.price
+                        )
 
-                    email:
-                        email
+                };
+
+
+                /*
+                   لو العميل غير مسجل:
+                   افتح التسجيل تلقائيًا.
+                */
+
+                if(
+                    !auth.currentUser
+                ){
+
+                    openAuth();
+
+                    return;
 
                 }
 
-            );
 
+                /*
+                   لو مسجل:
+                   افتح الطلب مباشرة.
+                */
 
-            showMessage(
-                "🎉 تم إنشاء الحساب بنجاح!",
-                "success"
-            );
-
-
-            setTimeout(
-                function(){
-
-                    window.location.href =
-                        "index.html";
-
-                },
-                900
-            );
-
-
-        }
-
-        catch(error){
-
-            console.error(
-                "Register Error:",
-                error
-            );
-
-
-            let text =
-                "❌ حدث خطأ أثناء إنشاء الحساب.";
-
-
-            if(
-                error.code ===
-                "auth/email-already-in-use"
-            ){
-
-                text =
-                    "❌ البريد الإلكتروني مستخدم بالفعل.";
+                openOrder();
 
             }
-
-            else if(
-                error.code ===
-                "auth/invalid-email"
-            ){
-
-                text =
-                    "❌ البريد الإلكتروني غير صحيح.";
-
-            }
-
-            else if(
-                error.code ===
-                "auth/weak-password"
-            ){
-
-                text =
-                    "❌ كلمة المرور ضعيفة.";
-
-            }
-
-            else if(
-                error.code ===
-                "auth/operation-not-allowed"
-            ){
-
-                text =
-                    "❌ فعّل Email/Password في Firebase Authentication.";
-
-            }
-
-            else if(
-                error.code ===
-                "auth/network-request-failed"
-            ){
-
-                text =
-                    "❌ مشكلة في الإنترنت.";
-
-            }
-
-
-            showMessage(
-                text,
-                "error"
-            );
-
-
-            registerBtn.disabled =
-                false;
-
-            registerBtn.textContent =
-                "إنشاء الحساب 🎁";
-
-        }
+        );
 
     }
+
 );
 
 
 /* =========================================
-   LOGIN BY PHONE + PASSWORD
+   REGISTER
 ========================================= */
 
-loginBtn.addEventListener(
-    "click",
-    async function(){
+document.getElementById(
+    "registerBtn"
+).onclick = async function(){
 
-        const phone =
-            formatEgyptPhone(
-                loginPhone.value
-            );
-
-        const password =
-            loginPassword.value;
+    const name =
+        document.getElementById(
+            "registerName"
+        ).value.trim();
 
 
-        if(!phone){
-
-            showMessage(
-                "❌ اكتب رقم هاتف مصري صحيح.",
-                "error"
-            );
-
-            return;
-
-        }
+    const phone =
+        formatEgyptPhone(
+            document.getElementById(
+                "registerPhone"
+            ).value
+        );
 
 
-        if(!password){
-
-            showMessage(
-                "❌ اكتب كلمة المرور.",
-                "error"
-            );
-
-            return;
-
-        }
+    const email =
+        document.getElementById(
+            "registerEmail"
+        ).value.trim();
 
 
-        loginBtn.disabled =
-            true;
-
-        loginBtn.textContent =
-            "جاري تسجيل الدخول...";
-
-
-        try{
-
-            /*
-               الرقم يتحول إلى معرف داخلي.
-
-               ملاحظة:
-               الحسابات التي أنشئت من هذه النسخة
-               باستخدام البريد لن يكون الدخول إليها
-               بالرقم ممكنًا إلا إذا كان الحساب
-               قد أنشئ بالنظام الداخلي للرقم.
-            */
-
-            const internalEmail =
-                phoneToEmail(phone);
+    const password =
+        document.getElementById(
+            "registerPassword"
+        ).value;
 
 
-            const result =
-                await signInWithEmailAndPassword(
-
-                    auth,
-
-                    internalEmail,
-
-                    password
-
-                );
+    const password2 =
+        document.getElementById(
+            "registerPassword2"
+        ).value;
 
 
-            await saveCustomer(
+    if(
+        name.length < 2
+    ){
 
-                result.user,
+        showMessage(
+            "❌ اكتب الاسم بشكل صحيح.",
+            "error"
+        );
 
-                {
-
-                    phone:
-                        phone
-
-                }
-
-            );
-
-
-            showMessage(
-                "✅ تم تسجيل الدخول بنجاح.",
-                "success"
-            );
-
-
-            setTimeout(
-                function(){
-
-                    window.location.href =
-                        "index.html";
-
-                },
-                700
-            );
-
-
-        }
-
-        catch(error){
-
-            console.error(
-                "Phone Login Error:",
-                error
-            );
-
-
-            showMessage(
-                "❌ رقم الهاتف أو كلمة المرور غير صحيحة.",
-                "error"
-            );
-
-
-            loginBtn.disabled =
-                false;
-
-            loginBtn.textContent =
-                "تسجيل الدخول 🔐";
-
-        }
+        return;
 
     }
-);
+
+
+    if(!phone){
+
+        showMessage(
+            "❌ رقم الهاتف المصري غير صحيح.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        !email ||
+        !email.includes("@")
+    ){
+
+        showMessage(
+            "❌ اكتب بريدًا إلكترونيًا صحيحًا.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        password.length < 6
+    ){
+
+        showMessage(
+            "❌ كلمة المرور يجب أن تكون 6 أحرف أو أكثر.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        password !== password2
+    ){
+
+        showMessage(
+            "❌ كلمتا المرور غير متطابقتين.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const btn =
+        document.getElementById(
+            "registerBtn"
+        );
+
+
+    btn.disabled =
+        true;
+
+    btn.textContent =
+        "جاري إنشاء الحساب...";
+
+
+    try{
+
+        /*
+           في هذا النظام:
+           البريد الحقيقي هو وسيلة Auth.
+
+           الهاتف يتم حفظه كبيان أساسي
+           في customers.
+        */
+
+        const result =
+            await createUserWithEmailAndPassword(
+
+                auth,
+
+                email,
+
+                password
+
+            );
+
+
+        await saveCustomer(
+
+            result.user,
+
+            {
+
+                name:
+                    name,
+
+                phone:
+                    phone,
+
+                email:
+                    email
+
+            }
+
+        );
+
+
+        showMessage(
+            "🎉 تم إنشاء الحساب.",
+            "success"
+        );
+
+
+        /*
+           بعد التسجيل:
+           افتح الطلب تلقائيًا.
+        */
+
+        setTimeout(
+
+            function(){
+
+                authOverlay.style.display =
+                    "none";
+
+                openOrder();
+
+            },
+
+            500
+
+        );
+
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+
+        let text =
+            "❌ حدث خطأ أثناء إنشاء الحساب.";
+
+
+        if(
+            error.code ===
+            "auth/email-already-in-use"
+        ){
+
+            text =
+                "❌ البريد الإلكتروني مستخدم بالفعل.";
+
+        }
+
+        else if(
+            error.code ===
+            "auth/invalid-email"
+        ){
+
+            text =
+                "❌ البريد الإلكتروني غير صحيح.";
+
+        }
+
+        else if(
+            error.code ===
+            "auth/weak-password"
+        ){
+
+            text =
+                "❌ كلمة المرور ضعيفة.";
+
+        }
+
+
+        showMessage(
+            text,
+            "error"
+        );
+
+
+        btn.disabled =
+            false;
+
+        btn.textContent =
+            "إنشاء الحساب";
+
+    }
+
+};
+
+
+/* =========================================
+   LOGIN
+========================================= */
+
+document.getElementById(
+    "loginBtn"
+).onclick = async function(){
+
+    const phone =
+        formatEgyptPhone(
+            document.getElementById(
+                "loginPhone"
+            ).value
+        );
+
+
+    const password =
+        document.getElementById(
+            "loginPassword"
+        ).value;
+
+
+    if(!phone){
+
+        showMessage(
+            "❌ اكتب رقم الهاتف المصري.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(!password){
+
+        showMessage(
+            "❌ اكتب كلمة المرور.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const btn =
+        document.getElementById(
+            "loginBtn"
+        );
+
+
+    btn.disabled =
+        true;
+
+    btn.textContent =
+        "جاري الدخول...";
+
+
+    try{
+
+        /*
+           ملاحظة مهمة:
+
+           لكي يكون الرقم نفسه وسيلة دخول
+           بكلمة مرور، الحساب يجب أن يكون
+           منشأً بنظام الرقم الداخلي.
+
+           الحسابات المنشأة بالبريد الحقيقي
+           تدخل من Google أو البريد،
+           وليس من الرقم، ما لم نربطهما.
+        */
+
+        const internalEmail =
+            phoneToEmail(phone);
+
+
+        const result =
+            await signInWithEmailAndPassword(
+
+                auth,
+
+                internalEmail,
+
+                password
+
+            );
+
+
+        await saveCustomer(
+
+            result.user,
+
+            {
+
+                phone:
+                    phone
+
+            }
+
+        );
+
+
+        showMessage(
+            "✅ تم تسجيل الدخول.",
+            "success"
+        );
+
+
+        setTimeout(
+
+            function(){
+
+                authOverlay.style.display =
+                    "none";
+
+                openOrder();
+
+            },
+
+            500
+
+        );
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+
+        showMessage(
+            "❌ رقم الهاتف أو كلمة المرور غير صحيحة.",
+            "error"
+        );
+
+
+        btn.disabled =
+            false;
+
+        btn.textContent =
+            "تسجيل الدخول";
+
+    }
+
+};
 
 
 /* =========================================
    GOOGLE
 ========================================= */
 
-googleBtn.addEventListener(
-    "click",
-    async function(){
+document.getElementById(
+    "googleBtn"
+).onclick = async function(){
 
-        googleBtn.disabled =
-            true;
-
-        googleBtn.textContent =
-            "...";
-
-
-        try{
-
-            const provider =
-                new GoogleAuthProvider();
+    const btn =
+        document.getElementById(
+            "googleBtn"
+        );
 
 
-            const result =
-                await signInWithPopup(
-
-                    auth,
-
-                    provider
-
-                );
+    btn.disabled =
+        true;
 
 
-            /*
-               Google لا يضمن رقم الهاتف.
-               لذلك نتحقق هل العميل موجود
-               ولديه رقم هاتف بالفعل.
-            */
+    try{
 
-            const customerRef =
-                doc(
-                    db,
-                    "customers",
-                    result.user.uid
-                );
+        const provider =
+            new GoogleAuthProvider();
 
 
-            const customerSnap =
-                await getDoc(
-                    customerRef
-                );
+        const result =
+            await signInWithPopup(
 
+                auth,
 
-            if(
-                !customerSnap.exists()
-            ){
+                provider
 
-                /*
-                   إنشاء العميل بدون رقم
-                   غير مسموح لأن الرقم أساسي.
-                */
-
-                showMessage(
-                    "⚠️ تم تسجيل Google. أضف رقم الهاتف لاستكمال ملف العميل.",
-                    "info"
-                );
-
-
-                /*
-                   نترك الحساب مسجلًا
-                   ونوجهه لصفحة إكمال البيانات.
-                */
-
-                setTimeout(
-                    function(){
-
-                        window.location.href =
-                            "complete-profile.html";
-
-                    },
-                    1000
-                );
-
-                return;
-
-            }
-
-
-            const customerData =
-                customerSnap.data();
-
-
-            if(
-                !customerData.phone
-            ){
-
-                showMessage(
-                    "⚠️ يجب إضافة رقم الهاتف إلى ملف العميل.",
-                    "info"
-                );
-
-
-                setTimeout(
-                    function(){
-
-                        window.location.href =
-                            "complete-profile.html";
-
-                    },
-                    1000
-                );
-
-                return;
-
-            }
-
-
-            showMessage(
-                "✅ تم تسجيل الدخول باستخدام Google.",
-                "success"
             );
 
 
-            setTimeout(
-                function(){
+        const customerRef =
+            doc(
+                db,
+                "customers",
+                result.user.uid
+            );
 
-                    window.location.href =
-                        "index.html";
+
+        const customerSnap =
+            await getDoc(
+                customerRef
+            );
+
+
+        /*
+           Google لا يعطينا رقم الهاتف
+           بشكل مضمون.
+
+           لذلك لو الحساب جديد:
+           نطلب رقم الهاتف قبل الطلب.
+        */
+
+        if(
+            !customerSnap.exists() ||
+            !customerSnap.data().phone
+        ){
+
+            await setDoc(
+
+                customerRef,
+
+                {
+
+                    uid:
+                        result.user.uid,
+
+                    name:
+                        result.user.displayName ||
+                        "",
+
+                    email:
+                        result.user.email ||
+                        "",
+
+                    phone:
+                        "",
+
+                    points:
+                        0,
+
+                    totalPurchases:
+                        0,
+
+                    createdAt:
+                        serverTimestamp()
 
                 },
-                700
+
+                {
+                    merge:true
+                }
+
             );
+
+            authOverlay.style.display =
+                "none";
+
+            showPhoneForGoogle();
+
+            return;
 
         }
 
-        catch(error){
 
-            console.error(
-                "Google Error:",
-                error
-            );
+        authOverlay.style.display =
+            "none";
 
 
-            showMessage(
-                "❌ لم يتم تسجيل الدخول باستخدام Google.",
-                "error"
-            );
+        openOrder();
+
+    }
+
+    catch(error){
+
+        console.error(error);
 
 
-            googleBtn.disabled =
-                false;
+        showMessage(
+            "❌ لم يتم تسجيل الدخول باستخدام Google.",
+            "error"
+        );
 
-            googleBtn.textContent =
-                "G";
+    }
+
+    finally{
+
+        btn.disabled =
+            false;
+
+    }
+
+};
+
+
+/* =========================================
+   GOOGLE PHONE COMPLETION
+========================================= */
+
+async function showPhoneForGoogle(){
+
+    const phone =
+        prompt(
+            "اكتب رقم الهاتف المصري لإكمال حسابك:"
+        );
+
+
+    if(!phone){
+
+        await signOut(auth);
+
+        return;
+
+    }
+
+
+    const formatted =
+        formatEgyptPhone(phone);
+
+
+    if(!formatted){
+
+        alert(
+            "رقم الهاتف غير صحيح."
+        );
+
+        await signOut(auth);
+
+        return;
+
+    }
+
+
+    const user =
+        auth.currentUser;
+
+
+    await setDoc(
+
+        doc(
+            db,
+            "customers",
+            user.uid
+        ),
+
+        {
+
+            phone:
+                formatted
+
+        },
+
+        {
+            merge:true
+        }
+
+    );
+
+
+    openOrder();
+
+}
+
+
+/* =========================================
+   OPEN ORDER
+========================================= */
+
+async function openOrder(){
+
+    if(
+        !auth.currentUser
+    ){
+
+        openAuth();
+
+        return;
+
+    }
+
+
+    if(!selectedProduct){
+
+        return;
+
+    }
+
+
+    orderOverlay.style.display =
+        "flex";
+
+
+    document.getElementById(
+        "orderProductName"
+    ).textContent =
+        selectedProduct.name;
+
+
+    document.getElementById(
+        "orderProductPrice"
+    ).textContent =
+        selectedProduct.price +
+        " جنيه";
+
+
+    showOrderMessage(
+        "",
+        ""
+    );
+
+
+    /*
+       تحميل بيانات العميل
+    */
+
+    const customerRef =
+        doc(
+            db,
+            "customers",
+            auth.currentUser.uid
+        );
+
+
+    const customerSnap =
+        await getDoc(
+            customerRef
+        );
+
+
+    if(
+        customerSnap.exists()
+    ){
+
+        const data =
+            customerSnap.data();
+
+
+        document.getElementById(
+            "orderName"
+        ).value =
+            data.name || "";
+
+
+        document.getElementById(
+            "orderPhone"
+        ).value =
+            data.phone || "";
+
+    }
+
+}
+
+
+/* =========================================
+   CLOSE ORDER
+========================================= */
+
+document.getElementById(
+    "closeOrder"
+).onclick = function(){
+
+    orderOverlay.style.display =
+        "none";
+
+};
+
+
+/* =========================================
+   SUBMIT ORDER
+========================================= */
+
+document.getElementById(
+    "submitOrder"
+).onclick = async function(){
+
+    const user =
+        auth.currentUser;
+
+
+    if(!user){
+
+        showOrderMessage(
+            "❌ يجب تسجيل الدخول أولًا.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const name =
+        document.getElementById(
+            "orderName"
+        ).value.trim();
+
+
+    const phone =
+        formatEgyptPhone(
+            document.getElementById(
+                "orderPhone"
+            ).value
+        );
+
+
+    const address =
+        document.getElementById(
+            "orderAddress"
+        ).value.trim();
+
+
+    const quantity =
+        Number(
+            document.getElementById(
+                "orderQuantity"
+            ).value
+        );
+
+
+    if(
+        name.length < 2
+    ){
+
+        showOrderMessage(
+            "❌ اكتب اسم المستلم.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(!phone){
+
+        showOrderMessage(
+            "❌ رقم الهاتف غير صحيح.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        address.length < 5
+    ){
+
+        showOrderMessage(
+            "❌ اكتب عنوان التوصيل كاملًا.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        !Number.isInteger(quantity) ||
+        quantity < 1
+    ){
+
+        showOrderMessage(
+            "❌ الكمية غير صحيحة.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const total =
+        selectedProduct.price *
+        quantity;
+
+
+    const btn =
+        document.getElementById(
+            "submitOrder"
+        );
+
+
+    btn.disabled =
+        true;
+
+    btn.textContent =
+        "جاري إرسال الطلب...";
+
+
+    try{
+
+        /*
+           تحديث بيانات العميل
+        */
+
+        await setDoc(
+
+            doc(
+                db,
+                "customers",
+                user.uid
+            ),
+
+            {
+
+                name:
+                    name,
+
+                phone:
+                    phone,
+
+                updatedAt:
+                    serverTimestamp()
+
+            },
+
+            {
+                merge:true
+            }
+
+        );
+
+
+        /*
+           إنشاء الطلب
+        */
+
+        await addDoc(
+
+            collection(
+                db,
+                "orders"
+            ),
+
+            {
+
+                customerId:
+                    user.uid,
+
+                customerName:
+                    name,
+
+                customerPhone:
+                    phone,
+
+                customerEmail:
+                    user.email || "",
+
+                address:
+                    address,
+
+                productId:
+                    selectedProduct.id,
+
+                productName:
+                    selectedProduct.name,
+
+                unitPrice:
+                    selectedProduct.price,
+
+                quantity:
+                    quantity,
+
+                total:
+                    total,
+
+                status:
+                    "new",
+
+                createdAt:
+                    serverTimestamp()
+
+            }
+
+        );
+
+
+        showOrderMessage(
+            "🎉 تم إرسال طلبك بنجاح!",
+            "success"
+        );
+
+
+        btn.textContent =
+            "تم إرسال الطلب ✅";
+
+
+        setTimeout(
+
+            function(){
+
+                orderOverlay.style.display =
+                    "none";
+
+                btn.disabled =
+                    false;
+
+                btn.textContent =
+                    "تأكيد الطلب ✅";
+
+            },
+
+            1200
+
+        );
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Order error:",
+            error
+        );
+
+
+        showOrderMessage(
+            "❌ لم يتم إرسال الطلب. حاول مرة أخرى.",
+            "error"
+        );
+
+
+        btn.disabled =
+            false;
+
+        btn.textContent =
+            "تأكيد الطلب ✅";
+
+    }
+
+};
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+logoutBtn.onclick =
+async function(){
+
+    await signOut(auth);
+
+    userMenu.style.display =
+        "none";
+
+    accountBtn.style.display =
+        "block";
+
+};
+
+
+/* =========================================
+   AUTH STATE
+========================================= */
+
+onAuthStateChanged(
+
+    auth,
+
+    async function(user){
+
+        if(user){
+
+            accountBtn.style.display =
+                "none";
+
+            userMenu.style.display =
+                "block";
+
+        }
+
+        else{
+
+            accountBtn.style.display =
+                "block";
+
+            userMenu.style.display =
+                "none";
 
         }
 
     }
-);
 
-
-/* =========================================
-   INITIAL STATE
-========================================= */
-
-showMessage(
-    "",
-    ""
 );
 
 </script>
 
 </body>
+
 </html>
