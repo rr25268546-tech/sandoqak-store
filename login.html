@@ -2,12 +2,22 @@
 <html lang="ar" dir="rtl">
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>SANDOQAK | تسجيل الدخول</title>
 
+
 <style>
+
+/* =========================
+   RESET
+========================= */
 
 *{
     box-sizing:border-box;
@@ -16,191 +26,401 @@
     font-family:Arial,sans-serif;
 }
 
+
+/* =========================
+   BODY
+========================= */
+
 body{
+
     min-height:100vh;
+
     background:#090909;
+
     color:#fff;
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
     padding:20px;
+
 }
+
+
+/* =========================
+   BOX
+========================= */
 
 .box{
+
     width:100%;
+
     max-width:430px;
+
     background:#111;
+
     border:1px solid #292929;
+
     border-radius:22px;
+
     padding:25px;
-    box-shadow:0 15px 50px rgba(0,0,0,.45);
+
+    box-shadow:
+        0 15px 50px
+        rgba(0,0,0,.45);
+
 }
 
+
+/* =========================
+   HEADER
+========================= */
+
 h1{
+
     text-align:center;
+
     margin-bottom:8px;
+
 }
 
 .subtitle{
+
     text-align:center;
+
     color:#999;
+
     margin-bottom:25px;
+
 }
+
+
+/* =========================
+   LABEL
+========================= */
 
 label{
+
     display:block;
+
     margin-bottom:7px;
+
     color:#ccc;
+
 }
 
+
+/* =========================
+   INPUT
+========================= */
+
 input{
+
     width:100%;
+
     height:48px;
+
     background:#181818;
+
     border:1px solid #333;
+
     border-radius:10px;
+
     color:#fff;
+
     padding:12px;
+
     font-size:16px;
+
     outline:none;
+
     margin-bottom:14px;
+
 }
 
 input:focus{
+
     border-color:#00e5ff;
+
 }
 
+
+/* =========================
+   BUTTON
+========================= */
+
 button{
+
     border:0;
+
     cursor:pointer;
+
     font-size:16px;
+
     font-weight:bold;
+
 }
 
 button:disabled{
+
     opacity:.5;
+
     cursor:not-allowed;
+
 }
 
-.phone-btn{
-    width:100%;
-    height:48px;
-    border-radius:10px;
-    background:#00e5ff;
-    color:#000;
-}
-
-.verify-btn{
-    width:100%;
-    height:48px;
-    border-radius:10px;
-    background:#22c55e;
-    color:#fff;
-    margin-top:8px;
-}
-
-#codeBox,
-#emailBox{
-    display:none;
-}
-
-#recaptcha-container{
-    margin:15px 0;
-    display:flex;
-    justify-content:center;
-}
 
 /* =========================
-   LOGIN OPTIONS
+   PHONE BUTTON
+========================= */
+
+.phone-btn{
+
+    width:100%;
+
+    height:48px;
+
+    border-radius:10px;
+
+    background:#00e5ff;
+
+    color:#000;
+
+}
+
+
+/* =========================
+   VERIFY BUTTON
+========================= */
+
+.verify-btn{
+
+    width:100%;
+
+    height:48px;
+
+    border-radius:10px;
+
+    background:#22c55e;
+
+    color:#fff;
+
+    margin-top:8px;
+
+}
+
+
+/* =========================
+   OTP
+========================= */
+
+#codeBox{
+
+    display:none;
+
+}
+
+
+/* =========================
+   RECAPTCHA
+========================= */
+
+#recaptcha-container{
+
+    margin:15px 0;
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+
+/* =========================
+   OTHER LOGIN
 ========================= */
 
 .other-title{
+
     text-align:center;
+
     color:#777;
+
     font-size:13px;
-    margin-top:18px;
-    margin-bottom:12px;
+
+    margin-top:20px;
+
+    margin-bottom:13px;
+
 }
+
 
 .social-options{
+
     display:flex;
+
     justify-content:center;
+
     align-items:center;
+
     gap:16px;
+
 }
+
 
 .social-btn{
+
     width:52px;
+
     height:52px;
+
     border-radius:50%;
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
     font-size:21px;
+
     transition:.2s;
+
     border:1px solid #333;
+
 }
+
 
 .social-btn:hover{
+
     transform:translateY(-3px);
+
     border-color:#666;
+
 }
+
+
+/* EMAIL */
 
 .email-circle{
+
     background:#222;
+
     color:#fff;
+
 }
+
+
+/* GOOGLE */
 
 .google-circle{
+
     background:#fff;
+
     color:#4285F4;
+
 }
+
+
+/* FACEBOOK */
 
 .facebook-circle{
+
     background:#1877F2;
+
     color:#fff;
+
 }
 
+
 /* =========================
-   EMAIL
+   EMAIL BOX
 ========================= */
 
 #emailBox{
+
+    display:none;
+
     margin-top:18px;
+
     padding-top:18px;
+
     border-top:1px solid #292929;
+
 }
 
+
+/* =========================
+   MESSAGE
+========================= */
+
 #message{
+
     margin-top:15px;
+
     text-align:center;
+
     line-height:1.6;
+
     min-height:25px;
+
 }
 
 .error{
+
     color:#ff7777;
+
 }
 
 .success{
+
     color:#6dff91;
+
 }
 
+.info{
+
+    color:#ccc;
+
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
 .small{
+
     color:#777;
+
     font-size:12px;
+
     text-align:center;
+
     margin-top:15px;
+
+    line-height:1.6;
+
 }
 
 </style>
+
 </head>
+
 
 <body>
 
+
 <div class="box">
 
-    <h1>📦 SANDOQAK</h1>
+
+    <h1>
+        📦 SANDOQAK
+    </h1>
+
 
     <p class="subtitle">
         تسجيل الدخول أو إنشاء حساب
@@ -212,24 +432,40 @@ button:disabled{
     ========================== -->
 
     <label for="phone">
-        رقم الهاتف
+        رقم الهاتف المصري
     </label>
 
+
     <input
+
         id="phone"
+
         type="tel"
-        placeholder="مثال: 01012345678"
+
+        placeholder="01012345678"
+
         autocomplete="tel"
+
+        inputmode="tel"
+
     >
+
 
     <div id="recaptcha-container"></div>
 
+
     <button
+
         id="sendBtn"
+
         class="phone-btn"
+
         type="button"
+
     >
+
         إرسال كود للهاتف 📱
+
     </button>
 
 
@@ -239,78 +475,122 @@ button:disabled{
 
     <div id="codeBox">
 
+
         <label
             for="code"
             style="margin-top:20px;"
         >
+
             كود التحقق
+
         </label>
 
+
         <input
+
             id="code"
+
             type="text"
+
             inputmode="numeric"
+
             maxlength="6"
-            placeholder="أدخل الكود"
+
+            placeholder="أدخل الكود المكون من 6 أرقام"
+
             autocomplete="one-time-code"
+
         >
 
+
         <button
+
             id="verifyBtn"
+
             class="verify-btn"
+
             type="button"
+
         >
+
             تأكيد الكود ✅
+
         </button>
+
 
     </div>
 
 
     <!-- =========================
-         OTHER LOGIN OPTIONS
+         OTHER OPTIONS
     ========================== -->
 
     <div class="other-title">
+
         أو الدخول باستخدام
+
     </div>
 
 
     <div class="social-options">
 
+
         <!-- EMAIL -->
 
         <button
+
             id="emailToggle"
+
             class="social-btn email-circle"
+
             type="button"
+
             title="البريد الإلكتروني"
+
         >
+
             ✉️
+
         </button>
 
 
         <!-- GOOGLE -->
 
         <button
+
             id="googleBtn"
+
             class="social-btn google-circle"
+
             type="button"
+
             title="Google"
+
         >
+
             G
+
         </button>
 
 
         <!-- FACEBOOK -->
 
         <button
+
             id="facebookBtn"
+
             class="social-btn facebook-circle"
+
             type="button"
+
             title="Facebook"
+
         >
+
             f
+
         </button>
+
 
     </div>
 
@@ -321,96 +601,173 @@ button:disabled{
 
     <div id="emailBox">
 
+
         <label for="email">
+
             البريد الإلكتروني
+
         </label>
 
+
         <input
+
             id="email"
+
             type="email"
+
             placeholder="example@email.com"
+
             autocomplete="email"
+
         >
 
 
         <label for="password">
+
             كلمة المرور
+
         </label>
 
+
         <input
+
             id="password"
+
             type="password"
+
             placeholder="كلمة المرور"
+
             autocomplete="current-password"
+
         >
 
 
         <button
+
             id="emailLoginBtn"
+
             class="verify-btn"
+
             type="button"
+
         >
+
             تسجيل الدخول 📧
+
         </button>
+
 
     </div>
 
 
     <p class="small">
-        رقم الهاتف هو الحساب الأساسي للنقاط والمشتريات.
+
+        📱 رقم الهاتف هو الحساب الأساسي للنقاط والمشتريات.
+
+        <br>
+
+        🎁 نقاطك لا يتم تصفيرها عند تسجيل الدخول مرة أخرى.
+
     </p>
 
 
     <div id="message"></div>
 
+
 </div>
+
 
 
 <script type="module">
 
+
+/* =========================
+   FIREBASE APP
+========================= */
+
 import {
+
     initializeApp
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
-import {
-    getAuth,
-    RecaptchaVerifier,
-    signInWithPhoneNumber,
-    onAuthStateChanged,
-    signInWithEmailAndPassword,
-    GoogleAuthProvider,
-    signInWithPopup
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+}
 
-import {
-    getFirestore,
-    doc,
-    getDoc,
-    setDoc,
-    serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 
 /* =========================
-   FIREBASE
+   FIREBASE AUTH
+========================= */
+
+import {
+
+    getAuth,
+
+    RecaptchaVerifier,
+
+    signInWithPhoneNumber,
+
+    signInWithEmailAndPassword,
+
+    GoogleAuthProvider,
+
+    signInWithPopup
+
+}
+
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+/* =========================
+   FIRESTORE
+========================= */
+
+import {
+
+    getFirestore,
+
+    doc,
+
+    getDoc,
+
+    setDoc,
+
+    serverTimestamp
+
+}
+
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+
+/* =========================
+   FIREBASE CONFIG
 ========================= */
 
 const firebaseConfig = {
 
+
     apiKey:
     "AIzaSyC3NvbBmiX-2nBBFw-X6KBkpU_8ZOQnDvQ",
+
 
     authDomain:
     "sandoqak-479c4.firebaseapp.com",
 
+
     projectId:
     "sandoqak-479c4",
+
 
     storageBucket:
     "sandoqak-479c4.firebasestorage.app",
 
+
     messagingSenderId:
     "295608980009",
+
 
     appId:
     "1:295608980009:web:f3176896d1b5f461c30238"
@@ -418,14 +775,24 @@ const firebaseConfig = {
 };
 
 
+
+/* =========================
+   INITIALIZE
+========================= */
+
 const app =
-    initializeApp(firebaseConfig);
+    initializeApp(
+        firebaseConfig
+    );
+
 
 const auth =
     getAuth(app);
 
+
 const db =
     getFirestore(app);
+
 
 
 /* =========================
@@ -435,52 +802,74 @@ const db =
 const phoneInput =
     document.getElementById("phone");
 
+
 const codeInput =
     document.getElementById("code");
+
 
 const sendBtn =
     document.getElementById("sendBtn");
 
+
 const verifyBtn =
     document.getElementById("verifyBtn");
+
 
 const codeBox =
     document.getElementById("codeBox");
 
+
 const emailToggle =
     document.getElementById("emailToggle");
+
 
 const emailBox =
     document.getElementById("emailBox");
 
+
 const emailInput =
     document.getElementById("email");
+
 
 const passwordInput =
     document.getElementById("password");
 
+
 const emailLoginBtn =
     document.getElementById("emailLoginBtn");
+
 
 const googleBtn =
     document.getElementById("googleBtn");
 
+
 const facebookBtn =
     document.getElementById("facebookBtn");
+
 
 const message =
     document.getElementById("message");
 
 
+
+/* =========================
+   VARIABLES
+========================= */
+
 let confirmationResult = null;
+
 let recaptchaVerifier = null;
+
 
 
 /* =========================
    MESSAGE
 ========================= */
 
-function showMessage(text,type){
+function showMessage(
+    text,
+    type
+){
 
     message.className =
         type || "";
@@ -491,19 +880,31 @@ function showMessage(text,type){
 }
 
 
+
 /* =========================
-   PHONE FORMAT
+   EGYPT PHONE FORMAT
 ========================= */
 
-function formatEgyptPhone(phone){
+function formatEgyptPhone(
+    phone
+){
 
     phone =
+
         phone
         .replace(/\s+/g,"")
         .replace(/-/g,"");
 
 
-    if(phone.startsWith("01")){
+    /*
+       01012345678
+       ↓
+       +201012345678
+    */
+
+    if(
+        /^01\d{9}$/.test(phone)
+    ){
 
         return "+20" +
             phone.substring(1);
@@ -511,7 +912,31 @@ function formatEgyptPhone(phone){
     }
 
 
-    if(phone.startsWith("0020")){
+    /*
+       201012345678
+       ↓
+       +201012345678
+    */
+
+    if(
+        /^20\d{10}$/.test(phone)
+    ){
+
+        return "+" +
+            phone;
+
+    }
+
+
+    /*
+       00201012345678
+       ↓
+       +201012345678
+    */
+
+    if(
+        /^0020\d{10}$/.test(phone)
+    ){
 
         return "+" +
             phone.substring(2);
@@ -519,9 +944,23 @@ function formatEgyptPhone(phone){
     }
 
 
-    return phone;
+    /*
+       Already international
+    */
+
+    if(
+        /^\+20\d{10}$/.test(phone)
+    ){
+
+        return phone;
+
+    }
+
+
+    return "";
 
 }
+
 
 
 /* =========================
@@ -530,22 +969,31 @@ function formatEgyptPhone(phone){
 
 function createRecaptcha(){
 
-    if(recaptchaVerifier){
+    try{
 
-        try{
+        if(recaptchaVerifier){
+
             recaptchaVerifier.clear();
-        }catch(e){}
 
-    }
+        }
+
+    }catch(e){}
 
 
     recaptchaVerifier =
+
         new RecaptchaVerifier(
+
             auth,
+
             "recaptcha-container",
+
             {
+
                 size:"normal"
+
             }
+
         );
 
 }
@@ -554,44 +1002,72 @@ function createRecaptcha(){
 createRecaptcha();
 
 
+
 /* =========================
-   CUSTOMER DATA
+   CREATE CUSTOMER
 ========================= */
 
-async function createCustomerIfNeeded(user){
+async function createCustomerIfNeeded(
+    user
+){
 
     const customerRef =
+
         doc(
+
             db,
+
             "customers",
+
             user.uid
+
         );
 
 
     const customerSnap =
+
         await getDoc(
             customerRef
         );
 
 
-    if(!customerSnap.exists()){
+    /*
+       أول تسجيل فقط
+    */
+
+    if(
+        !customerSnap.exists()
+    ){
 
         await setDoc(
 
             customerRef,
 
             {
-                uid:user.uid,
 
-                phone:user.phoneNumber || "",
+                uid:
+                    user.uid,
 
-                email:user.email || "",
 
-                name:user.displayName || "",
+                phone:
+                    user.phoneNumber || "",
 
-                points:0,
 
-                totalPurchases:0,
+                email:
+                    user.email || "",
+
+
+                name:
+                    user.displayName || "",
+
+
+                points:
+                    0,
+
+
+                totalPurchases:
+                    0,
+
 
                 createdAt:
                     serverTimestamp()
@@ -605,79 +1081,34 @@ async function createCustomerIfNeeded(user){
 }
 
 
-/* =========================
-   AUTH STATE
-========================= */
-
-onAuthStateChanged(
-    auth,
-    async function(user){
-
-        if(!user){
-            return;
-        }
-
-
-        try{
-
-            await createCustomerIfNeeded(
-                user
-            );
-
-
-            showMessage(
-                "✅ تم تسجيل الدخول، جاري فتح المتجر...",
-                "success"
-            );
-
-
-            setTimeout(
-                function(){
-
-                    window.location.href =
-                        "index.html";
-
-                },
-                800
-            );
-
-
-        }catch(error){
-
-            console.error(error);
-
-            showMessage(
-                "❌ تم الدخول ولكن حدث خطأ في تحميل الحساب.",
-                "error"
-            );
-
-        }
-
-    }
-);
-
 
 /* =========================
    SEND PHONE CODE
 ========================= */
 
 sendBtn.addEventListener(
+
     "click",
+
     async function(){
 
         const phone =
+
             formatEgyptPhone(
+
                 phoneInput.value.trim()
+
             );
 
 
-        if(
-            !/^\+20\d{10}$/.test(phone)
-        ){
+        if(!phone){
 
             showMessage(
+
                 "❌ اكتب رقم مصري صحيح مثل 01012345678.",
+
                 "error"
+
             );
 
             return;
@@ -688,11 +1119,13 @@ sendBtn.addEventListener(
         sendBtn.disabled =
             true;
 
+
         sendBtn.innerText =
             "جاري إرسال الكود...";
 
 
         try{
+
 
             if(!recaptchaVerifier){
 
@@ -702,10 +1135,15 @@ sendBtn.addEventListener(
 
 
             confirmationResult =
+
                 await signInWithPhoneNumber(
+
                     auth,
+
                     phone,
+
                     recaptchaVerifier
+
                 );
 
 
@@ -714,8 +1152,12 @@ sendBtn.addEventListener(
 
 
             showMessage(
-                "✅ تم إرسال الكود إلى هاتفك.",
+
+                "✅ تم إرسال كود التحقق إلى " +
+                phone,
+
                 "success"
+
             );
 
 
@@ -723,581 +1165,59 @@ sendBtn.addEventListener(
                 "تم إرسال الكود";
 
 
-        }catch(error){
-
-            console.error(error);
-
-
-            showMessage(
-                "❌ لم يتم إرسال الكود. حاول مرة أخرى.",
-                "error"
-            );
-
-
-            sendBtn.disabled =
-                false;
-
-            sendBtn.innerText =
-                "إرسال كود للهاتف 📱";
-
-
-            createRecaptcha();
-
         }
 
-    }
-);
+        catch(error){
 
-
-/* =========================
-   VERIFY PHONE CODE
-========================= */
-
-verifyBtn.addEventListener(
-    "click",
-    async function(){
-
-        if(!confirmationResult){
-
-            showMessage(
-                "❌ اطلب الكود أولًا.",
-                "error"
+            console.error(
+                error
             );
-
-            return;
-
-        }
-
-
-        const code =
-            codeInput.value.trim();
-
-
-        if(!/^\d{6}$/.test(code)){
-
-            showMessage(
-                "❌ أدخل كود التحقق المكون من 6 أرقام.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        verifyBtn.disabled =
-            true;
-
-        verifyBtn.innerText =
-            "جاري التحقق...";
-
-
-        try{
-
-            const result =
-                await confirmationResult.confirm(
-                    code
-                );
-
-
-            await createCustomerIfNeeded(
-                result.user
-            );
-
-
-            showMessage(
-                "🎉 تم تسجيل الحساب بنجاح!",
-                "success"
-            );
-
-
-            setTimeout(
-                function(){
-
-                    window.location.href =
-                        "index.html";
-
-                },
-                1000
-            );
-
-
-        }catch(error){
-
-            console.error(error);
-
-
-            showMessage(
-                "❌ كود التحقق غير صحيح أو انتهت صلاحيته.",
-                "error"
-            );
-
-
-            verifyBtn.disabled =
-                false;
-
-            verifyBtn.innerText =
-                "تأكيد الكود ✅";
-
-        }
-
-    }
-);
-
-
-/* =========================
-   EMAIL BUTTON
-========================= */
-
-emailToggle.addEventListener(
-    "click",
-    function(){
-
-        if(
-            emailBox.style.display ===
-            "block"
-        ){
-
-            emailBox.style.display =
-                "none";
-
-        }else{
-
-            emailBox.style.display =
-                "block";
-
-            emailInput.focus();
-
-        }
-
-    }
-);
-
-
-/* =========================
-   EMAIL LOGIN
-========================= */
-
-emailLoginBtn.addEventListener(
-    "click",
-    async function(){
-
-        const email =
-            emailInput.value.trim();
-
-        const password =
-            passwordInput.value;
-
-
-        if(!email || !password){
-
-            showMessage(
-                "❌ اكتب البريد الإلكتروني وكلمة المرور.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        emailLoginBtn.disabled =
-            true;
-
-        emailLoginBtn.innerText =
-            "جاري تسجيل الدخول...";
-
-
-        try{
-
-            const result =
-                await signInWithEmailAndPassword(
-                    auth,
-                    email,
-                    password
-                );
-
-
-            await createCustomerIfNeeded(
-                result.user
-            );
-
-
-            showMessage(
-                "✅ تم تسجيل الدخول.",
-                "success"
-            );
-
-
-        }catch(error){
-
-            console.error(error);
-
-
-            showMessage(
-                "❌ البريد الإلكتروني أو كلمة المرور غير صحيحة.",
-                "error"
-            );
-
-
-            emailLoginBtn.disabled =
-                false;
-
-            emailLoginBtn.innerText =
-                "تسجيل الدخول 📧";
-
-        }
-
-    }
-);
-
-
-/* =========================
-   GOOGLE LOGIN
-========================= */
-
-googleBtn.addEventListener(
-    "click",
-    async function(){
-
-        googleBtn.disabled =
-            true;
-
-        googleBtn.innerText =
-            "...";
-
-
-        try{
-
-            const provider =
-                new GoogleAuthProvider();
-
-
-            const result =
-                await signInWithPopup(
-                    auth,
-                    provider
-                );
-
-
-            await createCustomerIfNeeded(
-                result.user
-            );
-
-
-            showMessage(
-                "✅ تم تسجيل الدخول باستخدام Google.",
-                "success"
-            );
-
-
-        }catch(error){
-
-            console.error(error);
-
-
-            showMessage(
-                "❌ لم يتم تسجيل الدخول باستخدام Google.",
-                "error"
-            );
-
-
-            googleBtn.disabled =
-                false;
-
-            googleBtn.innerText =
-                "G";
-
-        }
-
-    }
-);
-
-
-/* =========================
-   FACEBOOK
-========================= */
-
-facebookBtn.addEventListener(
-    "click",
-    function(){
-
-        showMessage(
-            "🔵 تسجيل الدخول بفيسبوك سيتم تفعيله بعد إكمال إعداد Meta.",
-            "info"
-        );
-
-    }
-);
-
-</script>
-
-</body>
-
-</html>
-            return;
-
-        }
-
-
-        sendBtn.disabled =
-            true;
-
-        sendBtn.innerText =
-            "جاري إرسال الكود...";
-
-
-        try{
-
-            if(!recaptchaVerifier){
-
-                createRecaptcha();
-
-            }
-
-
-            confirmationResult =
-                await signInWithPhoneNumber(
-                    auth,
-                    phone,
-                    recaptchaVerifier
-                );
-
-
-            codeBox.style.display =
-                "block";
-
-
-            showMessage(
-                "✅ تم إرسال الكود إلى هاتفك.",
-                "success"
-            );
-
-
-            sendBtn.innerText =
-                "تم إرسال الكود";
-
-
-        }catch(error){
-
-            console.error(error);
-
-
-            showMessage(
-                "❌ لم يتم إرسال الكود. حاول مرة أخرى.",
-                "error"
-            );
-
-
-            sendBtn.disabled =
-                false;
-
-            sendBtn.innerText =
-                "إرسال كود للهاتف 📱";
-
-
-            createRecaptcha();
-
-        }
-
-    }
-);
-
-
-/* =========================
-   VERIFY PHONE CODE
-========================= */
-
-verifyBtn.addEventListener(
-    "click",
-    async function(){
-
-        if(!confirmationResult){
-
-            showMessage(
-                "❌ اطلب الكود أولًا.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        const code =
-            codeInput.value.trim();
-
-
-        if(!/^\d{6}$/.test(code)){
-
-            showMessage(
-                "❌ أدخل كود التحقق المكون من 6 أرقام.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        verifyBtn.disabled =
-            true;
-
-        verifyBtn.innerText =
-            "جاري التحقق...";
-
-
-        try{
-
-            const result =
-                await confirmationResult.confirm(
-                    code
-                );
-
-
-            await createCustomerIfNeeded(
-                result.user
-            );
-
-
-            showMessage(
-                "🎉 تم تسجيل الحساب بنجاح!",
-                "success"
-            );
-
-
-            setTimeout(
-                function(){
-
-                    window.location.href =
-                        "index.html";
-
-                },
-                1000
-            );
-
-
-        }catch(error){
-
-            console.error(error);
-
-
-            showMessage(
-                "❌ كود التحقق غير صحيح أو انتهت صلاحيته.",
-                "error"
-            );
-
-
-            verifyBtn.disabled =
-                false;
-
-            verifyBtn.innerText =
-                "تأكيد الكود ✅";
-
-        }
-
-    }
-);
-
-
-/* =========================
-   EMAIL BOX
-========================= */
-
-emailToggle.addEventListener(
-    "click",
-    function(){
-
-        if(
-            emailBox.style.display ===
-            "block"
-        ){
-
-            emailBox.style.display =
-                "none";
-
-        }else{
-
-            emailBox.style.display =
-                "block";
-
-        }
-
-    }
-);
-
-
-/* =========================
-   EMAIL LOGIN
-========================= */
-
-emailLoginBtn.addEventListener(
-    "click",
-    async function(){
-
-        const email =
-            emailInput.value.trim();
-
-        const password =
-            passwordInput.value;
-
-
-        if(!email || !password){
-
-            showMessage(
-                "❌ اكتب البريد الإلكتروني وكلمة المرور.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        emailLoginBtn.disabled =
-            true;
-
-        emailLoginBtn.innerText =
-            "جاري تسجيل الدخول...";
-
-
-        try{
-
-            const result =
-                await signInWithEmailAndPassword(
-                    auth,
-                    email,
-                    password
-                );
-
-
-            await createCustomerIfNeeded(
-                result.user
-            );
-
-
-            showMessage(
-                "✅ تم تسجيل الدخول.",
-                "success"
-            );
-
-
-        }catch(error){
-
-            console.error(error);
 
 
             let text =
-                "❌ البريد الإلكتروني أو كلمة المرور غير صحيحة.";
+                "❌ لم يتم إرسال الكود.";
 
 
             if(
                 error.code ===
-                "auth/invalid-credential"
+                "auth/too-many-requests"
             ){
 
                 text =
-                    "❌ البريد الإلكتروني أو كلمة المرور غير صحيحة.";
+                    "❌ تم تجاوز عدد المحاولات. حاول لاحقًا.";
+
+            }
+
+
+            else if(
+                error.code ===
+                "auth/quota-exceeded"
+            ){
+
+                text =
+                    "❌ تم تجاوز حد الرسائل المتاح حاليًا.";
+
+            }
+
+
+            else if(
+                error.code ===
+                "auth/invalid-phone-number"
+            ){
+
+                text =
+                    "❌ رقم الهاتف المصري غير صحيح.";
+
+            }
+
+
+            else if(
+                error.code ===
+                "auth/captcha-check-failed"
+            ){
+
+                text =
+                    "❌ تحقق من reCAPTCHA وحاول مرة أخرى.";
 
             }
 
@@ -1308,43 +1228,250 @@ emailLoginBtn.addEventListener(
             );
 
 
-            emailLoginBtn.disabled =
+            sendBtn.disabled =
                 false;
 
-            emailLoginBtn.innerText =
-                "تسجيل الدخول 📧";
+
+            sendBtn.innerText =
+                "إرسال كود للهاتف 📱";
+
+
+            createRecaptcha();
 
         }
 
     }
+
 );
 
 
+
 /* =========================
-   GOOGLE LOGIN
+   VERIFY CODE
 ========================= */
 
-googleBtn.addEventListener(
+verifyBtn.addEventListener(
+
     "click",
+
     async function(){
 
-        googleBtn.disabled =
+
+        if(!confirmationResult){
+
+            showMessage(
+
+                "❌ اطلب كود التحقق أولًا.",
+
+                "error"
+
+            );
+
+            return;
+
+        }
+
+
+        const code =
+            codeInput.value.trim();
+
+
+        if(
+            !/^\d{6}$/.test(code)
+        ){
+
+            showMessage(
+
+                "❌ أدخل الكود المكون من 6 أرقام.",
+
+                "error"
+
+            );
+
+            return;
+
+        }
+
+
+        verifyBtn.disabled =
             true;
 
-        googleBtn.innerText =
-            "جاري فتح Google...";
+
+        verifyBtn.innerText =
+            "جاري التحقق...";
 
 
         try{
 
-            const provider =
-                new GoogleAuthProvider();
+
+            const result =
+
+                await confirmationResult.confirm(
+                    code
+                );
+
+
+            const user =
+                result.user;
+
+
+            /*
+               إنشاء العميل لو أول مرة فقط
+            */
+
+            await createCustomerIfNeeded(
+                user
+            );
+
+
+            showMessage(
+
+                "🎉 تم تسجيل الدخول بنجاح!",
+
+                "success"
+
+            );
+
+
+            setTimeout(
+
+                function(){
+
+                    window.location.href =
+                        "index.html";
+
+                },
+
+                1000
+
+            );
+
+        }
+
+        catch(error){
+
+            console.error(
+                error
+            );
+
+
+            showMessage(
+
+                "❌ كود التحقق غير صحيح أو انتهت صلاحيته.",
+
+                "error"
+
+            );
+
+
+            verifyBtn.disabled =
+                false;
+
+
+            verifyBtn.innerText =
+                "تأكيد الكود ✅";
+
+        }
+
+    }
+
+);
+
+
+
+/* =========================
+   EMAIL OPEN
+========================= */
+
+emailToggle.addEventListener(
+
+    "click",
+
+    function(){
+
+        if(
+            emailBox.style.display ===
+            "block"
+        ){
+
+            emailBox.style.display =
+                "none";
+
+        }
+
+        else{
+
+            emailBox.style.display =
+                "block";
+
+            emailInput.focus();
+
+        }
+
+    }
+
+);
+
+
+
+/* =========================
+   EMAIL LOGIN
+========================= */
+
+emailLoginBtn.addEventListener(
+
+    "click",
+
+    async function(){
+
+
+        const email =
+            emailInput.value.trim();
+
+
+        const password =
+            passwordInput.value;
+
+
+        if(
+            !email ||
+            !password
+        ){
+
+            showMessage(
+
+                "❌ اكتب البريد الإلكتروني وكلمة المرور.",
+
+                "error"
+
+            );
+
+            return;
+
+        }
+
+
+        emailLoginBtn.disabled =
+            true;
+
+
+        emailLoginBtn.innerText =
+            "جاري تسجيل الدخول...";
+
+
+        try{
 
 
             const result =
-                await signInWithPopup(
+
+                await signInWithEmailAndPassword(
+
                     auth,
-                    provider
+
+                    email,
+
+                    password
+
                 );
 
 
@@ -1354,31 +1481,218 @@ googleBtn.addEventListener(
 
 
             showMessage(
-                "✅ تم تسجيل الدخول باستخدام Google.",
+
+                "✅ تم تسجيل الدخول بنجاح.",
+
                 "success"
+
             );
 
 
-        }catch(error){
+            setTimeout(
 
-            console.error(error);
+                function(){
+
+                    window.location.href =
+                        "index.html";
+
+                },
+
+                800
+
+            );
+
+        }
+
+        catch(error){
+
+            console.error(
+                error
+            );
+
+
+            /*
+               كلمة المرور غلط
+            */
+
+            if(
+                error.code ===
+                "auth/wrong-password" ||
+
+                error.code ===
+                "auth/invalid-credential"
+            ){
+
+                showMessage(
+
+                    "❌ البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+
+                    "error"
+
+                );
+
+            }
+
+            else if(
+                error.code ===
+                "auth/user-not-found"
+            ){
+
+                showMessage(
+
+                    "❌ لا يوجد حساب بهذا البريد الإلكتروني.",
+
+                    "error"
+
+                );
+
+            }
+
+            else{
+
+                showMessage(
+
+                    "❌ حدث خطأ أثناء تسجيل الدخول.",
+
+                    "error"
+
+                );
+
+            }
+
+
+            emailLoginBtn.disabled =
+                false;
+
+
+            emailLoginBtn.innerText =
+                "تسجيل الدخول 📧";
+
+        }
+
+    }
+
+);
+
+
+
+/* =========================
+   GOOGLE LOGIN
+========================= */
+
+googleBtn.addEventListener(
+
+    "click",
+
+    async function(){
+
+
+        googleBtn.disabled =
+            true;
+
+
+        googleBtn.innerText =
+            "...";
+
+
+        try{
+
+
+            const provider =
+                new GoogleAuthProvider();
+
+
+            const result =
+
+                await signInWithPopup(
+
+                    auth,
+
+                    provider
+
+                );
+
+
+            await createCustomerIfNeeded(
+                result.user
+            );
 
 
             showMessage(
+
+                "✅ تم تسجيل الدخول باستخدام Google.",
+
+                "success"
+
+            );
+
+
+            setTimeout(
+
+                function(){
+
+                    window.location.href =
+                        "index.html";
+
+                },
+
+                800
+
+            );
+
+        }
+
+        catch(error){
+
+            console.error(
+                error
+            );
+
+
+            showMessage(
+
                 "❌ لم يتم تسجيل الدخول باستخدام Google.",
+
                 "error"
+
             );
 
 
             googleBtn.disabled =
                 false;
 
+
             googleBtn.innerText =
-                "المتابعة باستخدام Google";
+                "G";
 
         }
 
     }
+
+);
+
+
+
+/* =========================
+   FACEBOOK
+========================= */
+
+facebookBtn.addEventListener(
+
+    "click",
+
+    function(){
+
+        showMessage(
+
+            "🔵 تسجيل الدخول بفيسبوك سيتم تفعيله بعد إكمال إعداد Meta.",
+
+            "info"
+
+        );
+
+    }
+
 );
 
 </script>
