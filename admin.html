@@ -3,371 +3,604 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>لوحة التحكم | SANDOQAK</title>
+<title>لوحة الطلبات | SANDOQAK</title>
 
-    <style>
+<style>
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:Arial,sans-serif;
+}
 
-        body {
-            background: #090909;
-            color: white;
-            min-height: 100vh;
-        }
+body{
+background:#090909;
+color:white;
+min-height:100vh;
+padding:20px;
+}
 
-        header {
-            padding: 18px 20px;
-            border-bottom: 1px solid #222;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+.container{
+max-width:1000px;
+margin:auto;
+}
 
-        .logo {
-            font-size: 23px;
-            font-weight: bold;
-        }
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:25px;
+}
 
-        .logo span {
-            color: #00e5ff;
-        }
+.logo{
+font-size:24px;
+font-weight:bold;
+}
 
-        .home {
-            background: #00e5ff;
-            color: #000;
-            text-decoration: none;
-            padding: 9px 14px;
-            border-radius: 10px;
-            font-weight: bold;
-        }
+.logo span{
+color:#00e5ff;
+}
 
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 30px 18px;
-        }
+.back{
+background:#00e5ff;
+color:#000;
+text-decoration:none;
+padding:10px 15px;
+border-radius:10px;
+font-weight:bold;
+}
 
-        .title {
-            text-align: center;
-            margin-bottom: 25px;
-        }
+.title{
+text-align:center;
+margin-bottom:25px;
+}
 
-        .title h1 {
-            font-size: 30px;
-            margin-bottom: 8px;
-        }
+.title h1{
+font-size:30px;
+margin-bottom:8px;
+}
 
-        .title p {
-            color: #aaa;
-        }
+.title p{
+color:#aaa;
+}
 
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-bottom: 25px;
-        }
+.stats{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+margin-bottom:25px;
+}
 
-        .stat {
-            background: #111;
-            border: 1px solid #252525;
-            border-radius: 16px;
-            padding: 20px;
-        }
+.stat{
+background:#111;
+border:1px solid #252525;
+border-radius:18px;
+padding:20px;
+}
 
-        .stat-title {
-            color: #aaa;
-            margin-bottom: 10px;
-        }
+.stat small{
+color:#aaa;
+}
 
-        .stat-number {
-            font-size: 27px;
-            font-weight: bold;
-        }
+.stat h2{
+margin-top:10px;
+font-size:28px;
+}
 
-        .orders {
-            background: #111;
-            border: 1px solid #252525;
-            border-radius: 18px;
-            padding: 20px;
-        }
+.orders{
+background:#111;
+border:1px solid #252525;
+border-radius:18px;
+padding:20px;
+}
 
-        .orders-title {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
+.orders-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
 
-        .refresh {
-            background: #00e5ff;
-            color: #000;
-            border: 0;
-            padding: 9px 14px;
-            border-radius: 9px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+.refresh{
+background:#00e5ff;
+color:#000;
+border:0;
+padding:10px 15px;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+}
 
-        .empty {
-            text-align: center;
-            color: #aaa;
-            padding: 40px 10px;
-        }
+.order{
+background:#181818;
+border:1px solid #292929;
+border-radius:15px;
+padding:18px;
+margin-bottom:15px;
+}
 
-        .order {
-            background: #181818;
-            border: 1px solid #292929;
-            border-radius: 15px;
-            padding: 18px;
-            margin-bottom: 15px;
-        }
+.order:last-child{
+margin-bottom:0;
+}
 
-        .order:last-child {
-            margin-bottom: 0;
-        }
+.order-top{
+display:flex;
+justify-content:space-between;
+margin-bottom:15px;
+gap:10px;
+}
 
-        .order-header {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
+.order-id{
+color:#00e5ff;
+font-weight:bold;
+}
 
-        .order-id {
-            color: #00e5ff;
-            font-weight: bold;
-        }
+.customer{
+line-height:2;
+color:#ddd;
+margin-bottom:15px;
+}
 
-        .customer {
-            color: #ddd;
-            line-height: 1.9;
-            margin-bottom: 15px;
-        }
+.products{
+border-top:1px solid #292929;
+border-bottom:1px solid #292929;
+padding:12px 0;
+margin-bottom:15px;
+}
 
-        .products {
-            border-top: 1px solid #292929;
-            border-bottom: 1px solid #292929;
-            padding: 12px 0;
-            margin-bottom: 15px;
-        }
+.product{
+display:flex;
+justify-content:space-between;
+padding:6px 0;
+}
 
-        .product {
-            display: flex;
-            justify-content: space-between;
-            padding: 7px 0;
-            color: #ddd;
-        }
+.total{
+font-size:20px;
+font-weight:bold;
+margin-bottom:15px;
+}
 
-        .total {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
+.delete{
+background:#e53935;
+color:white;
+border:0;
+padding:9px 14px;
+border-radius:9px;
+cursor:pointer;
+}
 
-        .delete {
-            background: #e53935;
-            color: white;
-            border: 0;
-            padding: 9px 14px;
-            border-radius: 9px;
-            cursor: pointer;
-        }
+.empty{
+text-align:center;
+padding:40px 10px;
+color:#aaa;
+}
 
-        @media (max-width: 600px) {
+.loading{
+text-align:center;
+padding:30px;
+color:#aaa;
+}
 
-            .stats {
-                grid-template-columns: 1fr;
-            }
+.error{
+background:#3a1111;
+border:1px solid #7a2222;
+color:#ffb3b3;
+padding:15px;
+border-radius:12px;
+line-height:1.7;
+}
 
-            .orders-title {
-                align-items: flex-start;
-                gap: 10px;
-                flex-direction: column;
-            }
+@media(max-width:600px){
 
-            .order-header {
-                flex-direction: column;
-            }
+.stats{
+grid-template-columns:1fr;
+}
 
-            .product {
-                font-size: 14px;
-            }
+.order-top{
+flex-direction:column;
+}
 
-        }
+.orders-header{
+gap:10px;
+align-items:flex-start;
+flex-direction:column;
+}
 
-    </style>
+}
+
+</style>
 
 </head>
 
-
 <body>
 
+<div class="container">
 
 <header>
 
-    <div class="logo">
-        SANDOQ<span>AK</span> 👑
-    </div>
+<div class="logo">
+SANDOQ<span>AK</span> 👑
+</div>
 
-    <a href="index.html" class="home">
-        الرئيسية
-    </a>
+<a href="index.html" class="back">
+الرئيسية
+</a>
 
 </header>
 
 
-<div class="container">
+<div class="title">
 
+<h1>
+📦 لوحة الطلبات
+</h1>
 
-    <div class="title">
-
-        <h1>
-            👑 لوحة التحكم
-        </h1>
-
-        <p>
-            متابعة وإدارة طلبات العملاء
-        </p>
-
-    </div>
-
-
-    <div class="stats">
-
-
-        <div class="stat">
-
-            <div class="stat-title">
-                📦 عدد الطلبات
-            </div>
-
-            <div
-                class="stat-number"
-                id="ordersCount">
-
-                0
-
-            </div>
-
-        </div>
-
-
-        <div class="stat">
-
-            <div class="stat-title">
-                💰 إجمالي المبيعات
-            </div>
-
-            <div
-                class="stat-number"
-                id="salesTotal">
-
-                0 جنيه
-
-            </div>
-
-        </div>
-
-
-        <div class="stat">
-
-            <div class="stat-title">
-                🛒 عدد المنتجات
-            </div>
-
-            <div
-                class="stat-number"
-                id="productsCount">
-
-                0
-
-            </div>
-
-        </div>
-
-
-    </div>
-
-
-    <div class="orders">
-
-
-        <div class="orders-title">
-
-            <h2>
-                📋 الطلبات
-            </h2>
-
-            <button
-                class="refresh"
-                onclick="loadOrders()">
-
-                🔄 تحديث
-
-            </button>
-
-        </div>
-
-
-        <div id="ordersList"></div>
-
-
-    </div>
-
+<p>
+طلبات العملاء من Firebase
+</p>
 
 </div>
 
 
-<script>
+<div class="stats">
+
+<div class="stat">
+
+<small>
+📦 عدد الطلبات
+</small>
+
+<h2 id="ordersCount">
+0
+</h2>
+
+</div>
 
 
-function loadOrders() {
+<div class="stat">
 
-    const orders =
-        JSON.parse(
-            localStorage.getItem("orders")
-        ) || [];
+<small>
+💰 إجمالي المبيعات
+</small>
 
+<h2 id="salesTotal">
+0 جنيه
+</h2>
 
-    const ordersList =
-        document.getElementById("ordersList");
+</div>
 
-
-    const ordersCount =
-        document.getElementById("ordersCount");
-
-
-    const salesTotal =
-        document.getElementById("salesTotal");
+</div>
 
 
-    const productsCount =
-        document.getElementById("productsCount");
+<div class="orders">
+
+<div class="orders-header">
+
+<h2>
+📋 الطلبات
+</h2>
+
+<button
+class="refresh"
+onclick="loadOrders()">
+
+🔄 تحديث
+
+</button>
+
+</div>
 
 
-    ordersCount.innerText =
-        orders.length;
+<div id="ordersList">
+
+<div class="loading">
+جاري تحميل الطلبات... ⏳
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 
-    let sales = 0;
+<script type="module">
 
-    let products = 0;
+import { db } from "./firebase.js";
+
+import {
+collection,
+getDocs,
+deleteDoc,
+doc
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
-    orders.forEach(function(order) {
+const ordersList =
+document.getElementById("ordersList");
 
-        sales +=
-            Number(order.total) || 0;
+const ordersCount =
+document.getElementById("ordersCount");
+
+const salesTotal =
+document.getElementById("salesTotal");
 
 
-        if (
+async function loadOrders(){
+
+try{
+
+ordersList.innerHTML = `
+<div class="loading">
+جاري تحميل الطلبات... ⏳
+</div>
+`;
+
+
+const snapshot =
+await getDocs(
+collection(db,"orders")
+);
+
+
+ordersCount.innerText =
+snapshot.size;
+
+
+let totalSales = 0;
+
+
+if(snapshot.empty){
+
+ordersList.innerHTML = `
+
+<div class="empty">
+
+لا توجد طلبات حتى الآن 📦
+
+</div>
+
+`;
+
+salesTotal.innerText =
+"0 جنيه";
+
+return;
+
+}
+
+
+ordersList.innerHTML = "";
+
+
+snapshot.forEach(function(orderDoc){
+
+const order =
+orderDoc.data();
+
+
+totalSales +=
+Number(order.total) || 0;
+
+
+let productsHTML = "";
+
+
+if(Array.isArray(order.products)){
+
+order.products.forEach(function(product){
+
+productsHTML += `
+
+<div class="product">
+
+<span>
+${product.name}
+</span>
+
+<strong>
+${product.price} جنيه
+</strong>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+let date = "";
+
+if(order.createdAt){
+
+try{
+
+date =
+order.createdAt
+.toDate()
+.toLocaleString("ar-EG");
+
+}catch(e){
+
+date = "";
+
+}
+
+}
+
+
+const orderElement =
+document.createElement("div");
+
+orderElement.className =
+"order";
+
+
+orderElement.innerHTML = `
+
+<div class="order-top">
+
+<div class="order-id">
+
+طلب #${orderDoc.id}
+
+</div>
+
+<div>
+
+${date}
+
+</div>
+
+</div>
+
+
+<div class="customer">
+
+👤 الاسم:
+${order.name || "غير موجود"}
+
+<br>
+
+📱 الهاتف:
+${order.phone || "غير موجود"}
+
+<br>
+
+📍 العنوان:
+${order.address || "غير موجود"}
+
+</div>
+
+
+<div class="products">
+
+${productsHTML}
+
+</div>
+
+
+<div class="total">
+
+💰 الإجمالي:
+${order.total || 0}
+جنيه
+
+</div>
+
+
+<button
+class="delete"
+data-id="${orderDoc.id}">
+
+🗑️ حذف الطلب
+
+</button>
+
+`;
+
+
+const deleteButton =
+orderElement.querySelector(".delete");
+
+
+deleteButton.addEventListener(
+"click",
+function(){
+
+deleteOrder(orderDoc.id);
+
+});
+
+
+ordersList.appendChild(
+orderElement
+);
+
+});
+
+
+salesTotal.innerText =
+totalSales + " جنيه";
+
+
+}catch(error){
+
+console.error(error);
+
+
+ordersList.innerHTML = `
+
+<div class="error">
+
+❌ حصل خطأ في تحميل الطلبات.
+
+<br><br>
+
+${error.message}
+
+</div>
+
+`;
+
+}
+
+}
+
+
+async function deleteOrder(id){
+
+const confirmed =
+confirm(
+"هل أنت متأكد من حذف الطلب؟"
+);
+
+
+if(!confirmed){
+
+return;
+
+}
+
+
+try{
+
+await deleteDoc(
+doc(db,"orders",id)
+);
+
+
+await loadOrders();
+
+
+}catch(error){
+
+alert(
+"حصل خطأ أثناء حذف الطلب:\n" +
+error.message
+);
+
+}
+
+}
+
+
+window.loadOrders =
+loadOrders;
+
+
+loadOrders();
+
+</script>
+
+</body>
+
+</html>
