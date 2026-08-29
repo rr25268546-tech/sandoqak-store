@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SANDOQAK | تسجيل الدخول</title>
+<title>SANDOQAK | الحساب</title>
 
 <style>
 
@@ -82,7 +82,7 @@ button:disabled{
     cursor:not-allowed;
 }
 
-.phone-btn{
+.main-btn{
     width:100%;
     height:48px;
     border-radius:10px;
@@ -90,24 +90,24 @@ button:disabled{
     color:#000;
 }
 
-.verify-btn{
+.register-btn{
     width:100%;
     height:48px;
     border-radius:10px;
     background:#22c55e;
     color:#fff;
-    margin-top:8px;
 }
 
-#codeBox,
-#emailBox{
+.switch-btn{
+    width:100%;
+    background:transparent;
+    color:#00e5ff;
+    margin-top:15px;
+    padding:8px;
+}
+
+#registerBox{
     display:none;
-}
-
-#recaptcha-container{
-    margin:15px 0;
-    display:flex;
-    justify-content:center;
 }
 
 .other-title{
@@ -122,7 +122,6 @@ button:disabled{
     display:flex;
     justify-content:center;
     align-items:center;
-    gap:16px;
 }
 
 .social-btn{
@@ -142,25 +141,20 @@ button:disabled{
     border-color:#777;
 }
 
-.email-circle{
-    background:#222;
-    color:#fff;
-}
-
 .google-circle{
     background:#fff;
     color:#4285F4;
 }
 
-.facebook-circle{
-    background:#1877F2;
-    color:#fff;
-}
-
-#emailBox{
-    margin-top:18px;
-    padding-top:18px;
-    border-top:1px solid #292929;
+#recaptcha-box{
+    margin:12px 0;
+    padding:10px;
+    border:1px solid #292929;
+    border-radius:10px;
+    background:#0d0d0d;
+    color:#777;
+    font-size:12px;
+    text-align:center;
 }
 
 #message{
@@ -191,13 +185,6 @@ button:disabled{
     line-height:1.6;
 }
 
-.firebase-error{
-    margin-top:8px;
-    font-size:11px;
-    color:#ff9999;
-    direction:ltr;
-}
-
 </style>
 </head>
 
@@ -213,69 +200,156 @@ button:disabled{
 
 
     <!-- =========================
-         PHONE
+         LOGIN
     ========================== -->
 
-    <label for="phone">
-        رقم الهاتف المصري
-    </label>
+    <div id="loginBox">
 
-    <input
-        id="phone"
-        type="tel"
-        placeholder="01012345678"
-        autocomplete="tel"
-        inputmode="tel"
-    >
-
-
-    <div id="recaptcha-container"></div>
-
-
-    <button
-        id="sendBtn"
-        class="phone-btn"
-        type="button"
-    >
-        إرسال كود للهاتف 📱
-    </button>
-
-
-    <!-- =========================
-         CODE
-    ========================== -->
-
-    <div id="codeBox">
-
-        <label
-            for="code"
-            style="margin-top:20px;"
-        >
-            كود التحقق
+        <label for="loginPhone">
+            رقم الهاتف المصري
         </label>
 
         <input
-            id="code"
-            type="text"
+            id="loginPhone"
+            type="tel"
+            placeholder="01012345678"
+            autocomplete="tel"
             inputmode="numeric"
-            maxlength="6"
-            placeholder="أدخل الكود المكون من 6 أرقام"
-            autocomplete="one-time-code"
         >
 
+
+        <label for="loginPassword">
+            كلمة المرور
+        </label>
+
+        <input
+            id="loginPassword"
+            type="password"
+            placeholder="كلمة المرور"
+            autocomplete="current-password"
+        >
+
+
+        <!-- reCAPTCHA للحماية فقط -->
+        <div id="recaptcha-box">
+            🛡️ سيتم استخدام الحماية ضد الطلبات الآلية فقط
+        </div>
+
+
         <button
-            id="verifyBtn"
-            class="verify-btn"
+            id="loginBtn"
+            class="main-btn"
             type="button"
         >
-            تأكيد الكود ✅
+            تسجيل الدخول 🔐
+        </button>
+
+
+        <button
+            id="showRegisterBtn"
+            class="switch-btn"
+            type="button"
+        >
+            ليس لديك حساب؟ إنشاء حساب جديد
         </button>
 
     </div>
 
 
     <!-- =========================
-         OTHER OPTIONS
+         REGISTER
+    ========================== -->
+
+    <div id="registerBox">
+
+        <label for="registerName">
+            الاسم
+        </label>
+
+        <input
+            id="registerName"
+            type="text"
+            placeholder="اكتب اسمك"
+            autocomplete="name"
+        >
+
+
+        <label for="registerPhone">
+            رقم الهاتف المصري
+        </label>
+
+        <input
+            id="registerPhone"
+            type="tel"
+            placeholder="01012345678"
+            autocomplete="tel"
+            inputmode="numeric"
+        >
+
+
+        <label for="registerEmail">
+            البريد الإلكتروني
+        </label>
+
+        <input
+            id="registerEmail"
+            type="email"
+            placeholder="example@email.com"
+            autocomplete="email"
+        >
+
+
+        <label for="registerPassword">
+            كلمة المرور
+        </label>
+
+        <input
+            id="registerPassword"
+            type="password"
+            placeholder="6 أحرف أو أكثر"
+            autocomplete="new-password"
+        >
+
+
+        <label for="registerPassword2">
+            تأكيد كلمة المرور
+        </label>
+
+        <input
+            id="registerPassword2"
+            type="password"
+            placeholder="أعد كتابة كلمة المرور"
+            autocomplete="new-password"
+        >
+
+
+        <div id="recaptcha-register-box">
+            🛡️ حماية التسجيل من الاستخدام الآلي
+        </div>
+
+
+        <button
+            id="registerBtn"
+            class="register-btn"
+            type="button"
+        >
+            إنشاء الحساب 🎁
+        </button>
+
+
+        <button
+            id="showLoginBtn"
+            class="switch-btn"
+            type="button"
+        >
+            لديك حساب بالفعل؟ تسجيل الدخول
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         GOOGLE
     ========================== -->
 
     <div class="other-title">
@@ -286,16 +360,6 @@ button:disabled{
     <div class="social-options">
 
         <button
-            id="emailToggle"
-            class="social-btn email-circle"
-            type="button"
-            title="البريد الإلكتروني"
-        >
-            ✉️
-        </button>
-
-
-        <button
             id="googleBtn"
             class="social-btn google-circle"
             type="button"
@@ -304,67 +368,20 @@ button:disabled{
             G
         </button>
 
-
-        <button
-            id="facebookBtn"
-            class="social-btn facebook-circle"
-            type="button"
-            title="Facebook"
-        >
-            f
-        </button>
-
-    </div>
-
-
-    <!-- =========================
-         EMAIL
-    ========================== -->
-
-    <div id="emailBox">
-
-        <label for="email">
-            البريد الإلكتروني
-        </label>
-
-        <input
-            id="email"
-            type="email"
-            placeholder="example@email.com"
-            autocomplete="email"
-        >
-
-
-        <label for="password">
-            كلمة المرور
-        </label>
-
-        <input
-            id="password"
-            type="password"
-            placeholder="كلمة المرور"
-            autocomplete="current-password"
-        >
-
-
-        <button
-            id="emailLoginBtn"
-            class="verify-btn"
-            type="button"
-        >
-            تسجيل الدخول 📧
-        </button>
-
     </div>
 
 
     <p class="small">
 
-        📱 رقم الهاتف هو الحساب الأساسي للنقاط والمشتريات.
+        📱 رقم الهاتف بيانات أساسية للعميل.
 
         <br>
 
-        🎁 النقاط لا يتم تصفيرها عند تسجيل الدخول مرة أخرى.
+        📧 البريد الإلكتروني يستخدم للمصادقة.
+
+        <br>
+
+        🎁 النقاط والمشتريات محفوظة ولن يتم تصفيرها.
 
     </p>
 
@@ -376,9 +393,10 @@ button:disabled{
 
 <script type="module">
 
-/* =========================
+
+/* =========================================
    FIREBASE APP
-========================= */
+========================================= */
 
 import {
     initializeApp
@@ -387,14 +405,13 @@ from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 
-/* =========================
+/* =========================================
    FIREBASE AUTH
-========================= */
+========================================= */
 
 import {
     getAuth,
-    RecaptchaVerifier,
-    signInWithPhoneNumber,
+    createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     GoogleAuthProvider,
     signInWithPopup
@@ -403,9 +420,9 @@ from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 
-/* =========================
+/* =========================================
    FIRESTORE
-========================= */
+========================================= */
 
 import {
     getFirestore,
@@ -418,9 +435,9 @@ from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
-/* =========================
+/* =========================================
    FIREBASE CONFIG
-========================= */
+========================================= */
 
 const firebaseConfig = {
 
@@ -445,242 +462,104 @@ const firebaseConfig = {
 };
 
 
-/* =========================
+/* =========================================
    INITIALIZE FIREBASE
-========================= */
+========================================= */
 
 const app =
-    initializeApp(
-        firebaseConfig
-    );
-
+    initializeApp(firebaseConfig);
 
 const auth =
     getAuth(app);
-
 
 const db =
     getFirestore(app);
 
 
-/* =========================
+/* =========================================
    ELEMENTS
-========================= */
+========================================= */
 
-const phoneInput =
-    document.getElementById("phone");
+const loginBox =
+    document.getElementById("loginBox");
 
-const codeInput =
-    document.getElementById("code");
+const registerBox =
+    document.getElementById("registerBox");
 
-const sendBtn =
-    document.getElementById("sendBtn");
+const loginPhone =
+    document.getElementById("loginPhone");
 
-const verifyBtn =
-    document.getElementById("verifyBtn");
+const loginPassword =
+    document.getElementById("loginPassword");
 
-const codeBox =
-    document.getElementById("codeBox");
+const registerName =
+    document.getElementById("registerName");
 
-const emailToggle =
-    document.getElementById("emailToggle");
+const registerPhone =
+    document.getElementById("registerPhone");
 
-const emailBox =
-    document.getElementById("emailBox");
+const registerEmail =
+    document.getElementById("registerEmail");
 
-const emailInput =
-    document.getElementById("email");
+const registerPassword =
+    document.getElementById("registerPassword");
 
-const passwordInput =
-    document.getElementById("password");
+const registerPassword2 =
+    document.getElementById("registerPassword2");
 
-const emailLoginBtn =
-    document.getElementById("emailLoginBtn");
+const loginBtn =
+    document.getElementById("loginBtn");
+
+const registerBtn =
+    document.getElementById("registerBtn");
 
 const googleBtn =
     document.getElementById("googleBtn");
 
-const facebookBtn =
-    document.getElementById("facebookBtn");
+const showRegisterBtn =
+    document.getElementById("showRegisterBtn");
+
+const showLoginBtn =
+    document.getElementById("showLoginBtn");
 
 const message =
     document.getElementById("message");
 
 
-let confirmationResult =
-    null;
-
-let recaptchaVerifier =
-    null;
-
-
-/* =========================
+/* =========================================
    MESSAGE
-========================= */
+========================================= */
 
-function showMessage(
-    text,
-    type
-){
+function showMessage(text,type){
+
+    message.textContent =
+        text;
 
     message.className =
         type || "";
 
-    message.innerText =
-        text;
-
 }
 
 
-/* =========================
-   FIREBASE ERROR
-========================= */
+/* =========================================
+   PHONE FORMAT
+========================================= */
 
-function showFirebaseError(
-    error
-){
-
-    console.error(
-        "Firebase Error:",
-        error
-    );
-
-
-    let text =
-        "❌ حدث خطأ أثناء إرسال الكود.";
-
-
-    switch(error.code){
-
-        case "auth/invalid-phone-number":
-
-            text =
-                "❌ رقم الهاتف غير صحيح.";
-
-            break;
-
-
-        case "auth/too-many-requests":
-
-            text =
-                "❌ تم تجاوز عدد المحاولات. انتظر قليلًا ثم حاول مرة أخرى.";
-
-            break;
-
-
-        case "auth/quota-exceeded":
-
-            text =
-                "❌ تم تجاوز حد إرسال الرسائل المتاح.";
-
-            break;
-
-
-        case "auth/captcha-check-failed":
-
-            text =
-                "❌ فشل التحقق من reCAPTCHA.";
-
-            break;
-
-
-        case "auth/operation-not-allowed":
-
-            text =
-                "❌ تسجيل الدخول بالهاتف غير مفعّل في Firebase.";
-
-            break;
-
-
-        case "auth/app-not-authorized":
-
-            text =
-                "❌ هذا الموقع غير مصرح له باستخدام Firebase Authentication.";
-
-            break;
-
-
-        case "auth/billing-not-enabled":
-
-            text =
-                "❌ Firebase يطلب إعدادات الفوترة لهذه العملية.";
-
-            break;
-
-
-        case "auth/network-request-failed":
-
-            text =
-                "❌ مشكلة في الإنترنت. حاول مرة أخرى.";
-
-            break;
-
-
-        case "auth/internal-error":
-
-            text =
-                "❌ حدث خطأ داخلي في Firebase.";
-
-            break;
-
-
-        default:
-
-            text =
-                "❌ لم يتم إرسال الكود.";
-
-    }
-
-
-    showMessage(
-        text,
-        "error"
-    );
-
-
-    const errorCode =
-        document.createElement("div");
-
-
-    errorCode.className =
-        "firebase-error";
-
-
-    errorCode.innerText =
-        error.code ||
-        "unknown-error";
-
-
-    message.appendChild(
-        errorCode
-    );
-
-}
-
-
-
-/* =========================
-   EGYPT PHONE
-========================= */
-
-function formatEgyptPhone(
-    phone
-){
+function formatEgyptPhone(phone){
 
     phone =
         phone
+        .trim()
         .replace(/\s+/g,"")
         .replace(/-/g,"");
 
 
     /*
        01012345678
-       ↓
-       +201012345678
     */
 
     if(
-        /^01\d{9}$/.test(phone)
+        /^01[0125]\d{8}$/.test(phone)
     ){
 
         return "+20" +
@@ -690,11 +569,24 @@ function formatEgyptPhone(
 
 
     /*
+       +201012345678
+    */
+
+    if(
+        /^\+201[0125]\d{8}$/.test(phone)
+    ){
+
+        return phone;
+
+    }
+
+
+    /*
        201012345678
     */
 
     if(
-        /^20\d{10}$/.test(phone)
+        /^201[0125]\d{8}$/.test(phone)
     ){
 
         return "+" +
@@ -708,24 +600,11 @@ function formatEgyptPhone(
     */
 
     if(
-        /^0020\d{10}$/.test(phone)
+        /^00201[0125]\d{8}$/.test(phone)
     ){
 
         return "+" +
             phone.substring(2);
-
-    }
-
-
-    /*
-       +201012345678
-    */
-
-    if(
-        /^\+20\d{10}$/.test(phone)
-    ){
-
-        return phone;
 
     }
 
@@ -735,79 +614,48 @@ function formatEgyptPhone(
 }
 
 
+/* =========================================
+   PHONE INTERNAL ID
+========================================= */
 
-/* =========================
-   RECAPTCHA
-========================= */
+function phoneToEmail(phone){
 
-function createRecaptcha(){
-
-    try{
-
-        if(
-            recaptchaVerifier
-        ){
-
-            recaptchaVerifier.clear();
-
-        }
-
-    }catch(e){}
-
-
-    recaptchaVerifier =
-
-        new RecaptchaVerifier(
-
-            auth,
-
-            "recaptcha-container",
-
-            {
-
-                size:"normal"
-
-            }
-
-        );
+    return (
+        phone
+        .replace("+","")
+        .replace(/\D/g,"")
+        +
+        "@sandoqak.local"
+    );
 
 }
 
 
-createRecaptcha();
-
-
-
-/* =========================
+/* =========================================
    CUSTOMER
-========================= */
+========================================= */
 
-async function createCustomerIfNeeded(
-    user
+async function saveCustomer(
+    user,
+    data
 ){
 
     const customerRef =
-
         doc(
-
             db,
-
             "customers",
-
             user.uid
-
         );
 
 
     const customerSnap =
-
         await getDoc(
             customerRef
         );
 
 
     /*
-       إنشاء العميل أول مرة فقط
+       العميل جديد
     */
 
     if(
@@ -823,14 +671,19 @@ async function createCustomerIfNeeded(
                 uid:
                     user.uid,
 
+                name:
+                    data.name ||
+                    user.displayName ||
+                    "",
+
                 phone:
-                    user.phoneNumber || "",
+                    data.phone ||
+                    "",
 
                 email:
-                    user.email || "",
-
-                name:
-                    user.displayName || "",
+                    user.email ||
+                    data.email ||
+                    "",
 
                 points:
                     0,
@@ -845,39 +698,132 @@ async function createCustomerIfNeeded(
 
         );
 
+        return;
+
+    }
+
+
+    /*
+       العميل موجود:
+       لا نلمس النقاط والمشتريات.
+       نحدّث فقط البيانات الأساسية
+       إذا كانت متاحة.
+    */
+
+    const oldData =
+        customerSnap.data();
+
+
+    const updateData = {};
+
+
+    if(
+        data.name &&
+        data.name !== oldData.name
+    ){
+
+        updateData.name =
+            data.name;
+
+    }
+
+
+    if(
+        data.phone &&
+        data.phone !== oldData.phone
+    ){
+
+        updateData.phone =
+            data.phone;
+
+    }
+
+
+    if(
+        user.email &&
+        user.email !== oldData.email
+    ){
+
+        updateData.email =
+            user.email;
+
+    }
+
+
+    if(
+        Object.keys(updateData).length > 0
+    ){
+
+        await setDoc(
+
+            customerRef,
+
+            updateData,
+
+            {
+                merge:true
+            }
+
+        );
+
     }
 
 }
 
 
+/* =========================================
+   REGISTER
+========================================= */
 
-/* =========================
-   SEND SMS
-========================= */
-
-sendBtn.addEventListener(
-
+registerBtn.addEventListener(
     "click",
-
     async function(){
 
+        const name =
+            registerName.value.trim();
+
         const phone =
-
             formatEgyptPhone(
-
-                phoneInput.value.trim()
-
+                registerPhone.value
             );
 
+        const email =
+            registerEmail.value.trim();
+
+        const password =
+            registerPassword.value;
+
+        const password2 =
+            registerPassword2.value;
+
+
+        /* =========================
+           NAME
+        ========================== */
+
+        if(
+            name.length < 2
+        ){
+
+            showMessage(
+                "❌ اكتب الاسم بشكل صحيح.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        /* =========================
+           PHONE
+        ========================== */
 
         if(!phone){
 
             showMessage(
-
-                "❌ اكتب رقم مصري صحيح مثل 01012345678.",
-
+                "❌ رقم الهاتف المصري غير صحيح.",
                 "error"
-
             );
 
             return;
@@ -885,280 +831,18 @@ sendBtn.addEventListener(
         }
 
 
-        showMessage(
-            "",
-            ""
-        );
-
-
-        sendBtn.disabled =
-            true;
-
-
-        sendBtn.innerText =
-            "جاري إرسال الكود...";
-
-
-        try{
-
-
-            if(
-                !recaptchaVerifier
-            ){
-
-                createRecaptcha();
-
-            }
-
-
-            confirmationResult =
-
-                await signInWithPhoneNumber(
-
-                    auth,
-
-                    phone,
-
-                    recaptchaVerifier
-
-                );
-
-
-            codeBox.style.display =
-                "block";
-
-
-            showMessage(
-
-                "✅ تم إرسال كود التحقق إلى " +
-                phone,
-
-                "success"
-
-            );
-
-
-            sendBtn.innerText =
-                "تم إرسال الكود";
-
-
-        }
-
-        catch(error){
-
-            showFirebaseError(
-                error
-            );
-
-
-            sendBtn.disabled =
-                false;
-
-
-            sendBtn.innerText =
-                "إرسال كود للهاتف 📱";
-
-
-            createRecaptcha();
-
-        }
-
-    }
-
-);
-
-
-
-/* =========================
-   VERIFY SMS
-========================= */
-
-verifyBtn.addEventListener(
-
-    "click",
-
-    async function(){
-
-        if(
-            !confirmationResult
-        ){
-
-            showMessage(
-
-                "❌ اطلب الكود أولًا.",
-
-                "error"
-
-            );
-
-            return;
-
-        }
-
-
-        const code =
-            codeInput.value.trim();
-
-
-        if(
-            !/^\d{6}$/.test(code)
-        ){
-
-            showMessage(
-
-                "❌ أدخل الكود المكون من 6 أرقام.",
-
-                "error"
-
-            );
-
-            return;
-
-        }
-
-
-        verifyBtn.disabled =
-            true;
-
-
-        verifyBtn.innerText =
-            "جاري التحقق...";
-
-
-        try{
-
-
-            const result =
-
-                await confirmationResult.confirm(
-                    code
-                );
-
-
-            await createCustomerIfNeeded(
-                result.user
-            );
-
-
-            showMessage(
-
-                "🎉 تم تسجيل الحساب بنجاح!",
-
-                "success"
-
-            );
-
-
-            setTimeout(
-
-                function(){
-
-                    window.location.href =
-                        "index.html";
-
-                },
-
-                1000
-
-            );
-
-        }
-
-        catch(error){
-
-            console.error(
-                error
-            );
-
-
-            showMessage(
-
-                "❌ كود التحقق غير صحيح أو انتهت صلاحيته.",
-
-                "error"
-
-            );
-
-
-            verifyBtn.disabled =
-                false;
-
-
-            verifyBtn.innerText =
-                "تأكيد الكود ✅";
-
-        }
-
-    }
-
-);
-
-
-
-/* =========================
-   EMAIL OPEN
-========================= */
-
-emailToggle.addEventListener(
-
-    "click",
-
-    function(){
-
-        if(
-            emailBox.style.display ===
-            "block"
-        ){
-
-            emailBox.style.display =
-                "none";
-
-        }
-
-        else{
-
-            emailBox.style.display =
-                "block";
-
-            emailInput.focus();
-
-        }
-
-    }
-
-);
-
-
-
-/* =========================
-   EMAIL LOGIN
-========================= */
-
-emailLoginBtn.addEventListener(
-
-    "click",
-
-    async function(){
-
-        const email =
-            emailInput.value.trim();
-
-
-        const password =
-            passwordInput.value;
-
+        /* =========================
+           EMAIL
+        ========================== */
 
         if(
             !email ||
-            !password
+            !email.includes("@")
         ){
 
             showMessage(
-
-                "❌ اكتب البريد الإلكتروني وكلمة المرور.",
-
+                "❌ اكتب بريدًا إلكترونيًا صحيحًا.",
                 "error"
-
             );
 
             return;
@@ -1166,20 +850,54 @@ emailLoginBtn.addEventListener(
         }
 
 
-        emailLoginBtn.disabled =
+        /* =========================
+           PASSWORD
+        ========================== */
+
+        if(
+            password.length < 6
+        ){
+
+            showMessage(
+                "❌ كلمة المرور يجب أن تكون 6 أحرف أو أكثر.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if(
+            password !== password2
+        ){
+
+            showMessage(
+                "❌ كلمتا المرور غير متطابقتين.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        registerBtn.disabled =
             true;
 
-
-        emailLoginBtn.innerText =
-            "جاري تسجيل الدخول...";
+        registerBtn.textContent =
+            "جاري إنشاء الحساب...";
 
 
         try{
 
+            /*
+               Firebase Auth يستخدم البريد
+               للمصادقة.
+            */
 
             const result =
-
-                await signInWithEmailAndPassword(
+                await createUserWithEmailAndPassword(
 
                     auth,
 
@@ -1190,93 +908,287 @@ emailLoginBtn.addEventListener(
                 );
 
 
-            await createCustomerIfNeeded(
-                result.user
+            /*
+               حفظ بيانات العميل.
+            */
+
+            await saveCustomer(
+
+                result.user,
+
+                {
+
+                    name:
+                        name,
+
+                    phone:
+                        phone,
+
+                    email:
+                        email
+
+                }
+
             );
 
 
             showMessage(
-
-                "✅ تم تسجيل الدخول بنجاح.",
-
+                "🎉 تم إنشاء الحساب بنجاح!",
                 "success"
-
             );
 
 
             setTimeout(
-
                 function(){
 
                     window.location.href =
                         "index.html";
 
                 },
-
-                800
-
+                900
             );
+
 
         }
 
         catch(error){
 
             console.error(
+                "Register Error:",
+                error
+            );
+
+
+            let text =
+                "❌ حدث خطأ أثناء إنشاء الحساب.";
+
+
+            if(
+                error.code ===
+                "auth/email-already-in-use"
+            ){
+
+                text =
+                    "❌ البريد الإلكتروني مستخدم بالفعل.";
+
+            }
+
+            else if(
+                error.code ===
+                "auth/invalid-email"
+            ){
+
+                text =
+                    "❌ البريد الإلكتروني غير صحيح.";
+
+            }
+
+            else if(
+                error.code ===
+                "auth/weak-password"
+            ){
+
+                text =
+                    "❌ كلمة المرور ضعيفة.";
+
+            }
+
+            else if(
+                error.code ===
+                "auth/operation-not-allowed"
+            ){
+
+                text =
+                    "❌ فعّل Email/Password في Firebase Authentication.";
+
+            }
+
+            else if(
+                error.code ===
+                "auth/network-request-failed"
+            ){
+
+                text =
+                    "❌ مشكلة في الإنترنت.";
+
+            }
+
+
+            showMessage(
+                text,
+                "error"
+            );
+
+
+            registerBtn.disabled =
+                false;
+
+            registerBtn.textContent =
+                "إنشاء الحساب 🎁";
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   LOGIN BY PHONE + PASSWORD
+========================================= */
+
+loginBtn.addEventListener(
+    "click",
+    async function(){
+
+        const phone =
+            formatEgyptPhone(
+                loginPhone.value
+            );
+
+        const password =
+            loginPassword.value;
+
+
+        if(!phone){
+
+            showMessage(
+                "❌ اكتب رقم هاتف مصري صحيح.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if(!password){
+
+            showMessage(
+                "❌ اكتب كلمة المرور.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        loginBtn.disabled =
+            true;
+
+        loginBtn.textContent =
+            "جاري تسجيل الدخول...";
+
+
+        try{
+
+            /*
+               الرقم يتحول إلى معرف داخلي.
+
+               ملاحظة:
+               الحسابات التي أنشئت من هذه النسخة
+               باستخدام البريد لن يكون الدخول إليها
+               بالرقم ممكنًا إلا إذا كان الحساب
+               قد أنشئ بالنظام الداخلي للرقم.
+            */
+
+            const internalEmail =
+                phoneToEmail(phone);
+
+
+            const result =
+                await signInWithEmailAndPassword(
+
+                    auth,
+
+                    internalEmail,
+
+                    password
+
+                );
+
+
+            await saveCustomer(
+
+                result.user,
+
+                {
+
+                    phone:
+                        phone
+
+                }
+
+            );
+
+
+            showMessage(
+                "✅ تم تسجيل الدخول بنجاح.",
+                "success"
+            );
+
+
+            setTimeout(
+                function(){
+
+                    window.location.href =
+                        "index.html";
+
+                },
+                700
+            );
+
+
+        }
+
+        catch(error){
+
+            console.error(
+                "Phone Login Error:",
                 error
             );
 
 
             showMessage(
-
-                "❌ البريد الإلكتروني أو كلمة المرور غير صحيحة.",
-
+                "❌ رقم الهاتف أو كلمة المرور غير صحيحة.",
                 "error"
-
             );
 
 
-            emailLoginBtn.disabled =
+            loginBtn.disabled =
                 false;
 
-
-            emailLoginBtn.innerText =
-                "تسجيل الدخول 📧";
+            loginBtn.textContent =
+                "تسجيل الدخول 🔐";
 
         }
 
     }
-
 );
 
 
-
-/* =========================
+/* =========================================
    GOOGLE
-========================= */
+========================================= */
 
 googleBtn.addEventListener(
-
     "click",
-
     async function(){
 
         googleBtn.disabled =
             true;
 
-
-        googleBtn.innerText =
+        googleBtn.textContent =
             "...";
 
 
         try{
-
 
             const provider =
                 new GoogleAuthProvider();
 
 
             const result =
-
                 await signInWithPopup(
 
                     auth,
@@ -1286,31 +1198,104 @@ googleBtn.addEventListener(
                 );
 
 
-            await createCustomerIfNeeded(
-                result.user
-            );
+            /*
+               Google لا يضمن رقم الهاتف.
+               لذلك نتحقق هل العميل موجود
+               ولديه رقم هاتف بالفعل.
+            */
+
+            const customerRef =
+                doc(
+                    db,
+                    "customers",
+                    result.user.uid
+                );
+
+
+            const customerSnap =
+                await getDoc(
+                    customerRef
+                );
+
+
+            if(
+                !customerSnap.exists()
+            ){
+
+                /*
+                   إنشاء العميل بدون رقم
+                   غير مسموح لأن الرقم أساسي.
+                */
+
+                showMessage(
+                    "⚠️ تم تسجيل Google. أضف رقم الهاتف لاستكمال ملف العميل.",
+                    "info"
+                );
+
+
+                /*
+                   نترك الحساب مسجلًا
+                   ونوجهه لصفحة إكمال البيانات.
+                */
+
+                setTimeout(
+                    function(){
+
+                        window.location.href =
+                            "complete-profile.html";
+
+                    },
+                    1000
+                );
+
+                return;
+
+            }
+
+
+            const customerData =
+                customerSnap.data();
+
+
+            if(
+                !customerData.phone
+            ){
+
+                showMessage(
+                    "⚠️ يجب إضافة رقم الهاتف إلى ملف العميل.",
+                    "info"
+                );
+
+
+                setTimeout(
+                    function(){
+
+                        window.location.href =
+                            "complete-profile.html";
+
+                    },
+                    1000
+                );
+
+                return;
+
+            }
 
 
             showMessage(
-
                 "✅ تم تسجيل الدخول باستخدام Google.",
-
                 "success"
-
             );
 
 
             setTimeout(
-
                 function(){
 
                     window.location.href =
                         "index.html";
 
                 },
-
-                800
-
+                700
             );
 
         }
@@ -1318,58 +1303,39 @@ googleBtn.addEventListener(
         catch(error){
 
             console.error(
+                "Google Error:",
                 error
             );
 
 
             showMessage(
-
                 "❌ لم يتم تسجيل الدخول باستخدام Google.",
-
                 "error"
-
             );
 
 
             googleBtn.disabled =
                 false;
 
-
-            googleBtn.innerText =
+            googleBtn.textContent =
                 "G";
 
         }
 
     }
-
 );
 
 
+/* =========================================
+   INITIAL STATE
+========================================= */
 
-/* =========================
-   FACEBOOK
-========================= */
-
-facebookBtn.addEventListener(
-
-    "click",
-
-    function(){
-
-        showMessage(
-
-            "🔵 تسجيل الدخول بفيسبوك سيتم تفعيله بعد إكمال إعداد Meta.",
-
-            "info"
-
-        );
-
-    }
-
+showMessage(
+    "",
+    ""
 );
 
 </script>
 
 </body>
-
 </html>
