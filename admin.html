@@ -351,13 +351,50 @@ header{
 
     <div class="input-box">
 
-        <input
-            type="password"
-            id="password"
-            class="password-input"
-            placeholder="كلمة المرور"
-            autocomplete="current-password"
-        >
+        <div style="position:relative;">
+
+    <input
+        type="password"
+        id="password"
+        class="password-input"
+        placeholder="كلمة المرور"
+        autocomplete="current-password"
+        style="padding-left:90px;"
+    >
+
+    <button
+        type="button"
+        id="showPassword"
+        onclick="
+            const p = document.getElementById('password');
+            const b = document.getElementById('showPassword');
+
+            if (p.type === 'password') {
+                p.type = 'text';
+                b.innerHTML = '🙈 إخفاء';
+            } else {
+                p.type = 'password';
+                b.innerHTML = '👁️ إظهار';
+            }
+        "
+        style="
+            position:absolute;
+            left:7px;
+            top:7px;
+            height:34px;
+            padding:0 10px;
+            border:0;
+            border-radius:8px;
+            background:#333;
+            color:white;
+            cursor:pointer;
+            z-index:10;
+        "
+    >
+        👁️ إظهار
+    </button>
+
+</div>
 
         <button
     type="button"
