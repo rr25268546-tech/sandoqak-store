@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SANDOQAK | لوحة الإدارة</title>
+<title>Admin | SANDOQAK</title>
 
 <style>
 
@@ -21,7 +21,7 @@ body{
     background:#090909;
     color:#fff;
     min-height:100vh;
-    padding:15px;
+    padding:20px;
 }
 
 .container{
@@ -30,13 +30,11 @@ body{
 }
 
 
-/* =========================
-   LOGIN
-========================= */
+/* LOGIN */
 
 .login-box{
     max-width:420px;
-    margin:60px auto;
+    margin:70px auto;
     background:#111;
     border:1px solid #292929;
     border-radius:20px;
@@ -80,14 +78,14 @@ body{
     padding-left:90px !important;
 }
 
-.show-btn{
+.show-password{
     position:absolute;
     left:6px;
     top:6px;
     height:36px;
+    padding:0 10px;
     border:0;
     border-radius:8px;
-    padding:0 10px;
     background:#333;
     color:#fff;
     cursor:pointer;
@@ -109,17 +107,31 @@ body{
     opacity:.6;
 }
 
-.login-message{
+.message{
     text-align:center;
-    color:#ff7777;
     margin-top:15px;
+    padding:10px;
+    border-radius:10px;
     line-height:1.6;
+    display:none;
+}
+
+.message.error{
+    display:block;
+    background:#351212;
+    color:#ff8f8f;
+    border:1px solid #702020;
+}
+
+.message.success{
+    display:block;
+    background:#12351b;
+    color:#8fffaa;
+    border:1px solid #20702e;
 }
 
 
-/* =========================
-   ADMIN
-========================= */
+/* ADMIN */
 
 #adminPanel{
     display:none;
@@ -129,7 +141,6 @@ body{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    gap:10px;
     margin-bottom:25px;
 }
 
@@ -142,17 +153,17 @@ body{
     color:#00e5ff;
 }
 
-.header-buttons{
+.buttons{
     display:flex;
     gap:8px;
 }
 
-.header-btn{
+.btn{
     border:0;
     border-radius:10px;
     padding:10px 15px;
-    cursor:pointer;
     font-weight:bold;
+    cursor:pointer;
 }
 
 .refresh{
@@ -164,11 +175,6 @@ body{
     background:#e53935;
     color:#fff;
 }
-
-
-/* =========================
-   TITLE
-========================= */
 
 .title{
     text-align:center;
@@ -185,9 +191,7 @@ body{
 }
 
 
-/* =========================
-   STATS
-========================= */
+/* STATS */
 
 .stats{
     display:grid;
@@ -214,19 +218,17 @@ body{
 }
 
 
-/* =========================
-   ORDERS
-========================= */
+/* ORDERS */
 
 .orders-box{
     background:#111;
     border:1px solid #292929;
     border-radius:18px;
-    padding:18px;
+    padding:20px;
 }
 
-.orders-title{
-    margin-bottom:18px;
+.orders-box h2{
+    margin-bottom:20px;
 }
 
 .order{
@@ -237,14 +239,9 @@ body{
     margin-bottom:15px;
 }
 
-.order:last-child{
-    margin-bottom:0;
-}
-
 .order-header{
     display:flex;
     justify-content:space-between;
-    align-items:center;
     gap:10px;
     margin-bottom:15px;
 }
@@ -254,7 +251,7 @@ body{
     font-weight:bold;
 }
 
-.order-date{
+.date{
     color:#888;
     font-size:13px;
 }
@@ -274,55 +271,17 @@ body{
 .product{
     display:flex;
     justify-content:space-between;
-    gap:10px;
     padding:7px 0;
 }
 
-.order-bottom{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:10px;
-    margin-top:15px;
-}
-
 .total{
-    font-size:19px;
+    margin-top:15px;
+    font-size:20px;
     font-weight:bold;
 }
 
-.status-box{
+.delete{
     margin-top:15px;
-}
-
-.status-label{
-    display:block;
-    margin-bottom:7px;
-    color:#bbb;
-}
-
-.status-select{
-    width:100%;
-    height:43px;
-    border:1px solid #333;
-    border-radius:9px;
-    background:#222;
-    color:#fff;
-    padding:8px;
-    outline:none;
-}
-
-.status-select:focus{
-    border-color:#00e5ff;
-}
-
-.order-actions{
-    display:flex;
-    justify-content:flex-end;
-    margin-top:12px;
-}
-
-.delete-btn{
     border:0;
     border-radius:9px;
     padding:9px 14px;
@@ -331,26 +290,24 @@ body{
     cursor:pointer;
 }
 
-.empty,
-.loading{
+.loading,
+.empty{
     text-align:center;
-    padding:35px 10px;
     color:#999;
+    padding:35px 10px;
 }
 
-.error{
+.error-box{
     background:#351212;
-    border:1px solid #702020;
     color:#ffbaba;
+    border:1px solid #702020;
     border-radius:10px;
     padding:15px;
     line-height:1.7;
 }
 
 
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 
 @media(max-width:600px){
 
@@ -365,24 +322,19 @@ body{
     .header{
         flex-direction:column;
         align-items:stretch;
+        gap:15px;
     }
 
-    .header-buttons{
+    .buttons{
         width:100%;
     }
 
-    .header-btn{
+    .btn{
         flex:1;
     }
 
     .order-header{
         flex-direction:column;
-        align-items:flex-start;
-    }
-
-    .order-bottom{
-        flex-direction:column;
-        align-items:stretch;
     }
 
 }
@@ -424,7 +376,7 @@ body{
             type="email"
             id="email"
             placeholder="البريد الإلكتروني"
-            autocomplete="email"
+            autocomplete="username"
         >
 
     </div>
@@ -442,8 +394,7 @@ body{
 
         <button
             type="button"
-            class="show-btn"
-            onclick="togglePassword()"
+            class="show-password"
             id="showPassword"
         >
             👁️ إظهار
@@ -462,8 +413,8 @@ body{
 
 
     <div
-        class="login-message"
         id="loginMessage"
+        class="message"
     ></div>
 
 </div>
@@ -474,7 +425,9 @@ body{
      ADMIN PANEL
 ========================= -->
 
-<div id="adminPanel">
+<div
+    id="adminPanel"
+>
 
 
     <div class="header">
@@ -484,11 +437,11 @@ body{
         </div>
 
 
-        <div class="header-buttons">
+        <div class="buttons">
 
             <button
                 type="button"
-                class="header-btn refresh"
+                class="btn refresh"
                 id="refreshBtn"
             >
                 🔄 تحديث
@@ -497,7 +450,7 @@ body{
 
             <button
                 type="button"
-                class="header-btn logout"
+                class="btn logout"
                 id="logoutBtn"
             >
                 خروج
@@ -512,11 +465,11 @@ body{
     <div class="title">
 
         <h1>
-            📦 لوحة الطلبات
+            📦 الطلبات
         </h1>
 
         <p>
-            إدارة ومتابعة طلبات العملاء
+            لوحة إدارة طلبات العملاء
         </p>
 
     </div>
@@ -557,15 +510,14 @@ body{
 
         </div>
 
-
     </div>
 
 
 
     <div class="orders-box">
 
-        <h2 class="orders-title">
-            📋 الطلبات
+        <h2>
+            📋 كل الطلبات
         </h2>
 
 
@@ -587,60 +539,27 @@ body{
 
 
 
-<!-- =========================
-     PASSWORD BUTTON
-========================= -->
-
-<script>
-
-function togglePassword(){
-
-    const password =
-        document.getElementById("password");
-
-    const button =
-        document.getElementById("showPassword");
-
-
-    if(
-        password.type === "password"
-    ){
-
-        password.type = "text";
-
-        button.innerHTML =
-            "🙈 إخفاء";
-
-    }else{
-
-        password.type = "password";
-
-        button.innerHTML =
-            "👁️ إظهار";
-
-    }
-
-}
-
-</script>
-
-
-
-<!-- =========================
-     FIREBASE
-========================= -->
-
 <script type="module">
 
 
+/* =========================
+   Firebase
+========================= */
+
 import { db } from "./firebase.js";
 
+import {
+    collection,
+    getDocs,
+    deleteDoc,
+    doc
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 import {
     initializeApp
 }
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-
 
 import {
     getAuth,
@@ -651,19 +570,8 @@ import {
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 
-import {
-    collection,
-    getDocs,
-    updateDoc,
-    deleteDoc,
-    doc
-}
-from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-
-
-
 /* =========================
-   FIREBASE CONFIG
+   Firebase Config
 ========================= */
 
 const firebaseConfig = {
@@ -689,37 +597,28 @@ const firebaseConfig = {
 };
 
 
-
 /* =========================
-   AUTH APP
+   Authentication
 ========================= */
 
 const authApp =
     initializeApp(
         firebaseConfig,
-        "adminAuthentication"
+        "adminAuthApp"
     );
-
 
 const auth =
     getAuth(authApp);
 
 
-
 /* =========================
-   ELEMENTS
+   Elements
 ========================= */
 
-const loginBox =
-    document.getElementById("loginBox");
-
-const adminPanel =
-    document.getElementById("adminPanel");
-
-const emailInput =
+const email =
     document.getElementById("email");
 
-const passwordInput =
+const password =
     document.getElementById("password");
 
 const loginBtn =
@@ -727,6 +626,15 @@ const loginBtn =
 
 const loginMessage =
     document.getElementById("loginMessage");
+
+const loginBox =
+    document.getElementById("loginBox");
+
+const adminPanel =
+    document.getElementById("adminPanel");
+
+const showPassword =
+    document.getElementById("showPassword");
 
 const logoutBtn =
     document.getElementById("logoutBtn");
@@ -744,29 +652,94 @@ const salesTotal =
     document.getElementById("salesTotal");
 
 
+/* =========================
+   Show Password
+========================= */
+
+showPassword.addEventListener(
+    "click",
+    function(){
+
+        if(password.type === "password"){
+
+            password.type = "text";
+
+            showPassword.innerText =
+                "🙈 إخفاء";
+
+        }else{
+
+            password.type = "password";
+
+            showPassword.innerText =
+                "👁️ إظهار";
+
+        }
+
+    }
+);
+
 
 /* =========================
-   LOGIN
+   Login Message
+========================= */
+
+function showLoginError(message){
+
+    loginMessage.className =
+        "message error";
+
+    loginMessage.innerText =
+        message;
+
+}
+
+
+function clearLoginMessage(){
+
+    loginMessage.className =
+        "message";
+
+    loginMessage.innerText =
+        "";
+
+}
+
+
+/* =========================
+   Login
 ========================= */
 
 loginBtn.addEventListener(
     "click",
     async function(){
 
-        const email =
-            emailInput.value.trim();
+        const userEmail =
+            email.value.trim();
 
-        const password =
-            passwordInput.value;
+        const userPassword =
+            password.value;
 
 
-        if(
-            email === "" ||
-            password === ""
-        ){
+        clearLoginMessage();
 
-            loginMessage.innerText =
-                "من فضلك اكتب الإيميل وكلمة المرور.";
+
+        if(userEmail === ""){
+
+            showLoginError(
+                "⚠️ اكتب البريد الإلكتروني."
+            );
+
+            return;
+
+        }
+
+
+        if(userPassword === ""){
+
+            showLoginError(
+                "⚠️ اكتب كلمة المرور."
+            );
 
             return;
 
@@ -776,27 +749,98 @@ loginBtn.addEventListener(
         loginBtn.disabled = true;
 
         loginBtn.innerText =
-            "جاري تسجيل الدخول... ⏳";
-
-
-        loginMessage.innerText = "";
+            "جاري التحقق... ⏳";
 
 
         try{
 
             await signInWithEmailAndPassword(
                 auth,
-                email,
-                password
+                userEmail,
+                userPassword
             );
+
+
+            loginMessage.className =
+                "message success";
+
+            loginMessage.innerText =
+                "✅ تم تسجيل الدخول بنجاح";
 
 
         }catch(error){
 
-            console.error(error);
+            console.error(
+                "Login Error:",
+                error
+            );
 
-            loginMessage.innerText =
-                "الإيميل أو كلمة المرور غير صحيحة.";
+
+            /* كلمة المرور أو الإيميل غلط */
+
+            if(
+                error.code ===
+                "auth/invalid-credential"
+            ){
+
+                showLoginError(
+                    "❌ البريد الإلكتروني أو كلمة المرور غير صحيحة."
+                );
+
+            }
+
+            else if(
+                error.code ===
+                "auth/wrong-password"
+            ){
+
+                showLoginError(
+                    "❌ كلمة المرور غير صحيحة."
+                );
+
+            }
+
+            else if(
+                error.code ===
+                "auth/user-not-found"
+            ){
+
+                showLoginError(
+                    "❌ الحساب غير موجود."
+                );
+
+            }
+
+            else if(
+                error.code ===
+                "auth/invalid-email"
+            ){
+
+                showLoginError(
+                    "❌ البريد الإلكتروني غير صحيح."
+                );
+
+            }
+
+            else if(
+                error.code ===
+                "auth/too-many-requests"
+            ){
+
+                showLoginError(
+                    "⚠️ محاولات كثيرة. حاول بعد قليل."
+                );
+
+            }
+
+            else{
+
+                showLoginError(
+                    "⚠️ حصل خطأ أثناء تسجيل الدخول. حاول مرة أخرى."
+                );
+
+            }
+
 
             loginBtn.disabled = false;
 
@@ -809,9 +853,8 @@ loginBtn.addEventListener(
 );
 
 
-
 /* =========================
-   AUTH STATE
+   Authentication State
 ========================= */
 
 onAuthStateChanged(
@@ -825,6 +868,12 @@ onAuthStateChanged(
 
             adminPanel.style.display =
                 "block";
+
+            loginBtn.disabled =
+                false;
+
+            loginBtn.innerText =
+                "تسجيل الدخول 🔐";
 
             loadOrders();
 
@@ -842,9 +891,8 @@ onAuthStateChanged(
 );
 
 
-
 /* =========================
-   LOGOUT
+   Logout
 ========================= */
 
 logoutBtn.addEventListener(
@@ -857,9 +905,8 @@ logoutBtn.addEventListener(
 );
 
 
-
 /* =========================
-   REFRESH
+   Refresh
 ========================= */
 
 refreshBtn.addEventListener(
@@ -872,9 +919,8 @@ refreshBtn.addEventListener(
 );
 
 
-
 /* =========================
-   LOAD ORDERS
+   Load Orders
 ========================= */
 
 async function loadOrders(){
@@ -903,8 +949,7 @@ async function loadOrders(){
             snapshot.size;
 
 
-        let sales =
-            0;
+        let sales = 0;
 
 
         if(snapshot.empty){
@@ -997,10 +1042,6 @@ async function loadOrders(){
                 }
 
 
-                const currentStatus =
-                    order.status || "new";
-
-
                 const orderElement =
                     document.createElement(
                         "div"
@@ -1016,11 +1057,15 @@ async function loadOrders(){
                     <div class="order-header">
 
                         <div class="order-id">
+
                             📦 طلب #${orderDoc.id}
+
                         </div>
 
-                        <div class="order-date">
+                        <div class="date">
+
                             ${date}
+
                         </div>
 
                     </div>
@@ -1051,28 +1096,129 @@ async function loadOrders(){
                     </div>
 
 
-                    <div class="order-bottom">
+                    <div class="total">
 
-                        <div class="total">
-
-                            💰 ${Number(order.total) || 0}
-                            جنيه
-
-                        </div>
+                        💰 الإجمالي:
+                        ${Number(order.total) || 0}
+                        جنيه
 
                     </div>
 
 
-                    <div class="status-box">
+                    <button
+                        type="button"
+                        class="delete"
+                    >
 
-                        <label class="status-label">
-                            📌 حالة الطلب
-                        </label>
+                        🗑️ حذف الطلب
+
+                    </button>
+
+                `;
 
 
-                        <select
-                            class="status-select"
-                        >
+                const deleteButton =
+                    orderElement.querySelector(
+                        ".delete"
+                    );
 
-                            <option
-                               
+
+                deleteButton.addEventListener(
+                    "click",
+                    async function(){
+
+                        await deleteOrder(
+                            orderDoc.id
+                        );
+
+                    }
+                );
+
+
+                ordersList.appendChild(
+                    orderElement
+                );
+
+            }
+        );
+
+
+        salesTotal.innerText =
+            sales + " جنيه";
+
+
+    }catch(error){
+
+        console.error(error);
+
+
+        ordersList.innerHTML = `
+
+            <div class="error-box">
+
+                ❌ حصل خطأ في تحميل الطلبات.
+
+                <br><br>
+
+                ${error.message}
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================
+   Delete Order
+========================= */
+
+async function deleteOrder(id){
+
+    const answer =
+        confirm(
+            "هل أنت متأكد من حذف هذا الطلب؟"
+        );
+
+
+    if(!answer){
+
+        return;
+
+    }
+
+
+    try{
+
+        await deleteDoc(
+            doc(
+                db,
+                "orders",
+                id
+            )
+        );
+
+
+        loadOrders();
+
+
+    }catch(error){
+
+        console.error(error);
+
+        alert(
+            "❌ حصل خطأ أثناء حذف الطلب."
+        );
+
+    }
+
+}
+
+</script>
+
+
+</body>
+
+</html>
