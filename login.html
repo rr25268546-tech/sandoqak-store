@@ -19,7 +19,7 @@
 body{
     min-height:100vh;
     background:#090909;
-    color:white;
+    color:#fff;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -33,6 +33,7 @@ body{
     border:1px solid #292929;
     border-radius:20px;
     padding:25px;
+    box-shadow:0 15px 50px rgba(0,0,0,.45);
 }
 
 h1{
@@ -58,7 +59,7 @@ input{
     background:#181818;
     border:1px solid #333;
     border-radius:10px;
-    color:white;
+    color:#fff;
     padding:12px;
     font-size:16px;
     outline:none;
@@ -86,12 +87,13 @@ button{
 
 .verify{
     background:#22c55e;
-    color:white;
+    color:#fff;
     margin-top:10px;
 }
 
 button:disabled{
     opacity:.5;
+    cursor:not-allowed;
 }
 
 #codeBox{
@@ -102,6 +104,7 @@ button:disabled{
     margin-top:15px;
     text-align:center;
     line-height:1.6;
+    min-height:25px;
 }
 
 .error{
@@ -110,6 +113,10 @@ button:disabled{
 
 .success{
     color:#6dff91;
+}
+
+.info{
+    color:#ccc;
 }
 
 #recaptcha-container{
@@ -131,8 +138,7 @@ button:disabled{
         تسجيل الدخول أو إنشاء حساب
     </p>
 
-
-    <label>
+    <label for="phone">
         رقم الهاتف
     </label>
 
@@ -143,9 +149,7 @@ button:disabled{
         autocomplete="tel"
     >
 
-
     <div id="recaptcha-container"></div>
-
 
     <button
         id="sendBtn"
@@ -155,10 +159,12 @@ button:disabled{
         إرسال كود التحقق 📱
     </button>
 
-
     <div id="codeBox">
 
-        <label style="margin-top:20px;">
+        <label
+            for="code"
+            style="margin-top:20px;"
+        >
             كود التحقق
         </label>
 
@@ -181,7 +187,6 @@ button:disabled{
 
     </div>
 
-
     <div id="message"></div>
 
 </div>
@@ -196,12 +201,14 @@ import {
 import {
     getAuth,
     RecaptchaVerifier,
-    signInWithPhoneNumber
+    signInWithPhoneNumber,
+    onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 import {
     getFirestore,
     doc,
+    getDoc,
     setDoc,
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
@@ -237,10 +244,8 @@ const firebaseConfig = {
 const app =
     initializeApp(firebaseConfig);
 
-
 const auth =
     getAuth(app);
-
 
 const db =
     getFirestore(app);
@@ -270,18 +275,16 @@ const message =
 
 
 let confirmationResult = null;
+let recaptchaVerifier = null;
 
 
 /* =========================
    MESSAGE
 ========================= */
 
-function showMessage(
-    text,
-    type
-){
+function showMessage(text,type){
 
-    message.className = type;
+    message.className = type || "";
 
     message.innerText = text;
 
@@ -289,33 +292,32 @@ function showMessage(
 
 
 /* =========================
-   FORMAT PHONE
+   FORMAT EGYPT PHONE
 ========================= */
 
-function formatEgyptPhone(
-    phone
-){
+function formatEgyptPhone(phone){
 
     phone =
-        phone.replace(
-            /\s+/g,
-            ""
-        );
+        phone
+        .replace(/\s+/g,"")
+        .replace(/-/g,"");
 
 
-    if(
-        phone.startsWith("01")
-    ){
+    if(phone.startsWith("01")){
 
-        return "+20" +
-            phone.substring(1);
+        return "+20" + phone.substring(1);
 
     }
 
 
-    if(
-        phone.startsWith("+20")
-    ){
+    if(phone.startsWith("0020")){
+
+        return "+" + phone.substring(2);
+
+    }
+
+
+    if(phone.startsWith("+20")){
 
         return phone;
 
@@ -328,36 +330,143 @@ function formatEgyptPhone(
 
 
 /* =========================
-   RECAPTCHA
+   CREATE RECAPTCHA
 ========================= */
 
-window.recaptchaVerifier =
-    new RecaptchaVerifier(
-        auth,
-        "recaptcha-container",
-        {
-            size:"normal"
-        }
-    );
+function createRecaptcha(){
+
+    if(recaptchaVerifier){
+
+        try{
+            recaptchaVerifier.clear();
+        }catch(e){}
+
+    }
+
+
+    recaptchaVerifier =
+        new RecaptchaVerifier(
+            auth,
+            "recaptcha-container",
+            {
+                size:"normal"
+            }
+        );
+
+}
 
 
 /* =========================
-   SEND CODE
+   INITIALIZE
+========================= */
+
+createRecaptcha();
+
+
+/* =========================
+   CHECK LOGIN
+========================= */
+
+onAuthStateChanged(
+    auth,
+    async function(user){
+
+        if(!user){
+            return;
+        }
+
+
+        /*
+           العميل مسجل بالفعل.
+           نتأكد فقط من وجود بياناته.
+        */
+
+        try{
+
+            const customerRef =
+                doc(
+                    db,
+                    "customers",
+                    user.uid
+                );
+
+            const customerSnap =
+                await getDoc(customerRef);
+
+
+            if(!customerSnap.exists()){
+
+                await setDoc(
+
+                    customerRef,
+
+                    {
+                        uid:user.uid,
+
+                        phone:user.phoneNumber || "",
+
+                        points:0,
+
+                        totalPurchases:0,
+
+                        createdAt:
+                            serverTimestamp()
+
+                    }
+
+                );
+
+            }
+
+
+            showMessage(
+                "✅ أنت مسجل بالفعل، جاري فتح المتجر...",
+                "success"
+            );
+
+
+            setTimeout(
+                function(){
+
+                    window.location.href =
+                        "index.html";
+
+                },
+                800
+            );
+
+
+        }catch(error){
+
+            console.error(error);
+
+            showMessage(
+                "تم تسجيل الدخول، لكن حدث خطأ أثناء تحميل بيانات الحساب.",
+                "error"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================
+   SEND OTP
 ========================= */
 
 sendBtn.addEventListener(
     "click",
     async function(){
 
-        let phone =
+        const phone =
             formatEgyptPhone(
                 phoneInput.value.trim()
             );
 
 
         if(
-            !phone.startsWith("+20") ||
-            phone.length !== 13
+            !/^\+20\d{10}$/.test(phone)
         ){
 
             showMessage(
@@ -378,11 +487,18 @@ sendBtn.addEventListener(
 
         try{
 
+            if(!recaptchaVerifier){
+
+                createRecaptcha();
+
+            }
+
+
             confirmationResult =
                 await signInWithPhoneNumber(
                     auth,
                     phone,
-                    window.recaptchaVerifier
+                    recaptchaVerifier
                 );
 
 
@@ -405,8 +521,53 @@ sendBtn.addEventListener(
             console.error(error);
 
 
+            let errorMessage =
+                "❌ لم نتمكن من إرسال الكود.";
+
+
+            if(
+                error.code ===
+                "auth/invalid-phone-number"
+            ){
+
+                errorMessage =
+                    "❌ رقم الهاتف غير صحيح.";
+
+            }
+
+            else if(
+                error.code ===
+                "auth/too-many-requests"
+            ){
+
+                errorMessage =
+                    "❌ تم طلب أكواد كثيرة. حاول لاحقًا.";
+
+            }
+
+            else if(
+                error.code ===
+                "auth/quota-exceeded"
+            ){
+
+                errorMessage =
+                    "❌ تم تجاوز حد الرسائل المتاح حاليًا.";
+
+            }
+
+            else if(
+                error.code ===
+                "auth/captcha-check-failed"
+            ){
+
+                errorMessage =
+                    "❌ فشل التحقق الأمني. أعد تحميل الصفحة وحاول مرة أخرى.";
+
+            }
+
+
             showMessage(
-                "❌ لم نتمكن من إرسال الكود. حاول مرة أخرى.",
+                errorMessage,
                 "error"
             );
 
@@ -414,25 +575,11 @@ sendBtn.addEventListener(
             sendBtn.disabled =
                 false;
 
-
             sendBtn.innerText =
                 "إرسال كود التحقق 📱";
 
 
-            try{
-
-                window.recaptchaVerifier.clear();
-
-                window.recaptchaVerifier =
-                    new RecaptchaVerifier(
-                        auth,
-                        "recaptcha-container",
-                        {
-                            size:"normal"
-                        }
-                    );
-
-            }catch(e){}
+            createRecaptcha();
 
         }
 
@@ -441,20 +588,30 @@ sendBtn.addEventListener(
 
 
 /* =========================
-   VERIFY CODE
+   VERIFY OTP
 ========================= */
 
 verifyBtn.addEventListener(
     "click",
     async function(){
 
+        if(!confirmationResult){
+
+            showMessage(
+                "❌ اطلب كود التحقق أولًا.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
         const code =
             codeInput.value.trim();
 
 
-        if(
-            code.length !== 6
-        ){
+        if(!/^\d{6}$/.test(code)){
 
             showMessage(
                 "❌ أدخل كود التحقق المكون من 6 أرقام.",
@@ -469,7 +626,6 @@ verifyBtn.addEventListener(
         verifyBtn.disabled =
             true;
 
-
         verifyBtn.innerText =
             "جاري التحقق...";
 
@@ -477,49 +633,57 @@ verifyBtn.addEventListener(
         try{
 
             const result =
-                await confirmationResult
-                    .confirm(code);
+                await confirmationResult.confirm(code);
 
 
             const user =
                 result.user;
 
 
-            /* =====================
-               CREATE CUSTOMER
-            ===================== */
-
-            await setDoc(
-
+            const customerRef =
                 doc(
                     db,
                     "customers",
                     user.uid
-                ),
+                );
 
-                {
-                    uid:user.uid,
 
-                    phone:user.phoneNumber,
+            const customerSnap =
+                await getDoc(customerRef);
 
-                    points:0,
 
-                    totalPurchases:0,
+            /*
+               إنشاء بيانات العميل
+               لأول مرة فقط.
+            */
 
-                    createdAt:
-                        serverTimestamp()
+            if(!customerSnap.exists()){
 
-                },
+                await setDoc(
 
-                {
-                    merge:true
-                }
+                    customerRef,
 
-            );
+                    {
+                        uid:user.uid,
+
+                        phone:user.phoneNumber || "",
+
+                        points:0,
+
+                        totalPurchases:0,
+
+                        createdAt:
+                            serverTimestamp()
+
+                    }
+
+                );
+
+            }
 
 
             showMessage(
-                "🎉 تم تسجيل الدخول بنجاح!",
+                "🎉 تم تسجيل الدخول بنجاح! جاري فتح المتجر...",
                 "success"
             );
 
@@ -531,7 +695,7 @@ verifyBtn.addEventListener(
                         "index.html";
 
                 },
-                1200
+                1000
             );
 
 
@@ -540,15 +704,39 @@ verifyBtn.addEventListener(
             console.error(error);
 
 
+            let errorMessage =
+                "❌ كود التحقق غير صحيح أو انتهت صلاحيته.";
+
+
+            if(
+                error.code ===
+                "auth/invalid-verification-code"
+            ){
+
+                errorMessage =
+                    "❌ كود التحقق غير صحيح.";
+
+            }
+
+            else if(
+                error.code ===
+                "auth/code-expired"
+            ){
+
+                errorMessage =
+                    "❌ انتهت صلاحية الكود. اطلب كودًا جديدًا.";
+
+            }
+
+
             showMessage(
-                "❌ كود التحقق غير صحيح أو انتهت صلاحيته.",
+                errorMessage,
                 "error"
             );
 
 
             verifyBtn.disabled =
                 false;
-
 
             verifyBtn.innerText =
                 "تأكيد الكود ✅";
