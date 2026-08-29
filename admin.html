@@ -29,7 +29,7 @@ body{
     margin:auto;
 }
 
-/* تسجيل الدخول */
+/* ================= LOGIN ================= */
 
 .login-box{
     max-width:420px;
@@ -57,10 +57,6 @@ body{
     margin-bottom:15px;
 }
 
-.input-box input{
-    margin-bottom:0;
-}
-
 input{
     width:100%;
     padding:14px;
@@ -77,20 +73,26 @@ input:focus{
 }
 
 .password-input{
-    padding-left:90px;
+    padding-left:95px;
 }
 
 .show-password{
     position:absolute;
     left:7px;
     top:7px;
+    height:34px;
+    padding:0 10px;
     border:0;
     border-radius:8px;
     background:#333;
     color:white;
-    padding:7px 10px;
     cursor:pointer;
     font-size:13px;
+    z-index:5;
+}
+
+.show-password:active{
+    transform:scale(.96);
 }
 
 .login-btn{
@@ -116,8 +118,7 @@ input:focus{
     line-height:1.6;
 }
 
-
-/* لوحة الأدمن */
+/* ================= ADMIN ================= */
 
 #adminPanel{
     display:none;
@@ -215,10 +216,6 @@ header{
     margin-bottom:15px;
 }
 
-.order:last-child{
-    margin-bottom:0;
-}
-
 .order-top{
     display:flex;
     justify-content:space-between;
@@ -296,16 +293,16 @@ header{
         gap:15px;
     }
 
-    .order-top{
-        flex-direction:column;
-    }
-
     .header-buttons{
         width:100%;
     }
 
     .header-btn{
         flex:1;
+    }
+
+    .order-top{
+        flex-direction:column;
     }
 
 }
@@ -317,12 +314,11 @@ header{
 
 <body>
 
-
 <div class="container">
 
 
 <!-- =========================
-     تسجيل الدخول
+     LOGIN
 ========================= -->
 
 <div
@@ -365,8 +361,9 @@ header{
 
         <button
             type="button"
-            class="show-password"
             id="showPassword"
+            class="show-password"
+            onclick="togglePassword()"
         >
             👁️ إظهار
         </button>
@@ -393,12 +390,10 @@ header{
 
 
 <!-- =========================
-     لوحة الأدمن
+     ADMIN PANEL
 ========================= -->
 
-<div
-    id="adminPanel"
->
+<div id="adminPanel">
 
 
 <header>
@@ -411,6 +406,7 @@ header{
     <div class="header-buttons">
 
         <button
+            type="button"
             class="header-btn"
             id="refreshBtn"
         >
@@ -419,6 +415,7 @@ header{
 
 
         <button
+            type="button"
             class="header-btn logout"
             id="logoutBtn"
         >
@@ -465,101 +462,4 @@ header{
 
         <small>
             💰 إجمالي المبيعات
-        </small>
-
-        <h2 id="salesTotal">
-            0 جنيه
-        </h2>
-
-    </div>
-
-
-</div>
-
-
-
-<div class="orders">
-
-    <div class="orders-header">
-
-        <h2>
-            📋 الطلبات
-        </h2>
-
-    </div>
-
-
-    <div id="ordersList">
-
-        <div class="loading">
-            جاري تحميل الطلبات... ⏳
-        </div>
-
-    </div>
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
-
-<script type="module">
-
-
-/* =========================
-   Firebase Firestore
-========================= */
-
-import { db } from "./firebase.js";
-
-import {
-    collection,
-    getDocs,
-    deleteDoc,
-    doc
-}
-from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-
-
-/* =========================
-   Firebase Authentication
-========================= */
-
-import {
-    initializeApp
-}
-from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-
-import {
-    getAuth,
-    signInWithEmailAndPassword,
-    onAuthStateChanged,
-    signOut
-}
-from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-
-
-/* إعداد Firebase */
-
-const firebaseConfig = {
-
-    apiKey:
-    "AIzaSyC3NvbBmiX-2nBBFw-X6KBkpU_8ZOQnDvQ",
-
-    authDomain:
-    "sandoqak-479c4.firebaseapp.com",
-
-    projectId:
-    "sandoqak-479c4",
-
-    storageBucket:
-    "sandoqak-479c4.firebasestorage.app",
-
-    messagingSenderId:
-    "295608980009",
-
-   
+       
