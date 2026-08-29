@@ -2,22 +2,12 @@
 <html lang="ar" dir="rtl">
 
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>SANDOQAK | تسجيل الدخول</title>
 
-
 <style>
-
-/* =========================
-   RESET
-========================= */
 
 *{
     box-sizing:border-box;
@@ -26,401 +16,196 @@
     font-family:Arial,sans-serif;
 }
 
-
-/* =========================
-   BODY
-========================= */
-
 body{
-
     min-height:100vh;
-
     background:#090909;
-
     color:#fff;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     padding:20px;
-
 }
-
-
-/* =========================
-   BOX
-========================= */
 
 .box{
-
     width:100%;
-
     max-width:430px;
-
     background:#111;
-
     border:1px solid #292929;
-
     border-radius:22px;
-
     padding:25px;
-
-    box-shadow:
-        0 15px 50px
-        rgba(0,0,0,.45);
-
+    box-shadow:0 15px 50px rgba(0,0,0,.45);
 }
 
-
-/* =========================
-   HEADER
-========================= */
-
 h1{
-
     text-align:center;
-
     margin-bottom:8px;
-
 }
 
 .subtitle{
-
     text-align:center;
-
     color:#999;
-
     margin-bottom:25px;
-
 }
-
-
-/* =========================
-   LABEL
-========================= */
 
 label{
-
     display:block;
-
     margin-bottom:7px;
-
     color:#ccc;
-
 }
 
-
-/* =========================
-   INPUT
-========================= */
-
 input{
-
     width:100%;
-
     height:48px;
-
     background:#181818;
-
     border:1px solid #333;
-
     border-radius:10px;
-
     color:#fff;
-
     padding:12px;
-
     font-size:16px;
-
     outline:none;
-
     margin-bottom:14px;
-
 }
 
 input:focus{
-
     border-color:#00e5ff;
-
 }
 
-
-/* =========================
-   BUTTON
-========================= */
-
 button{
-
     border:0;
-
     cursor:pointer;
-
     font-size:16px;
-
     font-weight:bold;
-
 }
 
 button:disabled{
-
     opacity:.5;
-
     cursor:not-allowed;
-
 }
-
-
-/* =========================
-   PHONE BUTTON
-========================= */
 
 .phone-btn{
-
     width:100%;
-
     height:48px;
-
     border-radius:10px;
-
     background:#00e5ff;
-
     color:#000;
-
 }
-
-
-/* =========================
-   VERIFY BUTTON
-========================= */
 
 .verify-btn{
-
     width:100%;
-
     height:48px;
-
     border-radius:10px;
-
     background:#22c55e;
-
     color:#fff;
-
     margin-top:8px;
-
 }
 
-
-/* =========================
-   OTP
-========================= */
-
-#codeBox{
-
+#codeBox,
+#emailBox{
     display:none;
-
 }
-
-
-/* =========================
-   RECAPTCHA
-========================= */
 
 #recaptcha-container{
-
     margin:15px 0;
-
     display:flex;
-
     justify-content:center;
-
 }
-
-
-/* =========================
-   OTHER LOGIN
-========================= */
 
 .other-title{
-
     text-align:center;
-
     color:#777;
-
     font-size:13px;
-
     margin-top:20px;
-
     margin-bottom:13px;
-
 }
-
 
 .social-options{
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     gap:16px;
-
 }
-
 
 .social-btn{
-
     width:52px;
-
     height:52px;
-
     border-radius:50%;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     font-size:21px;
-
     transition:.2s;
-
     border:1px solid #333;
-
 }
-
 
 .social-btn:hover{
-
     transform:translateY(-3px);
-
-    border-color:#666;
-
+    border-color:#777;
 }
-
-
-/* EMAIL */
 
 .email-circle{
-
     background:#222;
-
     color:#fff;
-
 }
-
-
-/* GOOGLE */
 
 .google-circle{
-
     background:#fff;
-
     color:#4285F4;
-
 }
-
-
-/* FACEBOOK */
 
 .facebook-circle{
-
     background:#1877F2;
-
     color:#fff;
-
 }
-
-
-/* =========================
-   EMAIL BOX
-========================= */
 
 #emailBox{
-
-    display:none;
-
     margin-top:18px;
-
     padding-top:18px;
-
     border-top:1px solid #292929;
-
 }
 
-
-/* =========================
-   MESSAGE
-========================= */
-
 #message{
-
     margin-top:15px;
-
     text-align:center;
-
     line-height:1.6;
-
     min-height:25px;
-
+    word-break:break-word;
 }
 
 .error{
-
     color:#ff7777;
-
 }
 
 .success{
-
     color:#6dff91;
-
 }
 
 .info{
-
     color:#ccc;
-
 }
 
-
-/* =========================
-   FOOTER
-========================= */
-
 .small{
-
     color:#777;
-
     font-size:12px;
-
     text-align:center;
-
     margin-top:15px;
-
     line-height:1.6;
+}
 
+.firebase-error{
+    margin-top:8px;
+    font-size:11px;
+    color:#ff9999;
+    direction:ltr;
 }
 
 </style>
-
 </head>
-
 
 <body>
 
-
 <div class="box">
 
-
-    <h1>
-        📦 SANDOQAK
-    </h1>
-
+    <h1>📦 SANDOQAK</h1>
 
     <p class="subtitle">
         تسجيل الدخول أو إنشاء حساب
@@ -435,19 +220,12 @@ button:disabled{
         رقم الهاتف المصري
     </label>
 
-
     <input
-
         id="phone"
-
         type="tel"
-
         placeholder="01012345678"
-
         autocomplete="tel"
-
         inputmode="tel"
-
     >
 
 
@@ -455,68 +233,43 @@ button:disabled{
 
 
     <button
-
         id="sendBtn"
-
         class="phone-btn"
-
         type="button"
-
     >
-
         إرسال كود للهاتف 📱
-
     </button>
 
 
     <!-- =========================
-         OTP
+         CODE
     ========================== -->
 
     <div id="codeBox">
-
 
         <label
             for="code"
             style="margin-top:20px;"
         >
-
             كود التحقق
-
         </label>
 
-
         <input
-
             id="code"
-
             type="text"
-
             inputmode="numeric"
-
             maxlength="6"
-
             placeholder="أدخل الكود المكون من 6 أرقام"
-
             autocomplete="one-time-code"
-
         >
-
 
         <button
-
             id="verifyBtn"
-
             class="verify-btn"
-
             type="button"
-
         >
-
             تأكيد الكود ✅
-
         </button>
-
 
     </div>
 
@@ -526,136 +279,81 @@ button:disabled{
     ========================== -->
 
     <div class="other-title">
-
         أو الدخول باستخدام
-
     </div>
 
 
     <div class="social-options">
 
-
-        <!-- EMAIL -->
-
         <button
-
             id="emailToggle"
-
             class="social-btn email-circle"
-
             type="button"
-
             title="البريد الإلكتروني"
-
         >
-
             ✉️
-
         </button>
 
 
-        <!-- GOOGLE -->
-
         <button
-
             id="googleBtn"
-
             class="social-btn google-circle"
-
             type="button"
-
             title="Google"
-
         >
-
             G
-
         </button>
 
-
-        <!-- FACEBOOK -->
 
         <button
-
             id="facebookBtn"
-
             class="social-btn facebook-circle"
-
             type="button"
-
             title="Facebook"
-
         >
-
             f
-
         </button>
-
 
     </div>
 
 
     <!-- =========================
-         EMAIL LOGIN
+         EMAIL
     ========================== -->
 
     <div id="emailBox">
 
-
         <label for="email">
-
             البريد الإلكتروني
-
         </label>
 
-
         <input
-
             id="email"
-
             type="email"
-
             placeholder="example@email.com"
-
             autocomplete="email"
-
         >
 
 
         <label for="password">
-
             كلمة المرور
-
         </label>
 
-
         <input
-
             id="password"
-
             type="password"
-
             placeholder="كلمة المرور"
-
             autocomplete="current-password"
-
         >
 
 
         <button
-
             id="emailLoginBtn"
-
             class="verify-btn"
-
             type="button"
-
         >
-
             تسجيل الدخول 📧
-
         </button>
-
 
     </div>
 
@@ -666,31 +364,25 @@ button:disabled{
 
         <br>
 
-        🎁 نقاطك لا يتم تصفيرها عند تسجيل الدخول مرة أخرى.
+        🎁 النقاط لا يتم تصفيرها عند تسجيل الدخول مرة أخرى.
 
     </p>
 
 
     <div id="message"></div>
 
-
 </div>
 
 
-
 <script type="module">
-
 
 /* =========================
    FIREBASE APP
 ========================= */
 
 import {
-
     initializeApp
-
 }
-
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
@@ -700,21 +392,13 @@ from
 ========================= */
 
 import {
-
     getAuth,
-
     RecaptchaVerifier,
-
     signInWithPhoneNumber,
-
     signInWithEmailAndPassword,
-
     GoogleAuthProvider,
-
     signInWithPopup
-
 }
-
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
@@ -724,22 +408,14 @@ from
 ========================= */
 
 import {
-
     getFirestore,
-
     doc,
-
     getDoc,
-
     setDoc,
-
     serverTimestamp
-
 }
-
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-
 
 
 /* =========================
@@ -748,26 +424,20 @@ from
 
 const firebaseConfig = {
 
-
     apiKey:
     "AIzaSyC3NvbBmiX-2nBBFw-X6KBkpU_8ZOQnDvQ",
-
 
     authDomain:
     "sandoqak-479c4.firebaseapp.com",
 
-
     projectId:
     "sandoqak-479c4",
-
 
     storageBucket:
     "sandoqak-479c4.firebasestorage.app",
 
-
     messagingSenderId:
     "295608980009",
-
 
     appId:
     "1:295608980009:web:f3176896d1b5f461c30238"
@@ -775,9 +445,8 @@ const firebaseConfig = {
 };
 
 
-
 /* =========================
-   INITIALIZE
+   INITIALIZE FIREBASE
 ========================= */
 
 const app =
@@ -794,7 +463,6 @@ const db =
     getFirestore(app);
 
 
-
 /* =========================
    ELEMENTS
 ========================= */
@@ -802,64 +470,48 @@ const db =
 const phoneInput =
     document.getElementById("phone");
 
-
 const codeInput =
     document.getElementById("code");
-
 
 const sendBtn =
     document.getElementById("sendBtn");
 
-
 const verifyBtn =
     document.getElementById("verifyBtn");
-
 
 const codeBox =
     document.getElementById("codeBox");
 
-
 const emailToggle =
     document.getElementById("emailToggle");
-
 
 const emailBox =
     document.getElementById("emailBox");
 
-
 const emailInput =
     document.getElementById("email");
-
 
 const passwordInput =
     document.getElementById("password");
 
-
 const emailLoginBtn =
     document.getElementById("emailLoginBtn");
-
 
 const googleBtn =
     document.getElementById("googleBtn");
 
-
 const facebookBtn =
     document.getElementById("facebookBtn");
-
 
 const message =
     document.getElementById("message");
 
 
+let confirmationResult =
+    null;
 
-/* =========================
-   VARIABLES
-========================= */
-
-let confirmationResult = null;
-
-let recaptchaVerifier = null;
-
+let recaptchaVerifier =
+    null;
 
 
 /* =========================
@@ -880,9 +532,135 @@ function showMessage(
 }
 
 
+/* =========================
+   FIREBASE ERROR
+========================= */
+
+function showFirebaseError(
+    error
+){
+
+    console.error(
+        "Firebase Error:",
+        error
+    );
+
+
+    let text =
+        "❌ حدث خطأ أثناء إرسال الكود.";
+
+
+    switch(error.code){
+
+        case "auth/invalid-phone-number":
+
+            text =
+                "❌ رقم الهاتف غير صحيح.";
+
+            break;
+
+
+        case "auth/too-many-requests":
+
+            text =
+                "❌ تم تجاوز عدد المحاولات. انتظر قليلًا ثم حاول مرة أخرى.";
+
+            break;
+
+
+        case "auth/quota-exceeded":
+
+            text =
+                "❌ تم تجاوز حد إرسال الرسائل المتاح.";
+
+            break;
+
+
+        case "auth/captcha-check-failed":
+
+            text =
+                "❌ فشل التحقق من reCAPTCHA.";
+
+            break;
+
+
+        case "auth/operation-not-allowed":
+
+            text =
+                "❌ تسجيل الدخول بالهاتف غير مفعّل في Firebase.";
+
+            break;
+
+
+        case "auth/app-not-authorized":
+
+            text =
+                "❌ هذا الموقع غير مصرح له باستخدام Firebase Authentication.";
+
+            break;
+
+
+        case "auth/billing-not-enabled":
+
+            text =
+                "❌ Firebase يطلب إعدادات الفوترة لهذه العملية.";
+
+            break;
+
+
+        case "auth/network-request-failed":
+
+            text =
+                "❌ مشكلة في الإنترنت. حاول مرة أخرى.";
+
+            break;
+
+
+        case "auth/internal-error":
+
+            text =
+                "❌ حدث خطأ داخلي في Firebase.";
+
+            break;
+
+
+        default:
+
+            text =
+                "❌ لم يتم إرسال الكود.";
+
+    }
+
+
+    showMessage(
+        text,
+        "error"
+    );
+
+
+    const errorCode =
+        document.createElement("div");
+
+
+    errorCode.className =
+        "firebase-error";
+
+
+    errorCode.innerText =
+        error.code ||
+        "unknown-error";
+
+
+    message.appendChild(
+        errorCode
+    );
+
+}
+
+
 
 /* =========================
-   EGYPT PHONE FORMAT
+   EGYPT PHONE
 ========================= */
 
 function formatEgyptPhone(
@@ -890,7 +668,6 @@ function formatEgyptPhone(
 ){
 
     phone =
-
         phone
         .replace(/\s+/g,"")
         .replace(/-/g,"");
@@ -914,8 +691,6 @@ function formatEgyptPhone(
 
     /*
        201012345678
-       ↓
-       +201012345678
     */
 
     if(
@@ -930,8 +705,6 @@ function formatEgyptPhone(
 
     /*
        00201012345678
-       ↓
-       +201012345678
     */
 
     if(
@@ -945,7 +718,7 @@ function formatEgyptPhone(
 
 
     /*
-       Already international
+       +201012345678
     */
 
     if(
@@ -971,7 +744,9 @@ function createRecaptcha(){
 
     try{
 
-        if(recaptchaVerifier){
+        if(
+            recaptchaVerifier
+        ){
 
             recaptchaVerifier.clear();
 
@@ -1004,7 +779,7 @@ createRecaptcha();
 
 
 /* =========================
-   CREATE CUSTOMER
+   CUSTOMER
 ========================= */
 
 async function createCustomerIfNeeded(
@@ -1032,7 +807,7 @@ async function createCustomerIfNeeded(
 
 
     /*
-       أول تسجيل فقط
+       إنشاء العميل أول مرة فقط
     */
 
     if(
@@ -1048,26 +823,20 @@ async function createCustomerIfNeeded(
                 uid:
                     user.uid,
 
-
                 phone:
                     user.phoneNumber || "",
-
 
                 email:
                     user.email || "",
 
-
                 name:
                     user.displayName || "",
-
 
                 points:
                     0,
 
-
                 totalPurchases:
                     0,
-
 
                 createdAt:
                     serverTimestamp()
@@ -1083,7 +852,7 @@ async function createCustomerIfNeeded(
 
 
 /* =========================
-   SEND PHONE CODE
+   SEND SMS
 ========================= */
 
 sendBtn.addEventListener(
@@ -1116,6 +885,12 @@ sendBtn.addEventListener(
         }
 
 
+        showMessage(
+            "",
+            ""
+        );
+
+
         sendBtn.disabled =
             true;
 
@@ -1127,7 +902,9 @@ sendBtn.addEventListener(
         try{
 
 
-            if(!recaptchaVerifier){
+            if(
+                !recaptchaVerifier
+            ){
 
                 createRecaptcha();
 
@@ -1169,62 +946,8 @@ sendBtn.addEventListener(
 
         catch(error){
 
-            console.error(
+            showFirebaseError(
                 error
-            );
-
-
-            let text =
-                "❌ لم يتم إرسال الكود.";
-
-
-            if(
-                error.code ===
-                "auth/too-many-requests"
-            ){
-
-                text =
-                    "❌ تم تجاوز عدد المحاولات. حاول لاحقًا.";
-
-            }
-
-
-            else if(
-                error.code ===
-                "auth/quota-exceeded"
-            ){
-
-                text =
-                    "❌ تم تجاوز حد الرسائل المتاح حاليًا.";
-
-            }
-
-
-            else if(
-                error.code ===
-                "auth/invalid-phone-number"
-            ){
-
-                text =
-                    "❌ رقم الهاتف المصري غير صحيح.";
-
-            }
-
-
-            else if(
-                error.code ===
-                "auth/captcha-check-failed"
-            ){
-
-                text =
-                    "❌ تحقق من reCAPTCHA وحاول مرة أخرى.";
-
-            }
-
-
-            showMessage(
-                text,
-                "error"
             );
 
 
@@ -1247,7 +970,7 @@ sendBtn.addEventListener(
 
 
 /* =========================
-   VERIFY CODE
+   VERIFY SMS
 ========================= */
 
 verifyBtn.addEventListener(
@@ -1256,12 +979,13 @@ verifyBtn.addEventListener(
 
     async function(){
 
-
-        if(!confirmationResult){
+        if(
+            !confirmationResult
+        ){
 
             showMessage(
 
-                "❌ اطلب كود التحقق أولًا.",
+                "❌ اطلب الكود أولًا.",
 
                 "error"
 
@@ -1311,22 +1035,14 @@ verifyBtn.addEventListener(
                 );
 
 
-            const user =
-                result.user;
-
-
-            /*
-               إنشاء العميل لو أول مرة فقط
-            */
-
             await createCustomerIfNeeded(
-                user
+                result.user
             );
 
 
             showMessage(
 
-                "🎉 تم تسجيل الدخول بنجاح!",
+                "🎉 تم تسجيل الحساب بنجاح!",
 
                 "success"
 
@@ -1424,7 +1140,6 @@ emailLoginBtn.addEventListener(
 
     async function(){
 
-
         const email =
             emailInput.value.trim();
 
@@ -1511,54 +1226,13 @@ emailLoginBtn.addEventListener(
             );
 
 
-            /*
-               كلمة المرور غلط
-            */
+            showMessage(
 
-            if(
-                error.code ===
-                "auth/wrong-password" ||
+                "❌ البريد الإلكتروني أو كلمة المرور غير صحيحة.",
 
-                error.code ===
-                "auth/invalid-credential"
-            ){
+                "error"
 
-                showMessage(
-
-                    "❌ البريد الإلكتروني أو كلمة المرور غير صحيحة.",
-
-                    "error"
-
-                );
-
-            }
-
-            else if(
-                error.code ===
-                "auth/user-not-found"
-            ){
-
-                showMessage(
-
-                    "❌ لا يوجد حساب بهذا البريد الإلكتروني.",
-
-                    "error"
-
-                );
-
-            }
-
-            else{
-
-                showMessage(
-
-                    "❌ حدث خطأ أثناء تسجيل الدخول.",
-
-                    "error"
-
-                );
-
-            }
+            );
 
 
             emailLoginBtn.disabled =
@@ -1577,7 +1251,7 @@ emailLoginBtn.addEventListener(
 
 
 /* =========================
-   GOOGLE LOGIN
+   GOOGLE
 ========================= */
 
 googleBtn.addEventListener(
@@ -1585,7 +1259,6 @@ googleBtn.addEventListener(
     "click",
 
     async function(){
-
 
         googleBtn.disabled =
             true;
